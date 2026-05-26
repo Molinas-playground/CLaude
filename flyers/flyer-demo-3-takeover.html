@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — Demo: Top Half Takeover</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Poppins', Arial, sans-serif; overflow: hidden; }
+
+    .flyer { width: 5.5in; height: 8.5in; display: flex; flex-direction: column; }
+
+    /* ── ③ TOP HALF PHOTO TAKEOVER ── */
+    .photo-top {
+      position: relative;
+      height: 3.4in; /* ~40% of 8.5in */
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    /* The stock photo */
+    .photo-top img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    /* Gradient overlay: transparent top → solid dark bottom for text legibility */
+    .photo-top::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.35) 40%,
+        rgba(10,10,30,0.92) 100%
+      );
+    }
+    /* All content over the photo */
+    .photo-content {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18pt 24pt 20pt;
+    }
+    /* Brand at top of photo */
+    .brand-row { display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-size: 22pt; font-weight: 900; color: white; letter-spacing: -.5pt; line-height: 1; }
+    .brand em { font-style: normal; color: #fbbf24; }
+    .brand-tag { font-size: 7.5pt; color: rgba(255,255,255,.6); font-weight: 500; margin-top: 3pt; }
+    .star-pill { background: rgba(255,255,255,.15); border: 1pt solid rgba(255,255,255,.35); border-radius: 20pt; padding: 5pt 11pt; text-align: center; }
+    .star-pill .stars { color: #fbbf24; font-size: 10pt; letter-spacing: 1px; }
+    .star-pill .starlabel { font-size: 6pt; color: rgba(255,255,255,.6); font-weight: 600; letter-spacing: 1px; }
+
+    /* Headline at bottom of photo */
+    .photo-headline {
+      font-size: 36pt;
+      font-weight: 900;
+      color: white;
+      line-height: 1.0;
+      letter-spacing: -.5pt;
+      text-shadow: 0 2pt 12pt rgba(0,0,0,0.6);
+    }
+    .photo-headline .accent { color: #fbbf24; }
+    .photo-eyebrow {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(251,191,36,.8);
+      margin-bottom: 8pt;
+    }
+    .photo-sub {
+      font-size: 10.5pt;
+      color: rgba(255,255,255,.85);
+      margin-top: 9pt;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+    /* Photo credit */
+    .photo-credit {
+      position: absolute;
+      bottom: 5pt; right: 8pt;
+      z-index: 2;
+      font-size: 5.5pt;
+      color: rgba(255,255,255,.2);
+    }
+
+    /* ── BOTTOM HALF: SERVICES + CONTACT ── */
+    .bottom {
+      flex: 1;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Accent bar between photo and services */
+    .accent-bar {
+      height: 4pt;
+      background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 40%, #6d28d9 70%, #ec4899 100%);
+      flex-shrink: 0;
+    }
+
+    .services { padding: 12pt 24pt; flex: 1; }
+    .section-label { font-size: 7pt; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: #6d28d9; margin-bottom: 9pt; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5pt; }
+    .card { background: #fafafa; border: 1.5pt solid #e5e7eb; border-radius: 7pt; padding: 8pt 10pt; display: flex; align-items: center; gap: 8pt; }
+    .icon-box { width: 28pt; height: 28pt; background: #6d28d9; border-radius: 6pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .icon-box svg { width: 14pt; height: 14pt; stroke: white; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .card-title { font-size: 9pt; font-weight: 700; color: #111; }
+    .card-sub { font-size: 7pt; color: #888; margin-top: 1pt; font-weight: 400; }
+
+    /* Trust pills */
+    .trust { padding: 0 24pt 9pt; display: flex; gap: 5pt; }
+    .tpill { flex: 1; background: #faf5ff; border: 1pt solid #e9d5ff; border-radius: 5pt; padding: 5pt 4pt; text-align: center; }
+    .tpill .ico { font-size: 11pt; display: block; margin-bottom: 2pt; }
+    .tpill span { font-size: 7pt; font-weight: 700; color: #6d28d9; line-height: 1.3; }
+
+    /* Pricing + Contact combined row */
+    .bottom-bar {
+      background: #1a0533;
+      padding: 12pt 24pt;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .phone { font-size: 21pt; font-weight: 900; color: white; letter-spacing: -.3pt; line-height: 1; }
+    .bcmeta { margin-top: 4pt; display: flex; flex-direction: column; gap: 2pt; }
+    .web { font-size: 9.5pt; color: #fbbf24; font-weight: 700; }
+    .loc { font-size: 8pt; color: rgba(255,255,255,.4); }
+    .price-bubble {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border-radius: 8pt;
+      padding: 8pt 14pt;
+      text-align: center;
+    }
+    .pb-amount { font-size: 13pt; font-weight: 900; color: #000; line-height: 1; }
+    .pb-note { font-size: 7pt; color: rgba(0,0,0,.6); font-weight: 600; margin-top: 2pt; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+
+  <!-- ③ TOP HALF PHOTO TAKEOVER -->
+  <div class="photo-top">
+    <img src="https://picsum.photos/seed/suredesk-top/660/400" alt="">
+    <div class="photo-content">
+      <!-- Brand at top -->
+      <div class="brand-row">
+        <div>
+          <div class="brand">Sure<em>Desk</em></div>
+          <div class="brand-tag">IT Support &amp; AI Training</div>
+        </div>
+        <div class="star-pill">
+          <div class="stars">★★★★★</div>
+          <div class="starlabel">5-STAR</div>
+        </div>
+      </div>
+
+      <!-- Headline at bottom of photo -->
+      <div>
+        <div class="photo-eyebrow">Miami, FL · Same Day · No Contracts</div>
+        <div class="photo-headline">Tech Help for<br><span class="accent">Real Life.</span></div>
+        <div class="photo-sub">Fast in-person IT support &amp; personal AI training —<br>no jargon, no hidden fees, just results.</div>
+      </div>
+    </div>
+    <div class="photo-credit">Photo: Unsplash</div>
+  </div>
+
+  <!-- BOTTOM HALF: services + contact -->
+  <div class="bottom">
+    <div class="accent-bar"></div>
+
+    <div class="services">
+      <div class="section-label">What We Do</div>
+      <div class="grid">
+        <div class="card">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div><div class="card-title">Computer Repair</div><div class="card-sub">Slow · Frozen · Crashed</div></div>
+        </div>
+        <div class="card">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="card-title">Virus Removal</div><div class="card-sub">Cleaned &amp; secured</div></div>
+        </div>
+        <div class="card">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
+          <div><div class="card-title">WiFi &amp; Network</div><div class="card-sub">Setup &amp; troubleshoot</div></div>
+        </div>
+        <div class="card">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><div class="card-title">Learn AI Tools</div><div class="card-sub">ChatGPT · Claude · More</div></div>
+        </div>
+        <div class="card">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+          <div><div class="card-title">Data Transfer</div><div class="card-sub">Files &amp; backups</div></div>
+        </div>
+        <div class="card">
+          <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <div><div class="card-title">Device Setup</div><div class="card-sub">Phone, tablet, laptop</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust">
+      <div class="tpill"><span class="ico">🕐</span><span>After Hours<br>&amp; Weekends</span></div>
+      <div class="tpill"><span class="ico">🌐</span><span>Bilingual<br>EN / ES</span></div>
+      <div class="tpill"><span class="ico">📋</span><span>No<br>Contracts</span></div>
+      <div class="tpill"><span class="ico">⚡</span><span>Same Day<br>Service</span></div>
+    </div>
+
+    <div class="bottom-bar">
+      <div>
+        <div class="phone">(561) 481-7911</div>
+        <div class="bcmeta">
+          <span class="web">suredesk.net</span>
+          <span class="loc">📍 Miami, FL</span>
+        </div>
+      </div>
+      <div class="price-bubble">
+        <div class="pb-amount">From $50/hr</div>
+        <div class="pb-note">No hidden fees</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

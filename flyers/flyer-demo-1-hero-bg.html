@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — Demo: Hero Background</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Inter', Arial, sans-serif; background: #000; overflow: hidden; }
+
+    .flyer {
+      width: 5.5in; height: 8.5in;
+      background: #030a10;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .flyer::before { content:'';position:absolute;left:0;top:0;bottom:0;width:3pt;background:linear-gradient(180deg,#00f0ff,#ff00cc,transparent);box-shadow:0 0 18pt rgba(0,240,255,.7); }
+    .flyer::after  { content:'';position:absolute;right:0;top:0;bottom:0;width:3pt;background:linear-gradient(180deg,transparent,#ff00cc,#00f0ff);box-shadow:0 0 18pt rgba(255,0,204,.7); }
+
+    /* ── HEADER ── */
+    .header { padding: 16pt 24pt 0; position: relative; z-index: 1; }
+    .brand { font-family:'Orbitron',monospace;font-size:32pt;font-weight:900;color:#00f0ff;text-shadow:0 0 4px #fff,0 0 10px #00f0ff,0 0 22px #00f0ff,0 0 46px #00f0ff;letter-spacing:3pt;line-height:1; }
+    .brand-sub { font-size:8pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:#ff00cc;text-shadow:0 0 8px #ff00cc;margin-top:4pt; }
+    .neon-line { height:1pt;background:linear-gradient(90deg,transparent 5%,#00f0ff 40%,#ff00cc 60%,transparent 95%);box-shadow:0 0 8pt rgba(0,240,255,.5);margin:10pt 0 0; }
+
+    /* ── HERO WITH PHOTO BACKGROUND ── */
+    .hero {
+      position: relative;
+      padding: 22pt 24pt 22pt;
+      overflow: hidden;
+      min-height: 140pt;
+    }
+    /* Stock photo as background */
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+    /* Dark overlay to keep text readable and preserve neon aesthetic */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(3,10,16,0.88) 0%,
+        rgba(3,10,16,0.72) 50%,
+        rgba(0,30,50,0.82) 100%
+      );
+    }
+    /* Content on top */
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow { font-size:7pt;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(0,240,255,.65);margin-bottom:8pt; }
+    .hero-headline { font-size:28pt;font-weight:900;color:#fff;line-height:1.06; }
+    .hero-headline .cyan { color:#00f0ff;text-shadow:0 0 10px #00f0ff,0 0 20px #00f0ff; }
+    .hero-sub { font-size:10pt;color:rgba(255,255,255,.7);margin-top:9pt;line-height:1.55; }
+    /* Photo credit tag */
+    .photo-badge {
+      position: absolute;
+      bottom: 6pt; right: 8pt;
+      font-size: 5.5pt;
+      color: rgba(255,255,255,.25);
+      letter-spacing: .5px;
+      z-index: 2;
+    }
+
+    /* ── SERVICES ── */
+    .services { padding:10pt 24pt;flex:1; }
+    .section-label { font-size:7pt;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#00f0ff;text-shadow:0 0 6px rgba(0,240,255,.6);margin-bottom:7pt; }
+    .grid { display:grid;grid-template-columns:1fr 1fr;gap:5pt; }
+    .card { background:rgba(0,240,255,.04);border:1pt solid rgba(0,240,255,.22);border-radius:5pt;padding:8pt 10pt;display:flex;align-items:center;gap:8pt;box-shadow:0 0 10pt rgba(0,240,255,.07); }
+    .icon-box { width:28pt;height:28pt;background:rgba(0,240,255,.1);border:1pt solid rgba(0,240,255,.35);border-radius:5pt;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .icon-box svg { width:13pt;height:13pt;stroke:#00f0ff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+    .card-title { font-size:9pt;font-weight:700;color:#fff; }
+    .card-sub { font-size:6.5pt;color:rgba(0,240,255,.5);margin-top:1pt; }
+
+    /* ── TRUST ── */
+    .trust { padding:8pt 24pt;display:flex;gap:5pt; }
+    .tpill { flex:1;background:rgba(255,0,204,.07);border:1pt solid rgba(255,0,204,.28);border-radius:4pt;padding:5pt 4pt;text-align:center; }
+    .tpill .ico { display:block;font-size:11pt;margin-bottom:2pt; }
+    .tpill span { font-size:7pt;font-weight:700;color:#ff00cc;line-height:1.3; }
+
+    /* ── PRICING ── */
+    .pricing { margin:0 24pt 8pt;background:rgba(0,240,255,.07);border:1.5pt solid rgba(0,240,255,.35);border-radius:5pt;padding:8pt 14pt;display:flex;align-items:center;justify-content:center;gap:10pt;box-shadow:0 0 14pt rgba(0,240,255,.12); }
+    .price-main { font-size:13pt;font-weight:900;color:#00f0ff;text-shadow:0 0 8px rgba(0,240,255,.7); }
+    .price-div { width:1pt;height:14pt;background:rgba(0,240,255,.3); }
+    .price-note { font-size:8pt;color:rgba(255,255,255,.5);font-weight:500; }
+
+    /* ── CONTACT ── */
+    .contact { border-top:1pt solid rgba(0,240,255,.2);padding:12pt 24pt; }
+    .phone { font-family:'Orbitron',monospace;font-size:21pt;font-weight:700;color:white;text-shadow:0 0 10px rgba(0,240,255,.4);line-height:1;letter-spacing:1pt; }
+    .cmeta { margin-top:5pt;display:flex;gap:16pt;align-items:center; }
+    .web { font-size:9.5pt;color:#00f0ff;font-weight:700;text-shadow:0 0 5px rgba(0,240,255,.5); }
+    .loc { font-size:8pt;color:rgba(255,255,255,.35);font-weight:500; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+
+  <div class="header">
+    <div class="brand">SUREDESK</div>
+    <div class="brand-sub">Personal IT Support &amp; AI Training · Miami, FL</div>
+    <div class="neon-line"></div>
+  </div>
+
+  <!-- ① HERO WITH PHOTO BACKGROUND -->
+  <div class="hero">
+    <img class="hero-photo"
+         src="https://picsum.photos/seed/suredesk-hero/660/340"
+         alt="">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Fast · In-Person · Same Day</div>
+      <div class="hero-headline">Your Tech Problems,<br><span class="cyan">Solved Today.</span></div>
+      <div class="hero-sub">Same day service · No contracts · No jargon<br>Just fast, friendly tech help that works.</div>
+    </div>
+    <div class="photo-badge">Photo: Unsplash</div>
+  </div>
+
+  <div class="services">
+    <div class="section-label">// Services</div>
+    <div class="grid">
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div><div class="card-title">Computer Repair</div><div class="card-sub">Slow · Frozen · Crashed</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="card-title">Virus Removal</div><div class="card-sub">Cleaned &amp; Secured</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
+        <div><div class="card-title">WiFi &amp; Network</div><div class="card-sub">Setup &amp; Fix</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <div><div class="card-title">Device Setup</div><div class="card-sub">Phone · Tablet · PC</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+        <div><div class="card-title">Data Transfer</div><div class="card-sub">Files &amp; Backups</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="card-title">Learn AI</div><div class="card-sub">ChatGPT · Claude</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust">
+    <div class="tpill"><span class="ico">🕐</span><span>After Hours<br>&amp; Weekends</span></div>
+    <div class="tpill"><span class="ico">🌐</span><span>Bilingual<br>EN / ES</span></div>
+    <div class="tpill"><span class="ico">📋</span><span>No<br>Contracts</span></div>
+    <div class="tpill"><span class="ico">⭐</span><span>5-Star<br>Rated</span></div>
+  </div>
+
+  <div class="pricing">
+    <div class="price-main">Starting at $50 / hr</div>
+    <div class="price-div"></div>
+    <div class="price-note">No hidden fees · No surprises</div>
+  </div>
+
+  <div class="contact">
+    <div class="phone">(561) 481-7911</div>
+    <div class="cmeta">
+      <span class="web">suredesk.net</span>
+      <span class="loc">📍 Miami, FL</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
