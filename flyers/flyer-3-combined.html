@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — Tech Help for Real Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    body {
+      width: 5.5in;
+      height: 8.5in;
+      font-family: 'Inter', Arial, sans-serif;
+      background: white;
+      overflow: hidden;
+    }
+
+    .flyer {
+      width: 5.5in;
+      height: 8.5in;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TOP ACCENT BAR ── */
+    .accent-bar {
+      height: 5pt;
+      background: linear-gradient(90deg, #0ea5e9 0%, #7c3aed 50%, #a855f7 100%);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: white;
+      padding: 14pt 22pt 12pt;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1pt solid #f0f0f0;
+    }
+    .brand { font-size: 26pt; font-weight: 900; color: #0b1f3a; letter-spacing: -0.5pt; }
+    .brand em { font-style: normal; background: linear-gradient(90deg, #0ea5e9, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .brand-tag { font-size: 8pt; color: #64748b; font-weight: 500; margin-top: 2pt; }
+    .rating-block { text-align: right; }
+    .stars { color: #fbbf24; font-size: 12pt; letter-spacing: 1px; }
+    .stars-sub { font-size: 7pt; color: #94a3b8; margin-top: 2pt; font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      background: #0b1f3a;
+      padding: 20pt 22pt 18pt;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -20pt;
+      top: 0;
+      bottom: 0;
+      width: 180pt;
+      background: linear-gradient(135deg, transparent 0%, rgba(124,58,237,0.2) 100%);
+    }
+    .hero-eyebrow {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 7pt;
+    }
+    .hero-headline {
+      font-size: 30pt;
+      font-weight: 900;
+      color: white;
+      line-height: 1.05;
+      letter-spacing: -0.5pt;
+    }
+    .hero-headline span { color: #38bdf8; }
+    .hero-sub {
+      font-size: 10pt;
+      color: rgba(255,255,255,0.75);
+      margin-top: 8pt;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* ── DUAL COLUMNS ── */
+    .dual {
+      display: flex;
+      flex: 1;
+    }
+
+    /* IT SUPPORT COLUMN */
+    .col-it {
+      flex: 1;
+      background: #f0f9ff;
+      padding: 13pt 14pt 12pt 22pt;
+      border-right: 1pt solid #e0f2fe;
+    }
+    .col-ai {
+      flex: 1;
+      background: #faf5ff;
+      padding: 13pt 22pt 12pt 14pt;
+    }
+
+    .col-header {
+      display: flex;
+      align-items: center;
+      gap: 7pt;
+      margin-bottom: 10pt;
+    }
+    .col-dot {
+      width: 8pt;
+      height: 8pt;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-blue { background: #0ea5e9; }
+    .dot-purple { background: #a855f7; }
+    .col-title { font-size: 11pt; font-weight: 900; color: #0b1f3a; }
+    .col-sub { font-size: 7.5pt; color: #64748b; margin-top: 1pt; font-weight: 500; }
+
+    .item-list { display: flex; flex-direction: column; gap: 6pt; }
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 7pt;
+      background: white;
+      border-radius: 6pt;
+      padding: 7pt 9pt;
+    }
+    .item-it { border: 1pt solid #bae6fd; }
+    .item-ai { border: 1pt solid #e9d5ff; }
+
+    .item-icon {
+      width: 22pt;
+      height: 22pt;
+      border-radius: 5pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-blue { background: #0ea5e9; }
+    .icon-purple { background: #a855f7; }
+
+    .item-icon svg {
+      width: 12pt;
+      height: 12pt;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .item-text { font-size: 9pt; font-weight: 700; color: #0b1f3a; }
+
+    /* ── TRUST BAND ── */
+    .trust {
+      background: #0b1f3a;
+      padding: 10pt 22pt;
+      display: flex;
+      align-items: center;
+      gap: 6pt;
+      justify-content: center;
+    }
+    .trust-chip {
+      background: rgba(255,255,255,0.08);
+      border: 1pt solid rgba(255,255,255,0.12);
+      color: white;
+      font-size: 8pt;
+      font-weight: 700;
+      padding: 5pt 10pt;
+      border-radius: 20pt;
+    }
+    .trust-chip .t-icon { margin-right: 3pt; }
+
+    /* ── PRICING BAND ── */
+    .pricing {
+      background: linear-gradient(90deg, #0ea5e9 0%, #7c3aed 100%);
+      padding: 10pt 22pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10pt;
+    }
+    .price-main { font-size: 14pt; font-weight: 900; color: white; letter-spacing: -0.3pt; }
+    .price-div { width: 1pt; height: 18pt; background: rgba(255,255,255,0.3); }
+    .price-note { font-size: 9pt; color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: white;
+      padding: 15pt 22pt;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 2pt solid #f0f0f0;
+    }
+    .phone { font-size: 23pt; font-weight: 900; color: #0b1f3a; letter-spacing: -0.5pt; line-height: 1; }
+    .contact-meta { margin-top: 5pt; display: flex; flex-direction: column; gap: 3pt; }
+    .contact-meta .web { font-size: 10pt; color: #0ea5e9; font-weight: 700; }
+    .contact-meta .loc { font-size: 8.5pt; color: #94a3b8; font-weight: 500; }
+    .qr-box {
+      background: #f8fafc;
+      border: 1pt solid #e2e8f0;
+      border-radius: 7pt;
+      padding: 5pt;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3pt;
+    }
+    .qr-box img { width: 68pt; height: 68pt; display: block; }
+    .qr-box span { font-size: 6.5pt; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+
+  <div class="accent-bar"></div>
+
+  <div class="header">
+    <div>
+      <div class="brand">Sure<em>Desk</em></div>
+      <div class="brand-tag">Personal IT Support + AI Training</div>
+    </div>
+    <div class="rating-block">
+      <div class="stars">★★★★★</div>
+      <div class="stars-sub">5-STAR RATED</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Miami, FL · After Hours &amp; Weekends · Bilingual</div>
+    <div class="hero-headline">Tech Help for<br><span>Real Life.</span></div>
+    <div class="hero-sub">Friendly, in-person support for your computer &amp; AI questions — no contracts, no jargon, no hassle.</div>
+  </div>
+
+  <div class="dual">
+
+    <!-- IT SUPPORT COLUMN -->
+    <div class="col-it">
+      <div class="col-header">
+        <div class="col-dot dot-blue"></div>
+        <div>
+          <div class="col-title">IT Support</div>
+          <div class="col-sub">Fix your tech today</div>
+        </div>
+      </div>
+      <div class="item-list">
+        <div class="item item-it">
+          <div class="item-icon icon-blue">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="item-text">Computer Repair</div>
+        </div>
+        <div class="item item-it">
+          <div class="item-icon icon-blue">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="item-text">Virus Removal</div>
+        </div>
+        <div class="item item-it">
+          <div class="item-icon icon-blue">
+            <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+          </div>
+          <div class="item-text">WiFi &amp; Network</div>
+        </div>
+        <div class="item item-it">
+          <div class="item-icon icon-blue">
+            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <div class="item-text">New Device Setup</div>
+        </div>
+        <div class="item item-it">
+          <div class="item-icon icon-blue">
+            <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+          </div>
+          <div class="item-text">Data Transfer</div>
+        </div>
+        <div class="item item-it">
+          <div class="item-icon icon-blue">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="item-text">Password Reset</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI TRAINING COLUMN -->
+    <div class="col-ai">
+      <div class="col-header">
+        <div class="col-dot dot-purple"></div>
+        <div>
+          <div class="col-title">Learn AI</div>
+          <div class="col-sub">Work smarter, save time</div>
+        </div>
+      </div>
+      <div class="item-list">
+        <div class="item item-ai">
+          <div class="item-icon icon-purple">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="item-text">Write Emails</div>
+        </div>
+        <div class="item item-ai">
+          <div class="item-icon icon-purple">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+          </div>
+          <div class="item-text">Summarize Info</div>
+        </div>
+        <div class="item item-ai">
+          <div class="item-icon icon-purple">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="item-text">Research Topics</div>
+        </div>
+        <div class="item item-ai">
+          <div class="item-icon icon-purple">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="item-text">Brainstorm Ideas</div>
+        </div>
+        <div class="item item-ai">
+          <div class="item-icon icon-purple">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="item-text">Create Images</div>
+        </div>
+        <div class="item item-ai">
+          <div class="item-icon icon-purple">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="item-text">ChatGPT &amp; Claude</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="trust">
+    <div class="trust-chip"><span class="t-icon">🕐</span>After Hours &amp; Weekends</div>
+    <div class="trust-chip"><span class="t-icon">🌐</span>Bilingual EN/ES</div>
+    <div class="trust-chip"><span class="t-icon">📋</span>No Contracts</div>
+  </div>
+
+  <div class="pricing">
+    <div class="price-main">Starting at $50 / hr</div>
+    <div class="price-div"></div>
+    <div class="price-note">No hidden fees · No surprises</div>
+  </div>
+
+  <div class="contact">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="contact-meta">
+        <span class="web">suredesk.net</span>
+        <span class="loc">📍 Miami, FL</span>
+      </div>
+    </div>
+    <div class="qr-box">
+      <img src="https://chart.googleapis.com/chart?chs=140x140&cht=qr&chl=https://suredesk.net&choe=UTF-8&chld=M|2" alt="QR Code — suredesk.net">
+      <span>SCAN TO VISIT</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

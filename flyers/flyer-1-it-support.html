@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — IT Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    body {
+      width: 5.5in;
+      height: 8.5in;
+      font-family: 'Inter', Arial, sans-serif;
+      background: white;
+      overflow: hidden;
+    }
+
+    .flyer {
+      width: 5.5in;
+      height: 8.5in;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #0b1f3a;
+      padding: 16pt 22pt;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand { font-size: 27pt; font-weight: 900; color: white; letter-spacing: -0.5pt; }
+    .brand em { font-style: normal; color: #38bdf8; }
+    .brand-tag { font-size: 8pt; color: #64748b; font-weight: 500; margin-top: 3pt; }
+    .rating-block { text-align: right; }
+    .stars { color: #fbbf24; font-size: 13pt; letter-spacing: 1.5px; }
+    .stars-sub { font-size: 7pt; color: #64748b; margin-top: 2pt; font-weight: 600; letter-spacing: 0.5px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+      padding: 22pt 22pt 20pt;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -40pt;
+      top: -40pt;
+      width: 160pt;
+      height: 160pt;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 20pt;
+      bottom: -50pt;
+      width: 100pt;
+      height: 100pt;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .hero-eyebrow {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 7pt;
+    }
+    .hero-headline {
+      font-size: 31pt;
+      font-weight: 900;
+      color: white;
+      line-height: 1.05;
+      letter-spacing: -0.5pt;
+    }
+    .hero-sub {
+      font-size: 10.5pt;
+      color: rgba(255,255,255,0.85);
+      margin-top: 9pt;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 15pt 22pt 12pt;
+      flex: 1;
+    }
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #0369a1;
+      margin-bottom: 10pt;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7pt;
+    }
+    .card {
+      background: #f0f9ff;
+      border: 1.5pt solid #bae6fd;
+      border-radius: 9pt;
+      padding: 10pt 11pt;
+      display: flex;
+      align-items: center;
+      gap: 9pt;
+    }
+    .icon-box {
+      width: 34pt;
+      height: 34pt;
+      background: #0369a1;
+      border-radius: 7pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-box svg {
+      width: 18pt;
+      height: 18pt;
+      stroke: white;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .card-title { font-size: 10pt; font-weight: 700; color: #0b1f3a; line-height: 1.2; }
+    .card-sub { font-size: 7.5pt; color: #64748b; margin-top: 2pt; font-weight: 400; }
+
+    /* ── TRUST ── */
+    .trust {
+      padding: 11pt 22pt;
+      background: #f8fafc;
+      border-top: 1pt solid #e2e8f0;
+      border-bottom: 1pt solid #e2e8f0;
+    }
+    .trust-row { display: flex; gap: 7pt; }
+    .pill {
+      flex: 1;
+      text-align: center;
+      background: white;
+      border: 1.5pt solid #e2e8f0;
+      border-radius: 30pt;
+      padding: 7pt 4pt;
+    }
+    .pill-icon { font-size: 12pt; display: block; margin-bottom: 3pt; }
+    .pill-text { font-size: 7.5pt; font-weight: 700; color: #334155; line-height: 1.3; }
+
+    /* ── PRICING ── */
+    .pricing {
+      background: #f59e0b;
+      padding: 10pt 22pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12pt;
+    }
+    .price-main { font-size: 15pt; font-weight: 900; color: #1c1917; letter-spacing: -0.3pt; }
+    .price-divider { width: 1pt; height: 20pt; background: rgba(0,0,0,0.2); }
+    .price-note { font-size: 9pt; color: #44403c; font-weight: 600; }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: #0b1f3a;
+      padding: 17pt 22pt;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .phone { font-size: 23pt; font-weight: 900; color: white; letter-spacing: -0.5pt; line-height: 1; }
+    .contact-meta { margin-top: 6pt; display: flex; flex-direction: column; gap: 3pt; }
+    .contact-meta .web { font-size: 10pt; color: #38bdf8; font-weight: 700; }
+    .contact-meta .loc { font-size: 8.5pt; color: #94a3b8; font-weight: 500; }
+    .qr-box {
+      background: white;
+      border-radius: 7pt;
+      padding: 5pt;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3pt;
+    }
+    .qr-box img { width: 70pt; height: 70pt; display: block; }
+    .qr-box span { font-size: 6.5pt; font-weight: 700; color: #64748b; letter-spacing: 0.5px; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+
+  <div class="header">
+    <div>
+      <div class="brand">Sure<em>Desk</em></div>
+      <div class="brand-tag">Personal IT Support</div>
+    </div>
+    <div class="rating-block">
+      <div class="stars">★★★★★</div>
+      <div class="stars-sub">5-STAR RATED</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Personal IT Support · Miami, FL</div>
+    <div class="hero-headline">Your Tech Problems,<br>Solved Today.</div>
+    <div class="hero-sub">Fast, friendly, in-person help — same day.<br>No contracts. No jargon. Just results.</div>
+  </div>
+
+  <div class="services">
+    <div class="section-label">What We Fix</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Computer Repair</div>
+          <div class="card-sub">Slow, frozen or crashed</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Virus Removal</div>
+          <div class="card-sub">Clean &amp; secure your device</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+        </div>
+        <div>
+          <div class="card-title">WiFi &amp; Network</div>
+          <div class="card-sub">Setup &amp; troubleshooting</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <div>
+          <div class="card-title">New Device Setup</div>
+          <div class="card-sub">Phone, tablet or laptop</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Data Transfer</div>
+          <div class="card-sub">Photos, files &amp; backups</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Password Reset</div>
+          <div class="card-sub">Email, device &amp; accounts</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="trust">
+    <div class="trust-row">
+      <div class="pill">
+        <span class="pill-icon">🕐</span>
+        <div class="pill-text">After Hours<br>&amp; Weekends</div>
+      </div>
+      <div class="pill">
+        <span class="pill-icon">🌐</span>
+        <div class="pill-text">Bilingual<br>EN / ES</div>
+      </div>
+      <div class="pill">
+        <span class="pill-icon">📋</span>
+        <div class="pill-text">No<br>Contracts</div>
+      </div>
+      <div class="pill">
+        <span class="pill-icon">⚡</span>
+        <div class="pill-text">Same Day<br>Service</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing">
+    <div class="price-main">Starting at $50 / hr</div>
+    <div class="price-divider"></div>
+    <div class="price-note">No hidden fees · No surprises</div>
+  </div>
+
+  <div class="contact">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="contact-meta">
+        <span class="web">suredesk.net</span>
+        <span class="loc">📍 Miami, FL</span>
+      </div>
+    </div>
+    <div class="qr-box">
+      <img src="https://chart.googleapis.com/chart?chs=140x140&cht=qr&chl=https://suredesk.net&choe=UTF-8&chld=M|2" alt="QR Code — suredesk.net">
+      <span>SCAN TO VISIT</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
