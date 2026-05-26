@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — AI Training · Bold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Inter', Arial, sans-serif; overflow: hidden; }
+    .flyer { width: 5.5in; height: 8.5in; display: flex; flex-direction: column; }
+
+    .top-block { background: #7C00E0; padding: 20pt 24pt 18pt; position: relative; overflow: hidden; }
+    .top-block::before { content:''; position:absolute;right:-50pt;top:-60pt;width:200pt;height:200pt;background:#DD88FF;border-radius:50%;opacity:.2; }
+    .top-block::after  { content:''; position:absolute;right:20pt;bottom:-80pt;width:140pt;height:140pt;background:#000;border-radius:50%;opacity:.08; }
+
+    .brand-row { display:flex;align-items:center;gap:10pt;margin-bottom:12pt; }
+    .brand-dot { width:12pt;height:12pt;background:#DD88FF;border-radius:50%; }
+    .brand-name { font-family:'Poppins',Arial,sans-serif;font-size:13pt;font-weight:900;color:white;letter-spacing:2px;text-transform:uppercase; }
+    .badge { background:rgba(255,255,255,.2);color:white;font-size:7.5pt;font-weight:800;padding:3pt 8pt;border-radius:20pt;letter-spacing:.5px;text-transform:uppercase;margin-left:auto; }
+
+    .top-headline { font-family:'Poppins',Arial,sans-serif;font-size:43pt;font-weight:900;color:#000;line-height:.92;letter-spacing:-1pt;text-transform:uppercase;position:relative;z-index:1; }
+    .top-headline .white { color:#fff; }
+    .top-headline .accent { color:#DD88FF; }
+    .top-sub { font-size:10.5pt;color:rgba(0,0,0,.65);margin-top:10pt;font-weight:600;line-height:1.4;position:relative;z-index:1; }
+
+    .purple-strip { background:#DD88FF;padding:8pt 24pt;display:flex;align-items:center;gap:18pt; }
+    .ys-item { font-size:8pt;font-weight:900;color:#000;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:5pt; }
+    .ys-item .dot { width:5pt;height:5pt;background:#7C00E0;border-radius:50%; }
+
+    .services { background:white;padding:14pt 24pt;flex:1; }
+    .section-label { font-size:7pt;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:#7C00E0;margin-bottom:10pt; }
+    .grid { display:grid;grid-template-columns:1fr 1fr;gap:6pt; }
+    .card { background:white;border:2pt solid #000;border-radius:4pt;padding:9pt 10pt;display:flex;align-items:center;gap:8pt;position:relative; }
+    .card::after { content:'';position:absolute;inset:0;border:2pt solid #000;border-radius:4pt;transform:translate(2.5pt,2.5pt);z-index:-1;background:#DD88FF; }
+    .icon-box { width:30pt;height:30pt;background:#000;border-radius:3pt;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .icon-box svg { width:15pt;height:15pt;stroke:#DD88FF;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round; }
+    .card-title { font-size:9.5pt;font-weight:800;color:#000; }
+    .card-sub { font-size:7.5pt;color:#666;margin-top:1pt;font-weight:500; }
+
+    .tools-row { background:white;padding:0 24pt 10pt; }
+    .tools-inner { background:#f8f0ff;border:1.5pt solid #7C00E0;border-radius:4pt;padding:8pt 12pt;display:flex;align-items:center;gap:8pt; }
+    .tools-lbl { font-size:7pt;font-weight:900;color:#7C00E0;letter-spacing:2px;text-transform:uppercase;white-space:nowrap; }
+    .tool-chips { display:flex;gap:4pt;flex-wrap:wrap; }
+    .chip { font-size:7.5pt;font-weight:700;color:#7C00E0;background:#eedeff;border:1pt solid #7C00E0;border-radius:20pt;padding:2pt 7pt; }
+
+    .pricing { background:#7C00E0;padding:9pt 24pt;display:flex;align-items:center;gap:10pt; }
+    .price-main { font-family:'Poppins',sans-serif;font-size:15pt;font-weight:900;color:#fff;letter-spacing:-.3pt; }
+    .price-div { width:1.5pt;height:18pt;background:rgba(255,255,255,.3); }
+    .price-note { font-size:9pt;color:rgba(255,255,255,.75);font-weight:700; }
+
+    .contact { background:#000;padding:15pt 24pt;display:flex;align-items:center;justify-content:space-between; }
+    .phone { font-family:'Poppins',sans-serif;font-size:23pt;font-weight:900;color:white;line-height:1;letter-spacing:-.3pt; }
+    .cmeta { margin-top:5pt;display:flex;flex-direction:column;gap:3pt; }
+    .web { font-size:10pt;color:#DD88FF;font-weight:700; }
+    .loc { font-size:8.5pt;color:rgba(255,255,255,.4);font-weight:500; }
+    .qr-box { background:white;border-radius:4pt;padding:4pt;display:flex;flex-direction:column;align-items:center;gap:3pt; }
+    .qr-box img { width:66pt;height:66pt;display:block; }
+    .qr-box .ql { font-size:6pt;font-weight:700;color:#666;letter-spacing:.5px; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+  <div class="top-block">
+    <div class="brand-row">
+      <div class="brand-dot"></div>
+      <div class="brand-name">SureDesk</div>
+      <div class="badge">NEW</div>
+    </div>
+    <div class="top-headline">
+      Learn<br><span class="white">AI</span><br><span class="accent">Today.</span>
+    </div>
+    <div class="top-sub">Personal AI coaching — 1-on-1, in your home.<br>Beginner friendly. Miami, FL.</div>
+  </div>
+
+  <div class="purple-strip">
+    <div class="ys-item"><div class="dot"></div>1-on-1 Personal Coaching</div>
+    <div class="ys-item"><div class="dot"></div>Beginner Friendly</div>
+    <div class="ys-item"><div class="dot"></div>From $50/hr</div>
+  </div>
+
+  <div class="services">
+    <div class="section-label">What You'll Learn</div>
+    <div class="grid">
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="card-title">ChatGPT for Life</div><div class="card-sub">Save hours every day</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div><div class="card-title">AI Image Creation</div><div class="card-sub">DALL-E · Midjourney</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div><div class="card-title">AI Writing</div><div class="card-sub">Claude · Perplexity</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div><div class="card-title">AI for Business</div><div class="card-sub">Copilot · Gemini</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="card-title">Task Automation</div><div class="card-sub">Save time &amp; clicks</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div><div class="card-title">Smart Home AI</div><div class="card-sub">Siri · Alexa · More</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tools-row">
+    <div class="tools-inner">
+      <div class="tools-lbl">Tools</div>
+      <div class="tool-chips">
+        <div class="chip">ChatGPT</div>
+        <div class="chip">Claude</div>
+        <div class="chip">DALL-E</div>
+        <div class="chip">Copilot</div>
+        <div class="chip">Gemini</div>
+        <div class="chip">Siri</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing">
+    <div class="price-main">Starting at $50 / hr</div>
+    <div class="price-div"></div>
+    <div class="price-note">No contracts · Pay per session</div>
+  </div>
+
+  <div class="contact">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="cmeta">
+        <span class="web">suredesk.net</span>
+        <span class="loc">📍 Miami, FL</span>
+      </div>
+    </div>
+    <div class="qr-box">
+      <img src="https://chart.googleapis.com/chart?chs=132x132&cht=qr&chl=https://suredesk.net&choe=UTF-8&chld=M|2" alt="QR">
+      <div class="ql">SCAN TO VISIT</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

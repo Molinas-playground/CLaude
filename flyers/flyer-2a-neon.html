@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — AI Training · Neon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Inter', Arial, sans-serif; background: #000; overflow: hidden; }
+
+    .flyer {
+      width: 5.5in; height: 8.5in;
+      background: #05030f;
+      background-image:
+        linear-gradient(rgba(160,100,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(160,100,255,0.06) 1px, transparent 1px);
+      background-size: 26pt 26pt;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .flyer::before { content:''; position:absolute;left:0;top:0;bottom:0;width:3pt;background:linear-gradient(180deg,#aa44ff,#ff44aa,transparent);box-shadow:0 0 18pt rgba(170,68,255,.7); }
+    .flyer::after  { content:''; position:absolute;right:0;top:0;bottom:0;width:3pt;background:linear-gradient(180deg,transparent,#ff44aa,#aa44ff);box-shadow:0 0 18pt rgba(255,68,170,.7); }
+
+    .header { padding:18pt 24pt 0; }
+    .brand { font-family:'Orbitron',monospace;font-size:36pt;font-weight:900;color:#cc66ff;text-shadow:0 0 4px #fff,0 0 10px #cc66ff,0 0 22px #cc66ff,0 0 46px #cc66ff;letter-spacing:3pt;line-height:1; }
+    .brand-sub { font-size:8.5pt;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:#ff66cc;text-shadow:0 0 8px #ff66cc;margin-top:5pt; }
+    .neon-line { height:1pt;background:linear-gradient(90deg,transparent 5%,#cc66ff 40%,#ff44aa 60%,transparent 95%);box-shadow:0 0 8pt rgba(200,100,255,.5);margin:12pt 0 0; }
+
+    .hero { padding:14pt 24pt 12pt; }
+    .hero-eyebrow { font-size:7pt;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(200,100,255,.55);margin-bottom:7pt; }
+    .hero-headline { font-size:29pt;font-weight:900;color:#fff;line-height:1.08; }
+    .hero-headline .glow { color:#cc66ff;text-shadow:0 0 8px #cc66ff; }
+    .hero-sub { font-size:10pt;color:rgba(255,255,255,.6);margin-top:8pt;line-height:1.55; }
+
+    .services { padding:10pt 24pt; flex:1; }
+    .section-label { font-size:7pt;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:#cc66ff;text-shadow:0 0 6px rgba(200,100,255,.6);margin-bottom:8pt; }
+    .grid { display:grid;grid-template-columns:1fr 1fr;gap:6pt; }
+    .card { background:rgba(160,80,255,.04);border:1pt solid rgba(160,80,255,.22);border-radius:5pt;padding:9pt 10pt;display:flex;align-items:center;gap:8pt;box-shadow:0 0 10pt rgba(160,80,255,.07); }
+    .icon-box { width:30pt;height:30pt;background:rgba(160,80,255,.1);border:1pt solid rgba(160,80,255,.35);border-radius:5pt;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 8pt rgba(160,80,255,.15); }
+    .icon-box svg { width:15pt;height:15pt;stroke:#cc66ff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+    .card-title { font-size:9.5pt;font-weight:700;color:#fff; }
+    .card-sub { font-size:7pt;color:rgba(200,120,255,.5);margin-top:2pt; }
+
+    .tools-row { padding:0 24pt 8pt; }
+    .tools-glass { background:rgba(160,80,255,.07);border:1pt solid rgba(160,80,255,.25);border-radius:5pt;padding:8pt 12pt;display:flex;align-items:center;gap:8pt; }
+    .tools-lbl { font-size:7pt;font-weight:700;color:rgba(200,120,255,.8);letter-spacing:2px;text-transform:uppercase;white-space:nowrap; }
+    .tool-chips { display:flex;gap:4pt;flex-wrap:wrap; }
+    .chip { font-size:7.5pt;font-weight:600;color:rgba(255,255,255,.7);background:rgba(160,80,255,.15);border:.5pt solid rgba(160,80,255,.3);border-radius:20pt;padding:2.5pt 7pt; }
+
+    .trust { padding:9pt 24pt;display:flex;gap:5pt; }
+    .tpill { flex:1;background:rgba(255,68,170,.07);border:1pt solid rgba(255,68,170,.28);border-radius:4pt;padding:6pt 4pt;text-align:center; }
+    .tpill .ico { display:block;font-size:12pt;margin-bottom:2pt; }
+    .tpill span { font-size:7.5pt;font-weight:700;color:#ff88cc;text-shadow:0 0 5px rgba(255,68,170,.4);line-height:1.3; }
+
+    .pricing { margin:0 24pt 10pt;background:rgba(160,80,255,.07);border:1.5pt solid rgba(160,80,255,.35);border-radius:5pt;padding:9pt 14pt;display:flex;align-items:center;justify-content:center;gap:10pt;box-shadow:0 0 14pt rgba(160,80,255,.12); }
+    .price-main { font-size:14pt;font-weight:900;color:#cc66ff;text-shadow:0 0 8px rgba(200,100,255,.7); }
+    .price-div { width:1pt;height:16pt;background:rgba(160,80,255,.3); }
+    .price-note { font-size:8.5pt;color:rgba(255,255,255,.5);font-weight:500; }
+
+    .contact { border-top:1pt solid rgba(160,80,255,.2);padding:14pt 24pt;display:flex;align-items:center;justify-content:space-between; }
+    .phone { font-family:'Orbitron',monospace;font-size:20pt;font-weight:700;color:white;text-shadow:0 0 10px rgba(160,80,255,.4);line-height:1;letter-spacing:1pt; }
+    .cmeta { margin-top:6pt;display:flex;flex-direction:column;gap:3pt; }
+    .web { font-size:9.5pt;color:#cc66ff;font-weight:700;text-shadow:0 0 5px rgba(160,80,255,.5); }
+    .loc { font-size:8pt;color:rgba(255,255,255,.35);font-weight:500; }
+    .qr-box { background:rgba(255,255,255,.04);border:1pt solid rgba(160,80,255,.3);border-radius:5pt;padding:5pt;display:flex;flex-direction:column;align-items:center;gap:3pt; }
+    .qr-box img { width:66pt;height:66pt;display:block; }
+    .qr-box .qlabel { font-size:6pt;font-weight:700;color:rgba(160,80,255,.5);letter-spacing:1px; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+  <div class="header">
+    <div class="brand">SUREDESK</div>
+    <div class="brand-sub">Personal AI Training · Miami, FL</div>
+    <div class="neon-line"></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">1-on-1 · In-Person · Beginner Friendly</div>
+    <div class="hero-headline">Master AI.<br><span class="glow">Work Smarter.</span></div>
+    <div class="hero-sub">Personal coaching to unlock ChatGPT, Claude,<br>and every major AI tool — at your pace.</div>
+  </div>
+
+  <div class="services">
+    <div class="section-label">// What You'll Learn</div>
+    <div class="grid">
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="card-title">ChatGPT for Life</div><div class="card-sub">Save hours every day</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div><div class="card-title">AI Image Creation</div><div class="card-sub">DALL-E · Midjourney</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div><div class="card-title">AI Writing &amp; Research</div><div class="card-sub">Claude · Perplexity</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div><div class="card-title">AI for Business</div><div class="card-sub">Copilot · Gemini</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="card-title">Task Automation</div><div class="card-sub">Save time &amp; clicks</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div><div class="card-title">Smart Home AI</div><div class="card-sub">Siri · Alexa · More</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tools-row">
+    <div class="tools-glass">
+      <div class="tools-lbl">Tools Covered</div>
+      <div class="tool-chips">
+        <div class="chip">ChatGPT</div>
+        <div class="chip">Claude</div>
+        <div class="chip">DALL-E</div>
+        <div class="chip">Copilot</div>
+        <div class="chip">Gemini</div>
+        <div class="chip">Siri</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust">
+    <div class="tpill"><span class="ico">🎓</span><span>Beginner<br>Friendly</span></div>
+    <div class="tpill"><span class="ico">🌐</span><span>Bilingual<br>EN / ES</span></div>
+    <div class="tpill"><span class="ico">🏠</span><span>In Your<br>Home</span></div>
+    <div class="tpill"><span class="ico">⭐</span><span>5-Star<br>Rated</span></div>
+  </div>
+
+  <div class="pricing">
+    <div class="price-main">Starting at $50 / hr</div>
+    <div class="price-div"></div>
+    <div class="price-note">No contracts · Pay per session</div>
+  </div>
+
+  <div class="contact">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="cmeta">
+        <span class="web">suredesk.net</span>
+        <span class="loc">📍 Miami, FL</span>
+      </div>
+    </div>
+    <div class="qr-box">
+      <img src="https://chart.googleapis.com/chart?chs=132x132&cht=qr&chl=https://suredesk.net&choe=UTF-8&chld=M|2" alt="QR">
+      <div class="qlabel">SCAN TO VISIT</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

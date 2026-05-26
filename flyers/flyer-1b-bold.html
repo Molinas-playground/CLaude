@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — IT Support · Bold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Inter', Arial, sans-serif; overflow: hidden; }
+    .flyer { width: 5.5in; height: 8.5in; display: flex; flex-direction: column; }
+
+    .top-block { background: #0066FF; padding: 20pt 24pt 18pt; position: relative; overflow: hidden; }
+    .top-block::before { content:''; position:absolute; right:-50pt;top:-60pt; width:200pt;height:200pt; background:#00DDFF; border-radius:50%; opacity:0.18; }
+    .top-block::after  { content:''; position:absolute; right:20pt;bottom:-80pt; width:140pt;height:140pt; background:#000; border-radius:50%; opacity:0.08; }
+
+    .brand-row { display:flex; align-items:center; gap:10pt; margin-bottom:12pt; }
+    .brand-dot { width:12pt; height:12pt; background:#00DDFF; border-radius:50%; }
+    .brand-name { font-family:'Poppins',Arial,sans-serif; font-size:13pt; font-weight:900; color:white; letter-spacing:2px; text-transform:uppercase; }
+    .stars-inline { color:#fff; font-size:10pt; letter-spacing:1px; margin-left:auto; opacity:.8; }
+
+    .top-headline { font-family:'Poppins',Arial,sans-serif; font-size:46pt; font-weight:900; color:#000; line-height:0.92; letter-spacing:-1pt; text-transform:uppercase; position:relative; z-index:1; }
+    .top-headline .white { color:#fff; }
+    .top-headline .accent { color:#00DDFF; }
+    .top-sub { font-size:10.5pt; color:rgba(0,0,0,.65); margin-top:10pt; font-weight:600; line-height:1.4; position:relative; z-index:1; }
+
+    .blue-strip { background:#00DDFF; padding:8pt 24pt; display:flex; align-items:center; gap:18pt; }
+    .ys-item { font-size:8pt; font-weight:900; color:#000; text-transform:uppercase; letter-spacing:1px; display:flex; align-items:center; gap:5pt; }
+    .ys-item .dot { width:5pt;height:5pt;background:#0066FF;border-radius:50%; }
+
+    .services { background:white; padding:14pt 24pt; flex:1; }
+    .section-label { font-size:7pt; font-weight:900; letter-spacing:4px; text-transform:uppercase; color:#0066FF; margin-bottom:10pt; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:6pt; }
+    .card { background:white; border:2pt solid #000; border-radius:4pt; padding:9pt 10pt; display:flex; align-items:center; gap:8pt; position:relative; }
+    .card::after { content:''; position:absolute; inset:0; border:2pt solid #000; border-radius:4pt; transform:translate(2.5pt,2.5pt); z-index:-1; background:#00DDFF; }
+    .icon-box { width:30pt;height:30pt;background:#000;border-radius:3pt;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .icon-box svg { width:15pt;height:15pt;stroke:#00DDFF;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round; }
+    .card-title { font-size:9.5pt; font-weight:800; color:#000; }
+    .card-sub { font-size:7.5pt; color:#666; margin-top:1pt; font-weight:500; }
+
+    .pricing { background:#0066FF; padding:9pt 24pt; display:flex; align-items:center; gap:10pt; }
+    .price-main { font-family:'Poppins',sans-serif; font-size:15pt; font-weight:900; color:#fff; letter-spacing:-.3pt; }
+    .price-div { width:1.5pt;height:18pt;background:rgba(255,255,255,.3); }
+    .price-note { font-size:9pt; color:rgba(255,255,255,.75); font-weight:700; }
+
+    .contact { background:#000; padding:15pt 24pt; display:flex; align-items:center; justify-content:space-between; }
+    .phone { font-family:'Poppins',sans-serif; font-size:23pt; font-weight:900; color:white; line-height:1; letter-spacing:-.3pt; }
+    .cmeta { margin-top:5pt; display:flex; flex-direction:column; gap:3pt; }
+    .web { font-size:10pt; color:#00DDFF; font-weight:700; }
+    .loc { font-size:8.5pt; color:rgba(255,255,255,.4); font-weight:500; }
+    .qr-box { background:white; border-radius:4pt; padding:4pt; display:flex; flex-direction:column; align-items:center; gap:3pt; }
+    .qr-box img { width:66pt;height:66pt;display:block; }
+    .qr-box .ql { font-size:6pt;font-weight:700;color:#666;letter-spacing:.5px; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+  <div class="top-block">
+    <div class="brand-row">
+      <div class="brand-dot"></div>
+      <div class="brand-name">SureDesk</div>
+      <div class="stars-inline">★★★★★</div>
+    </div>
+    <div class="top-headline">
+      Your<br><span class="white">Tech</span><br><span class="accent">Fixed.</span>
+    </div>
+    <div class="top-sub">Fast, in-person IT support — same day.<br>No contracts. No jargon. Miami, FL.</div>
+  </div>
+
+  <div class="blue-strip">
+    <div class="ys-item"><div class="dot"></div>After Hours &amp; Weekends</div>
+    <div class="ys-item"><div class="dot"></div>Bilingual EN/ES</div>
+    <div class="ys-item"><div class="dot"></div>From $50/hr</div>
+  </div>
+
+  <div class="services">
+    <div class="section-label">What We Fix</div>
+    <div class="grid">
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div><div class="card-title">Computer Repair</div><div class="card-sub">Slow, frozen or broken</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="card-title">Virus Removal</div><div class="card-sub">Cleaned &amp; secured</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
+        <div><div class="card-title">WiFi &amp; Network</div><div class="card-sub">Setup &amp; troubleshooting</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <div><div class="card-title">New Device Setup</div><div class="card-sub">Phone, tablet or laptop</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+        <div><div class="card-title">Data Transfer</div><div class="card-sub">Photos, files &amp; backups</div></div>
+      </div>
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div><div class="card-title">Password Reset</div><div class="card-sub">Email &amp; accounts</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing">
+    <div class="price-main">Starting at $50 / hr</div>
+    <div class="price-div"></div>
+    <div class="price-note">No hidden fees · No surprises</div>
+  </div>
+
+  <div class="contact">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="cmeta">
+        <span class="web">suredesk.net</span>
+        <span class="loc">📍 Miami, FL</span>
+      </div>
+    </div>
+    <div class="qr-box">
+      <img src="https://chart.googleapis.com/chart?chs=132x132&cht=qr&chl=https://suredesk.net&choe=UTF-8&chld=M|2" alt="QR">
+      <div class="ql">SCAN TO VISIT</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
