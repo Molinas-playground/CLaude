@@ -2,323 +2,386 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sure Desk — Demo: Top Half Takeover</title>
+  <title>Sure Desk — IT Support &amp; AI Training</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     @page { size: 5.5in 8.5in; margin: 0; }
     html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    body { width: 5.5in; height: 8.5in; font-family: 'Poppins', Arial, sans-serif; overflow: hidden; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Inter', Arial, sans-serif; overflow: hidden; }
 
+    /* ─────────────────────────────────────────
+       LAYOUT — two clean zones, nothing overlaps
+    ───────────────────────────────────────── */
     .flyer { width: 5.5in; height: 8.5in; display: flex; flex-direction: column; }
 
-    /* ── ③ TOP HALF ILLUSTRATION TAKEOVER ── */
-    .photo-top {
-      position: relative;
-      height: 3.4in;
+    /* ── ZONE 1: DARK TOP (brand + illustration) ── */
+    .top-zone {
+      background: #07111f;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    /* Brand strip — clean bar, sits completely above the illustration */
+    .brand-strip {
+      padding: 14pt 22pt 12pt;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1pt solid rgba(255,255,255,0.06);
+    }
+    .brand {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22pt;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5pt;
+      line-height: 1;
+    }
+    .brand em { font-style: normal; color: #0dd4e8; }
+    .brand-sub {
+      font-size: 7pt;
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 3pt;
+    }
+    .brand-right { text-align: right; }
+    .stars { color: #0dd4e8; font-size: 11pt; letter-spacing: 2px; }
+    .stars-sub {
+      font-size: 6.5pt;
+      color: rgba(255,255,255,0.3);
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2pt;
+    }
+
+    /* Illustration band — standalone visual, NO text overlaid */
+    .illus-band {
+      width: 100%;
+      height: 148pt;
       overflow: hidden;
       flex-shrink: 0;
+      position: relative;
     }
-    /* SVG fills the block */
-    .photo-top .scene-svg {
-      position: absolute;
-      inset: 0;
+    .illus-band svg {
       width: 100%;
       height: 100%;
-    }
-    /* Gradient overlay: transparent top → dark bottom for text legibility */
-    .photo-top::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(4,16,31,0.05) 0%,
-        rgba(4,16,31,0.30) 45%,
-        rgba(4,16,31,0.92) 100%
-      );
-    }
-    /* All content over the photo */
-    .photo-content {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 18pt 24pt 20pt;
-    }
-    /* Brand at top of photo */
-    .brand-row { display: flex; align-items: center; justify-content: space-between; }
-    .brand { font-size: 22pt; font-weight: 900; color: white; letter-spacing: -.5pt; line-height: 1; }
-    .brand em { font-style: normal; color: #fbbf24; }
-    .brand-tag { font-size: 7.5pt; color: rgba(255,255,255,.6); font-weight: 500; margin-top: 3pt; }
-    .star-pill { background: rgba(255,255,255,.15); border: 1pt solid rgba(255,255,255,.35); border-radius: 20pt; padding: 5pt 11pt; text-align: center; }
-    .star-pill .stars { color: #fbbf24; font-size: 10pt; letter-spacing: 1px; }
-    .star-pill .starlabel { font-size: 6pt; color: rgba(255,255,255,.6); font-weight: 600; letter-spacing: 1px; }
-
-    /* Headline at bottom of photo */
-    .photo-headline {
-      font-size: 36pt;
-      font-weight: 900;
-      color: white;
-      line-height: 1.0;
-      letter-spacing: -.5pt;
-      text-shadow: 0 2pt 12pt rgba(0,0,0,0.6);
-    }
-    .photo-headline .accent { color: #fbbf24; }
-    .photo-eyebrow {
-      font-size: 7pt;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(251,191,36,.8);
-      margin-bottom: 8pt;
-    }
-    .photo-sub {
-      font-size: 10.5pt;
-      color: rgba(255,255,255,.85);
-      margin-top: 9pt;
-      font-weight: 400;
-      line-height: 1.4;
-    }
-    /* Photo credit */
-    .photo-credit {
-      position: absolute;
-      bottom: 5pt; right: 8pt;
-      z-index: 2;
-      font-size: 5.5pt;
-      color: rgba(255,255,255,.2);
+      display: block;
     }
 
-    /* ── BOTTOM HALF: SERVICES + CONTACT ── */
-    .bottom {
+    /* ── ZONE 2: LIGHT BOTTOM (all text & services) ── */
+    .bottom-zone {
+      background: #f0f4f8;
       flex: 1;
-      background: white;
       display: flex;
       flex-direction: column;
     }
 
-    /* Accent bar between photo and services */
-    .accent-bar {
-      height: 4pt;
-      background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 40%, #6d28d9 70%, #ec4899 100%);
+    /* Teal accent bar separating zones */
+    .zone-divider {
+      height: 3pt;
+      background: linear-gradient(90deg, #0dd4e8 0%, #06b6d4 50%, #0891b2 100%);
       flex-shrink: 0;
     }
 
-    .services { padding: 12pt 24pt; flex: 1; }
-    .section-label { font-size: 7pt; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: #6d28d9; margin-bottom: 9pt; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5pt; }
-    .card { background: #fafafa; border: 1.5pt solid #e5e7eb; border-radius: 7pt; padding: 8pt 10pt; display: flex; align-items: center; gap: 8pt; }
-    .icon-box { width: 28pt; height: 28pt; background: #6d28d9; border-radius: 6pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .icon-box svg { width: 14pt; height: 14pt; stroke: white; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .card-title { font-size: 9pt; font-weight: 700; color: #111; }
-    .card-sub { font-size: 7pt; color: #888; margin-top: 1pt; font-weight: 400; }
+    /* Headline area — clear, uncluttered */
+    .headline-area {
+      padding: 13pt 22pt 10pt;
+      background: #fff;
+      border-bottom: 1pt solid #e2e8f0;
+      flex-shrink: 0;
+    }
+    .eyebrow {
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: #0891b2;
+      margin-bottom: 5pt;
+    }
+    .headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.05;
+      letter-spacing: -0.5pt;
+    }
+    .headline .teal { color: #0dd4e8; }
+    .sub-text {
+      font-size: 9.5pt;
+      color: #475569;
+      margin-top: 6pt;
+      font-weight: 400;
+      line-height: 1.5;
+    }
 
-    /* Trust pills */
-    .trust { padding: 0 24pt 9pt; display: flex; gap: 5pt; }
-    .tpill { flex: 1; background: #faf5ff; border: 1pt solid #e9d5ff; border-radius: 5pt; padding: 5pt 4pt; text-align: center; }
-    .tpill .ico { font-size: 11pt; display: block; margin-bottom: 2pt; }
-    .tpill span { font-size: 7pt; font-weight: 700; color: #6d28d9; line-height: 1.3; }
+    /* Services grid */
+    .services {
+      padding: 10pt 22pt;
+      flex: 1;
+      background: #f0f4f8;
+    }
+    .section-label {
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 7pt;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5pt;
+    }
+    .card {
+      background: #fff;
+      border: 1pt solid #e2e8f0;
+      border-radius: 7pt;
+      padding: 8pt 10pt;
+      display: flex;
+      align-items: center;
+      gap: 8pt;
+      box-shadow: 0 1pt 3pt rgba(0,0,0,0.04);
+    }
+    .icon-box {
+      width: 28pt;
+      height: 28pt;
+      background: #0dd4e8;
+      border-radius: 6pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-box svg {
+      width: 14pt;
+      height: 14pt;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-box.green { background: #10b981; }
+    .icon-box.navy  { background: #1e3a5f; }
+    .icon-box.slate { background: #475569; }
+    .card-title { font-size: 9pt; font-weight: 700; color: #0f172a; }
+    .card-sub { font-size: 7pt; color: #94a3b8; margin-top: 1pt; }
 
-    /* Pricing + Contact combined row */
-    .bottom-bar {
-      background: #1a0533;
-      padding: 12pt 24pt;
+    /* Trust row */
+    .trust {
+      padding: 8pt 22pt;
+      background: #fff;
+      border-top: 1pt solid #e2e8f0;
+      display: flex;
+      gap: 0;
+      flex-shrink: 0;
+    }
+    .titem {
+      flex: 1;
+      text-align: center;
+      padding: 0 6pt;
+      border-right: 1pt solid #e2e8f0;
+    }
+    .titem:last-child { border-right: none; }
+    .titem .ico { font-size: 11pt; display: block; margin-bottom: 2pt; }
+    .titem .tname { font-size: 7pt; font-weight: 700; color: #334155; }
+    .titem .tdesc { font-size: 6pt; color: #94a3b8; margin-top: 1pt; }
+
+    /* Contact bar */
+    .contact-bar {
+      background: #07111f;
+      padding: 12pt 22pt;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-shrink: 0;
     }
-    .phone { font-size: 21pt; font-weight: 900; color: white; letter-spacing: -.3pt; line-height: 1; }
-    .bcmeta { margin-top: 4pt; display: flex; flex-direction: column; gap: 2pt; }
-    .web { font-size: 9.5pt; color: #fbbf24; font-weight: 700; }
-    .loc { font-size: 8pt; color: rgba(255,255,255,.4); }
-    .price-bubble {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      border-radius: 8pt;
+    .phone {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20pt;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.3pt;
+      line-height: 1;
+    }
+    .cmeta { margin-top: 4pt; display: flex; flex-direction: column; gap: 2pt; }
+    .web { font-size: 9pt; color: #0dd4e8; font-weight: 600; }
+    .loc { font-size: 7.5pt; color: rgba(255,255,255,0.35); }
+    .price-tag {
+      background: #0dd4e8;
+      border-radius: 6pt;
       padding: 8pt 14pt;
       text-align: center;
     }
-    .pb-amount { font-size: 13pt; font-weight: 900; color: #000; line-height: 1; }
-    .pb-note { font-size: 7pt; color: rgba(0,0,0,.6); font-weight: 600; margin-top: 2pt; }
+    .price-amount { font-family: 'Poppins', sans-serif; font-size: 13pt; font-weight: 800; color: #07111f; line-height: 1; }
+    .price-note { font-size: 6.5pt; color: rgba(7,17,31,0.6); font-weight: 600; margin-top: 2pt; }
   </style>
 </head>
 <body>
 <div class="flyer">
 
-  <!-- ③ TOP HALF — INLINE SVG TECH ILLUSTRATION -->
-  <div class="photo-top">
-    <svg class="scene-svg" viewBox="0 0 528 327" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <!-- Background gradient -->
-        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#040f1e"/>
-          <stop offset="55%" stop-color="#071828"/>
-          <stop offset="100%" stop-color="#0d2845"/>
-        </linearGradient>
-        <!-- Laptop screen glow -->
-        <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
-        </radialGradient>
-        <!-- Dot grid pattern -->
-        <pattern id="dotGrid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="12" cy="12" r="0.8" fill="rgba(14,100,180,0.22)"/>
-        </pattern>
-      </defs>
+  <!-- ── DARK ZONE: brand strip + standalone illustration ── -->
+  <div class="top-zone">
 
-      <!-- ── BACKGROUND ── -->
-      <rect width="528" height="327" fill="url(#bgGrad)"/>
-      <rect width="528" height="327" fill="url(#dotGrid)"/>
-
-      <!-- Subtle horizontal light band across middle -->
-      <rect x="0" y="110" width="528" height="80" fill="rgba(14,100,200,0.04)"/>
-
-      <!-- ── LAPTOP ── -->
-      <!-- Ambient glow behind laptop -->
-      <ellipse cx="264" cy="165" rx="160" ry="110" fill="url(#screenGlow)"/>
-      <!-- Screen lid outer -->
-      <rect x="154" y="46" width="220" height="158" rx="8" fill="#0b1e36" stroke="#1e5a96" stroke-width="2"/>
-      <!-- Display panel -->
-      <rect x="163" y="55" width="202" height="138" rx="5" fill="#060f1c"/>
-      <!-- Screen top bar (like a browser/IDE) -->
-      <rect x="163" y="55" width="202" height="18" rx="5 5 0 0" fill="#0d2030"/>
-      <rect x="163" y="67" width="202" height="6" fill="#0d2030"/>
-      <!-- Window chrome dots -->
-      <circle cx="175" cy="64" r="4.5" fill="#ff5f57"/>
-      <circle cx="188" cy="64" r="4.5" fill="#febc2e"/>
-      <circle cx="201" cy="64" r="4.5" fill="#28c840"/>
-      <!-- Tab bar -->
-      <rect x="215" y="59" width="60" height="10" rx="3" fill="rgba(14,165,233,0.2)" stroke="rgba(14,165,233,0.4)" stroke-width="0.5"/>
-      <rect x="280" y="59" width="45" height="10" rx="3" fill="rgba(255,255,255,0.05)"/>
-      <!-- Screen content: diagnostic / dashboard UI -->
-      <!-- Side panel -->
-      <rect x="163" y="73" width="40" height="120" fill="rgba(14,30,56,0.8)"/>
-      <!-- Sidebar icons -->
-      <rect x="170" y="79" width="26" height="5" rx="2.5" fill="rgba(14,165,233,0.5)"/>
-      <rect x="170" y="88" width="26" height="5" rx="2.5" fill="rgba(255,255,255,0.15)"/>
-      <rect x="170" y="97" width="26" height="5" rx="2.5" fill="rgba(255,255,255,0.15)"/>
-      <rect x="170" y="106" width="26" height="5" rx="2.5" fill="rgba(255,255,255,0.15)"/>
-      <!-- Main content area -->
-      <!-- Header bar in content -->
-      <rect x="203" y="79" width="162" height="8" rx="2" fill="rgba(14,165,233,0.3)"/>
-      <!-- CPU / status bars -->
-      <text x="206" y="101" font-size="5.5" fill="rgba(255,255,255,0.4)" font-family="monospace">CPU</text>
-      <rect x="218" y="96" width="90" height="6" rx="3" fill="rgba(255,255,255,0.08)"/>
-      <rect x="218" y="96" width="62" height="6" rx="3" fill="#0ea5e9" opacity="0.8"/>
-      <text x="206" y="112" font-size="5.5" fill="rgba(255,255,255,0.4)" font-family="monospace">RAM</text>
-      <rect x="218" y="107" width="90" height="6" rx="3" fill="rgba(255,255,255,0.08)"/>
-      <rect x="218" y="107" width="40" height="6" rx="3" fill="#22c55e" opacity="0.8"/>
-      <text x="206" y="123" font-size="5.5" fill="rgba(255,255,255,0.4)" font-family="monospace">DSK</text>
-      <rect x="218" y="118" width="90" height="6" rx="3" fill="rgba(255,255,255,0.08)"/>
-      <rect x="218" y="118" width="75" height="6" rx="3" fill="#f59e0b" opacity="0.8"/>
-      <!-- Divider -->
-      <line x1="203" y1="132" x2="365" y2="132" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
-      <!-- Terminal lines -->
-      <rect x="206" y="137" width="8" height="4" rx="1" fill="#22c55e" opacity="0.9"/>
-      <rect x="218" y="137" width="65" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
-      <rect x="206" y="145" width="8" height="4" rx="1" fill="#0ea5e9" opacity="0.7"/>
-      <rect x="218" y="145" width="90" height="4" rx="1" fill="rgba(255,255,255,0.15)"/>
-      <rect x="206" y="153" width="8" height="4" rx="1" fill="#22c55e" opacity="0.9"/>
-      <rect x="218" y="153" width="50" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
-      <!-- Blinking cursor -->
-      <rect x="206" y="161" width="6" height="9" rx="1" fill="#22c55e" opacity="0.85"/>
-      <!-- Big green checkmark badge top-right of screen -->
-      <circle cx="348" cy="92" r="20" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1.5"/>
-      <polyline points="337,92 345,100 359,83" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-
-      <!-- Laptop base (keyboard deck) -->
-      <path d="M138,206 Q145,204 190,204 L338,204 Q383,204 390,206 L400,224 Q370,232 264,232 Q158,232 128,224 Z"
-            fill="#0b1e36" stroke="#1e5a96" stroke-width="1.5"/>
-      <!-- Keyboard rows -->
-      <rect x="165" y="208" width="198" height="3.5" rx="1.5" fill="rgba(30,90,150,0.4)"/>
-      <rect x="170" y="214" width="188" height="3.5" rx="1.5" fill="rgba(30,90,150,0.3)"/>
-      <!-- Touchpad -->
-      <rect x="222" y="220" width="84" height="6" rx="3" fill="rgba(30,90,150,0.4)" stroke="rgba(30,90,150,0.5)" stroke-width="0.5"/>
-      <!-- Laptop base shadow -->
-      <ellipse cx="264" cy="236" rx="140" ry="8" fill="rgba(0,0,0,0.35)"/>
-
-      <!-- ── FLOATING SERVICE ICONS ── -->
-
-      <!-- SHIELD (top-left) -->
-      <g transform="translate(36, 30)">
-        <circle cx="28" cy="28" r="26" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.45)" stroke-width="1.5"/>
-        <path d="M28 10 L42 15.5 V27 C42 35 36 41.5 28 44 C20 41.5 14 35 14 27 V15.5 Z"
-              stroke="#22c55e" stroke-width="2" fill="rgba(34,197,94,0.15)" stroke-linejoin="round"/>
-        <polyline points="20,28 26,34 36,23" stroke="#22c55e" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="28" y="64" text-anchor="middle" font-size="7.5" fill="rgba(34,197,94,0.7)" font-family="Inter,Arial,sans-serif" font-weight="700">VIRUS FREE</text>
-      </g>
-
-      <!-- WIFI (top-right) -->
-      <g transform="translate(440, 28)">
-        <circle cx="28" cy="28" r="26" fill="rgba(14,165,233,0.12)" stroke="rgba(14,165,233,0.45)" stroke-width="1.5"/>
-        <path d="M12 22a22 22 0 0 1 32 0" stroke="#0ea5e9" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <path d="M17 27a14 14 0 0 1 22 0" stroke="#0ea5e9" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <path d="M22 32a7 7 0 0 1 12 0"   stroke="#0ea5e9" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <circle cx="28" cy="37" r="2.5" fill="#0ea5e9"/>
-        <text x="28" y="64" text-anchor="middle" font-size="7.5" fill="rgba(14,165,233,0.7)" font-family="Inter,Arial,sans-serif" font-weight="700">WIFI SETUP</text>
-      </g>
-
-      <!-- PHONE/DEVICE (bottom-left) -->
-      <g transform="translate(40, 220)">
-        <circle cx="26" cy="26" r="24" fill="rgba(168,85,247,0.12)" stroke="rgba(168,85,247,0.45)" stroke-width="1.5"/>
-        <rect x="16" y="11" width="20" height="30" rx="3" stroke="#a855f7" stroke-width="2" fill="rgba(168,85,247,0.1)"/>
-        <rect x="19" y="14" width="14" height="20" rx="1" fill="rgba(168,85,247,0.2)"/>
-        <circle cx="26" cy="37" r="2" fill="#a855f7"/>
-        <text x="26" y="62" text-anchor="middle" font-size="7.5" fill="rgba(168,85,247,0.7)" font-family="Inter,Arial,sans-serif" font-weight="700">DEVICE SETUP</text>
-      </g>
-
-      <!-- DATA/BACKUP (bottom-right) -->
-      <g transform="translate(430, 220)">
-        <circle cx="26" cy="26" r="24" fill="rgba(251,146,60,0.12)" stroke="rgba(251,146,60,0.45)" stroke-width="1.5"/>
-        <!-- Up arrow -->
-        <path d="M26 10 L26 36" stroke="#fb923c" stroke-width="2" stroke-linecap="round"/>
-        <path d="M18 18 L26 10 L34 18" stroke="#fb923c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Cloud bottom half -->
-        <path d="M16 32 Q14 26 20 25 Q19 18 26 18 Q33 18 32 25 Q38 26 36 32 Z"
-              stroke="#fb923c" stroke-width="1.5" fill="rgba(251,146,60,0.15)"/>
-        <text x="26" y="62" text-anchor="middle" font-size="7.5" fill="rgba(251,146,60,0.7)" font-family="Inter,Arial,sans-serif" font-weight="700">DATA BACKUP</text>
-      </g>
-
-      <!-- ── CIRCUIT CONNECTOR LINES ── -->
-      <line x1="116" y1="64"  x2="155" y2="105" stroke="rgba(14,165,233,0.2)" stroke-width="1" stroke-dasharray="5,4"/>
-      <line x1="440" y1="62"  x2="374" y2="108" stroke="rgba(14,165,233,0.2)" stroke-width="1" stroke-dasharray="5,4"/>
-      <line x1="110" y1="256" x2="200" y2="215" stroke="rgba(14,165,233,0.15)" stroke-width="1" stroke-dasharray="5,4"/>
-      <line x1="430" y1="254" x2="338" y2="215" stroke="rgba(14,165,233,0.15)" stroke-width="1" stroke-dasharray="5,4"/>
-      <!-- Dot nodes at junctions -->
-      <circle cx="116" cy="64"  r="3" fill="#0ea5e9" opacity="0.5"/>
-      <circle cx="440" cy="62"  r="3" fill="#0ea5e9" opacity="0.5"/>
-      <circle cx="110" cy="256" r="3" fill="#a855f7" opacity="0.5"/>
-      <circle cx="430" cy="254" r="3" fill="#fb923c" opacity="0.5"/>
-    </svg>
-    <div class="photo-content">
-      <!-- Brand at top -->
-      <div class="brand-row">
-        <div>
-          <div class="brand">Sure<em>Desk</em></div>
-          <div class="brand-tag">IT Support &amp; AI Training</div>
-        </div>
-        <div class="star-pill">
-          <div class="stars">★★★★★</div>
-          <div class="starlabel">5-STAR</div>
-        </div>
-      </div>
-
-      <!-- Headline at bottom of photo -->
+    <!-- Brand strip: completely above the illustration, no overlap -->
+    <div class="brand-strip">
       <div>
-        <div class="photo-eyebrow">Miami, FL · Same Day · No Contracts</div>
-        <div class="photo-headline">Tech Help for<br><span class="accent">Real Life.</span></div>
-        <div class="photo-sub">Fast in-person IT support &amp; personal AI training —<br>no jargon, no hidden fees, just results.</div>
+        <div class="brand">Sure<em>Desk</em></div>
+        <div class="brand-sub">IT Support &amp; AI Training · Miami, FL</div>
       </div>
+      <div class="brand-right">
+        <div class="stars">★★★★★</div>
+        <div class="stars-sub">5-Star Rated</div>
+      </div>
+    </div>
+
+    <!-- Illustration: pure visual, no text overlapping -->
+    <div class="illus-band">
+      <svg viewBox="0 0 528 148" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#050e1c"/>
+            <stop offset="100%" stop-color="#0a1e38"/>
+          </linearGradient>
+          <radialGradient id="laptopGlow" cx="50%" cy="70%" r="45%">
+            <stop offset="0%" stop-color="#0dd4e8" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#0dd4e8" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Subtle dot grid -->
+          <pattern id="dg2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="0.7" fill="rgba(13,212,232,0.15)"/>
+          </pattern>
+        </defs>
+
+        <!-- Background -->
+        <rect width="528" height="148" fill="url(#bg2)"/>
+        <rect width="528" height="148" fill="url(#dg2)"/>
+
+        <!-- Ambient laptop glow -->
+        <ellipse cx="264" cy="110" rx="180" ry="70" fill="url(#laptopGlow)"/>
+
+        <!-- ── LAPTOP ── centered, clean -->
+        <!-- Screen lid -->
+        <rect x="174" y="18" width="180" height="116" rx="7" fill="#0b1d35" stroke="#1a4a7a" stroke-width="1.5"/>
+        <!-- Display -->
+        <rect x="182" y="26" width="164" height="100" rx="4" fill="#050d1c"/>
+        <!-- Menu/toolbar bar -->
+        <rect x="182" y="26" width="164" height="14" rx="4 4 0 0" fill="#0a1e34"/>
+        <!-- Window control dots -->
+        <circle cx="192" cy="33" r="4" fill="#ff5f57"/>
+        <circle cx="204" cy="33" r="4" fill="#febc2e"/>
+        <circle cx="216" cy="33" r="4" fill="#28c840"/>
+        <!-- Tab -->
+        <rect x="228" y="28" width="50" height="10" rx="3" fill="rgba(13,212,232,0.2)" stroke="rgba(13,212,232,0.4)" stroke-width="0.5"/>
+
+        <!-- Screen content: clean dashboard -->
+        <!-- Left mini-panel -->
+        <rect x="182" y="40" width="36" height="86" fill="rgba(10,30,56,0.7)"/>
+        <rect x="186" y="45" width="28" height="4" rx="2" fill="rgba(13,212,232,0.6)"/>
+        <rect x="186" y="53" width="28" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+        <rect x="186" y="61" width="28" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+        <rect x="186" y="69" width="28" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+        <rect x="186" y="77" width="28" height="4" rx="2" fill="rgba(255,255,255,0.1)"/>
+
+        <!-- Main content area -->
+        <!-- Status bars -->
+        <text x="222" y="50" font-size="5" fill="rgba(255,255,255,0.35)" font-family="monospace">CPU USAGE</text>
+        <rect x="222" y="52" width="118" height="5" rx="2.5" fill="rgba(255,255,255,0.08)"/>
+        <rect x="222" y="52" width="78" height="5" rx="2.5" fill="#0dd4e8"/>
+
+        <text x="222" y="63" font-size="5" fill="rgba(255,255,255,0.35)" font-family="monospace">MEMORY</text>
+        <rect x="222" y="65" width="118" height="5" rx="2.5" fill="rgba(255,255,255,0.08)"/>
+        <rect x="222" y="65" width="48" height="5" rx="2.5" fill="#10b981"/>
+
+        <text x="222" y="76" font-size="5" fill="rgba(255,255,255,0.35)" font-family="monospace">NETWORK</text>
+        <rect x="222" y="78" width="118" height="5" rx="2.5" fill="rgba(255,255,255,0.08)"/>
+        <rect x="222" y="78" width="96" height="5" rx="2.5" fill="#06b6d4"/>
+
+        <!-- Divider -->
+        <line x1="222" y1="90" x2="346" y2="90" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+
+        <!-- Mini terminal -->
+        <rect x="222" y="94" width="6" height="4" rx="1" fill="#10b981"/>
+        <rect x="232" y="94" width="60" height="4" rx="1" fill="rgba(255,255,255,0.18)"/>
+        <rect x="222" y="102" width="6" height="4" rx="1" fill="#0dd4e8"/>
+        <rect x="232" y="102" width="84" height="4" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <rect x="222" y="110" width="5" height="9" rx="1" fill="#10b981" opacity="0.85"/>
+
+        <!-- Success badge -->
+        <circle cx="330" cy="60" r="18" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1.5"/>
+        <polyline points="320,60 328,68 341,51" stroke="#10b981" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- Laptop base -->
+        <path d="M158,136 Q165,134 200,134 L328,134 Q363,134 370,136 L378,148 L150,148 Z"
+              fill="#0b1d35" stroke="#1a4a7a" stroke-width="1"/>
+        <!-- Keyboard -->
+        <rect x="172" y="137" width="184" height="3" rx="1.5" fill="rgba(26,74,122,0.5)"/>
+        <rect x="176" y="142" width="176" height="3" rx="1.5" fill="rgba(26,74,122,0.35)"/>
+        <rect x="224" y="144" width="80" height="4" rx="2" fill="rgba(26,74,122,0.4)"/>
+
+        <!-- ── LEFT SERVICE BADGE ── -->
+        <g transform="translate(32, 30)">
+          <rect width="96" height="80" rx="8" fill="rgba(10,30,56,0.6)" stroke="rgba(13,212,232,0.25)" stroke-width="1"/>
+          <!-- Shield -->
+          <path d="M48 16 L60 20.5 V30 C60 37 54.5 43 48 45 C41.5 43 36 37 36 30 V20.5 Z"
+                stroke="#10b981" stroke-width="1.5" fill="rgba(16,185,129,0.12)"/>
+          <polyline points="42,30 47,35 55,24" stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="48" y="56" text-anchor="middle" font-size="7" fill="#10b981" font-family="Inter,sans-serif" font-weight="700">VIRUS</text>
+          <text x="48" y="65" text-anchor="middle" font-size="7" fill="#10b981" font-family="Inter,sans-serif" font-weight="700">REMOVAL</text>
+          <!-- small wifi bottom -->
+          <path d="M36 76a17 17 0 0 1 24 0" stroke="rgba(13,212,232,0.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M39 76a11 11 0 0 1 18 0" stroke="rgba(13,212,232,0.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <circle cx="48" cy="76" r="1.5" fill="rgba(13,212,232,0.6)"/>
+        </g>
+
+        <!-- ── RIGHT SERVICE BADGE ── -->
+        <g transform="translate(400, 30)">
+          <rect width="96" height="80" rx="8" fill="rgba(10,30,56,0.6)" stroke="rgba(13,212,232,0.25)" stroke-width="1"/>
+          <!-- Monitor -->
+          <rect x="30" y="14" width="36" height="26" rx="3" stroke="#0dd4e8" stroke-width="1.5" fill="rgba(13,212,232,0.08)"/>
+          <!-- Lines on screen -->
+          <rect x="33" y="18" width="22" height="3" rx="1" fill="rgba(13,212,232,0.5)"/>
+          <rect x="33" y="24" width="28" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+          <rect x="33" y="29" width="18" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+          <!-- Stand -->
+          <line x1="48" y1="40" x2="48" y2="46" stroke="#0dd4e8" stroke-width="1.5"/>
+          <line x1="40" y1="46" x2="56" y2="46" stroke="#0dd4e8" stroke-width="1.5"/>
+          <text x="48" y="58" text-anchor="middle" font-size="7" fill="#0dd4e8" font-family="Inter,sans-serif" font-weight="700">COMPUTER</text>
+          <text x="48" y="67" text-anchor="middle" font-size="7" fill="#0dd4e8" font-family="Inter,sans-serif" font-weight="700">REPAIR</text>
+          <!-- Phone icon -->
+          <rect x="38" y="70" width="8" height="12" rx="1.5" stroke="rgba(13,212,232,0.4)" stroke-width="1" fill="none"/>
+          <rect x="50" y="71" width="8" height="12" rx="1.5" stroke="rgba(13,212,232,0.4)" stroke-width="1" fill="none"/>
+        </g>
+
+        <!-- Subtle connector lines from badges to laptop -->
+        <line x1="128" y1="70" x2="174" y2="80" stroke="rgba(13,212,232,0.12)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="400" y1="68" x2="356" y2="78" stroke="rgba(13,212,232,0.12)" stroke-width="1" stroke-dasharray="4,4"/>
+      </svg>
     </div>
   </div>
 
-  <!-- BOTTOM HALF: services + contact -->
-  <div class="bottom">
-    <div class="accent-bar"></div>
+  <!-- ── TEAL DIVIDER ── -->
+  <div class="zone-divider"></div>
 
+  <!-- ── LIGHT ZONE: headline + services + contact ── -->
+  <div class="bottom-zone">
+
+    <!-- Headline — completely separate from illustration -->
+    <div class="headline-area">
+      <div class="eyebrow">Miami, FL · Same Day · No Contracts</div>
+      <div class="headline">Your Tech, <span class="teal">Fixed Today.</span></div>
+      <div class="sub-text">Fast in-person IT support &amp; personal AI training — no jargon, no hidden fees.</div>
+    </div>
+
+    <!-- Services -->
     <div class="services">
       <div class="section-label">What We Do</div>
       <div class="grid">
@@ -327,7 +390,7 @@
           <div><div class="card-title">Computer Repair</div><div class="card-sub">Slow · Frozen · Crashed</div></div>
         </div>
         <div class="card">
-          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="icon-box green"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <div><div class="card-title">Virus Removal</div><div class="card-sub">Cleaned &amp; secured</div></div>
         </div>
         <div class="card">
@@ -335,42 +398,44 @@
           <div><div class="card-title">WiFi &amp; Network</div><div class="card-sub">Setup &amp; troubleshoot</div></div>
         </div>
         <div class="card">
-          <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="icon-box navy"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
           <div><div class="card-title">Learn AI Tools</div><div class="card-sub">ChatGPT · Claude · More</div></div>
         </div>
         <div class="card">
-          <div class="icon-box"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+          <div class="icon-box slate"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
           <div><div class="card-title">Data Transfer</div><div class="card-sub">Files &amp; backups</div></div>
         </div>
         <div class="card">
           <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-          <div><div class="card-title">Device Setup</div><div class="card-sub">Phone, tablet, laptop</div></div>
+          <div><div class="card-title">Device Setup</div><div class="card-sub">Phone · Tablet · PC</div></div>
         </div>
       </div>
     </div>
 
+    <!-- Trust -->
     <div class="trust">
-      <div class="tpill"><span class="ico">🕐</span><span>After Hours<br>&amp; Weekends</span></div>
-      <div class="tpill"><span class="ico">🌐</span><span>Bilingual<br>EN / ES</span></div>
-      <div class="tpill"><span class="ico">📋</span><span>No<br>Contracts</span></div>
-      <div class="tpill"><span class="ico">⚡</span><span>Same Day<br>Service</span></div>
+      <div class="titem"><span class="ico">🕐</span><div class="tname">After Hours</div><div class="tdesc">&amp; Weekends</div></div>
+      <div class="titem"><span class="ico">🌐</span><div class="tname">Bilingual</div><div class="tdesc">EN / ES</div></div>
+      <div class="titem"><span class="ico">📋</span><div class="tname">No Contracts</div><div class="tdesc">Pay as you go</div></div>
+      <div class="titem"><span class="ico">⚡</span><div class="tname">Same Day</div><div class="tdesc">Service</div></div>
     </div>
 
-    <div class="bottom-bar">
+    <!-- Contact -->
+    <div class="contact-bar">
       <div>
         <div class="phone">(561) 481-7911</div>
-        <div class="bcmeta">
+        <div class="cmeta">
           <span class="web">suredesk.net</span>
           <span class="loc">📍 Miami, FL</span>
         </div>
       </div>
-      <div class="price-bubble">
-        <div class="pb-amount">From $50/hr</div>
-        <div class="pb-note">No hidden fees</div>
+      <div class="price-tag">
+        <div class="price-amount">From $50/hr</div>
+        <div class="price-note">No hidden fees</div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
 </body>
 </html>
