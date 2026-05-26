@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sure Desk — Gradient</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    body {
+      width: 5.5in;
+      height: 8.5in;
+      font-family: 'Poppins', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .flyer {
+      width: 5.5in;
+      height: 8.5in;
+      background: linear-gradient(145deg, #1a0533 0%, #3b0764 20%, #1e3a8a 50%, #1d4ed8 70%, #7c3aed 100%);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Large decorative blobs */
+    .blob1 {
+      position: absolute;
+      width: 220pt;
+      height: 220pt;
+      background: rgba(251,191,36,0.12);
+      border-radius: 50%;
+      top: -80pt;
+      right: -60pt;
+      pointer-events: none;
+    }
+    .blob2 {
+      position: absolute;
+      width: 160pt;
+      height: 160pt;
+      background: rgba(236,72,153,0.15);
+      border-radius: 50%;
+      bottom: 60pt;
+      left: -60pt;
+      pointer-events: none;
+    }
+    .blob3 {
+      position: absolute;
+      width: 100pt;
+      height: 100pt;
+      background: rgba(99,102,241,0.2);
+      border-radius: 50%;
+      bottom: 150pt;
+      right: -20pt;
+      pointer-events: none;
+    }
+
+    /* Glass utility */
+    .glass {
+      background: rgba(255,255,255,0.1);
+      border: 1pt solid rgba(255,255,255,0.2);
+      border-radius: 10pt;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      padding: 20pt 24pt 16pt;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand { font-size: 26pt; font-weight: 900; color: white; letter-spacing: -0.5pt; line-height: 1; }
+    .brand em { font-style: normal; color: #fbbf24; }
+    .brand-tag { font-size: 7.5pt; color: rgba(255,255,255,0.6); font-weight: 500; margin-top: 3pt; letter-spacing: 0.5px; }
+    .star-pill {
+      background: rgba(251,191,36,0.2);
+      border: 1pt solid rgba(251,191,36,0.4);
+      border-radius: 20pt;
+      padding: 6pt 12pt;
+      text-align: center;
+    }
+    .star-pill .stars { color: #fbbf24; font-size: 10pt; letter-spacing: 1px; }
+    .star-pill .starlabel { font-size: 6.5pt; color: rgba(255,255,255,0.6); margin-top: 2pt; font-weight: 600; letter-spacing: 1px; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 4pt 24pt 18pt;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(251,191,36,0.7);
+      margin-bottom: 8pt;
+    }
+    .hero-headline {
+      font-size: 34pt;
+      font-weight: 900;
+      color: white;
+      line-height: 1.0;
+      letter-spacing: -0.5pt;
+    }
+    .hero-headline .accent { color: #fbbf24; }
+    .hero-sub {
+      font-size: 10.5pt;
+      color: rgba(255,255,255,0.8);
+      margin-top: 9pt;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* ── SERVICES GRID ── */
+    .services {
+      padding: 10pt 24pt;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .section-label {
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(251,191,36,0.7);
+      margin-bottom: 9pt;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6pt;
+    }
+    .card {
+      background: rgba(255,255,255,0.1);
+      border: 1pt solid rgba(255,255,255,0.18);
+      border-radius: 9pt;
+      padding: 10pt 11pt;
+      display: flex;
+      align-items: center;
+      gap: 9pt;
+    }
+    .icon-box {
+      width: 32pt;
+      height: 32pt;
+      background: rgba(255,255,255,0.15);
+      border: 1pt solid rgba(255,255,255,0.25);
+      border-radius: 8pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-box svg {
+      width: 16pt;
+      height: 16pt;
+      stroke: white;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .card-title { font-size: 9.5pt; font-weight: 700; color: white; line-height: 1.2; }
+    .card-sub { font-size: 7pt; color: rgba(255,255,255,0.55); margin-top: 2pt; font-weight: 400; }
+
+    /* ── AI TOOLS ROW ── */
+    .tools-row {
+      padding: 0 24pt 10pt;
+      position: relative;
+      z-index: 1;
+    }
+    .tools-glass {
+      background: rgba(255,255,255,0.08);
+      border: 1pt solid rgba(255,255,255,0.15);
+      border-radius: 8pt;
+      padding: 8pt 12pt;
+      display: flex;
+      align-items: center;
+      gap: 8pt;
+    }
+    .tools-lbl { font-size: 7pt; font-weight: 700; color: rgba(251,191,36,0.8); letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
+    .tools-vdiv { width: 1pt; height: 14pt; background: rgba(255,255,255,0.15); }
+    .tool-chips { display: flex; gap: 4pt; flex-wrap: wrap; }
+    .chip {
+      font-size: 7.5pt;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.12);
+      border: 0.5pt solid rgba(255,255,255,0.2);
+      border-radius: 20pt;
+      padding: 2.5pt 7pt;
+    }
+
+    /* ── TRUST ── */
+    .trust {
+      padding: 0 24pt 10pt;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 5pt;
+    }
+    .tpill {
+      flex: 1;
+      background: rgba(255,255,255,0.09);
+      border: 1pt solid rgba(255,255,255,0.15);
+      border-radius: 6pt;
+      padding: 6pt 4pt;
+      text-align: center;
+    }
+    .tpill .ico { font-size: 13pt; display: block; margin-bottom: 2pt; }
+    .tpill span { font-size: 7.5pt; font-weight: 700; color: rgba(255,255,255,0.8); line-height: 1.3; }
+
+    /* ── PRICING BAND ── */
+    .pricing {
+      margin: 0 24pt 10pt;
+      background: linear-gradient(90deg, rgba(251,191,36,0.25), rgba(251,191,36,0.1));
+      border: 1.5pt solid rgba(251,191,36,0.5);
+      border-radius: 8pt;
+      padding: 9pt 16pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12pt;
+      position: relative;
+      z-index: 1;
+    }
+    .price-main { font-size: 14pt; font-weight: 900; color: #fbbf24; letter-spacing: -0.3pt; }
+    .price-div { width: 1pt; height: 16pt; background: rgba(251,191,36,0.3); }
+    .price-note { font-size: 8.5pt; color: rgba(255,255,255,0.65); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 14pt 24pt 16pt;
+      position: relative;
+      z-index: 1;
+      background: rgba(0,0,0,0.25);
+      border-top: 1pt solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .phone { font-size: 23pt; font-weight: 900; color: white; letter-spacing: -0.5pt; line-height: 1; }
+    .cmeta { margin-top: 5pt; display: flex; flex-direction: column; gap: 3pt; }
+    .web { font-size: 10pt; color: #fbbf24; font-weight: 700; }
+    .loc { font-size: 8.5pt; color: rgba(255,255,255,0.45); font-weight: 400; }
+    .qr-box {
+      background: rgba(255,255,255,0.12);
+      border: 1pt solid rgba(255,255,255,0.25);
+      border-radius: 8pt;
+      padding: 5pt;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3pt;
+    }
+    .qr-box img { width: 66pt; height: 66pt; display: block; }
+    .qr-box .ql { font-size: 6pt; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="blob3"></div>
+
+  <div class="header">
+    <div>
+      <div class="brand">Sure<em>Desk</em></div>
+      <div class="brand-tag">Personal IT Support + AI Training</div>
+    </div>
+    <div class="star-pill">
+      <div class="stars">★★★★★</div>
+      <div class="starlabel">5-STAR</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Miami, FL · After Hours · Bilingual</div>
+    <div class="hero-headline">Tech Help for<br><span class="accent">Real Life.</span></div>
+    <div class="hero-sub">Fast in-person IT support &amp; personal AI training —<br>no contracts, no jargon, just results.</div>
+  </div>
+
+  <div class="services">
+    <div class="section-label">What We Do</div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div><div class="card-title">Computer Repair</div><div class="card-sub">Slow · Frozen · Crashed</div></div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="card-title">Virus Removal</div><div class="card-sub">Cleaned &amp; secured</div></div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
+        <div><div class="card-title">WiFi &amp; Network</div><div class="card-sub">Setup &amp; troubleshoot</div></div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <div><div class="card-title">Device Setup</div><div class="card-sub">Phone · Tablet · PC</div></div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+        <div><div class="card-title">Data Transfer</div><div class="card-sub">Files &amp; backups</div></div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="card-title">Learn AI</div><div class="card-sub">ChatGPT · Claude · more</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tools-row">
+    <div class="tools-glass">
+      <div class="tools-lbl">AI Tools</div>
+      <div class="tools-vdiv"></div>
+      <div class="tool-chips">
+        <div class="chip">ChatGPT</div>
+        <div class="chip">Claude</div>
+        <div class="chip">DALL-E</div>
+        <div class="chip">Copilot</div>
+        <div class="chip">Gemini</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust">
+    <div class="tpill"><span class="ico">🕐</span><span>After Hours<br>&amp; Weekends</span></div>
+    <div class="tpill"><span class="ico">🌐</span><span>Bilingual<br>EN / ES</span></div>
+    <div class="tpill"><span class="ico">📋</span><span>No<br>Contracts</span></div>
+    <div class="tpill"><span class="ico">⚡</span><span>Same Day<br>Service</span></div>
+  </div>
+
+  <div class="pricing">
+    <div class="price-main">Starting at $50 / hr</div>
+    <div class="price-div"></div>
+    <div class="price-note">No hidden fees · No surprises</div>
+  </div>
+
+  <div class="contact">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="cmeta">
+        <span class="web">suredesk.net</span>
+        <span class="loc">📍 Miami, FL</span>
+      </div>
+    </div>
+    <div class="qr-box">
+      <img src="https://chart.googleapis.com/chart?chs=132x132&cht=qr&chl=https://suredesk.net&choe=UTF-8&chld=M|2" alt="QR Code">
+      <div class="ql">SCAN TO VISIT</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
