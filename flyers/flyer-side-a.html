@@ -11,170 +11,167 @@
     html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     body { width: 5.5in; height: 8.5in; overflow: hidden; background: #fff; font-family: 'Inter', sans-serif; }
 
-    .page {
-      width: 5.5in; height: 8.5in;
-      background: #fff;
-      display: flex; flex-direction: column;
-      overflow: hidden; position: relative;
-    }
+    .page { width: 5.5in; height: 8.5in; background: #fff; display: flex; flex-direction: column; overflow: hidden; position: relative; }
 
-    /* ───────────────────────────────
-       TOP AREA  (white, image + text)
-    ─────────────────────────────── */
+    /* ═══════════════════════════════
+       TOP — white bg, image right, text left
+    ═══════════════════════════════ */
     .top {
       position: relative;
-      padding: 18pt 22pt 0;
       flex-shrink: 0;
-      min-height: 196pt;
+      height: 205pt;
+      overflow: hidden;
     }
 
-    /* Light blue tint in the top-right quadrant — mimics the desk photo bg from ref 1 */
-    .top::after {
-      content: '';
+    /* Light blue tinted photo-background area (right portion) */
+    .photo-bg {
       position: absolute;
       top: 0; right: 0;
-      width: 55%; height: 100%;
-      background: linear-gradient(135deg, #EBF4FF 0%, #DDEEFF 100%);
-      border-radius: 0 0 0 60pt;
-      z-index: 0;
+      width: 58%; height: 100%;
+      background: linear-gradient(135deg, #C8DFF8 0%, #A8CAF0 40%, #BDD9F5 100%);
+    }
+    /* Angled left edge on photo bg */
+    .photo-bg::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -30pt; bottom: 0;
+      width: 50pt;
+      background: #fff;
+      transform: skewX(-6deg);
+      transform-origin: bottom left;
     }
 
-    /* Logo row */
-    .logo-row {
-      position: relative; z-index: 2;
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 14pt;
-    }
-    .logo { display: flex; align-items: center; gap: 8pt; }
-    .logo-icon {
-      width: 30pt; height: 30pt; background: #1A72D4;
-      border-radius: 7pt; display: flex; align-items: center; justify-content: center;
-    }
-    .logo-icon svg { width: 17pt; height: 17pt; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-    .logo-name { font-family: 'Poppins', sans-serif; font-size: 18pt; font-weight: 800; line-height: 1; }
-    .logo-name .sure { color: #0D2B5E; }
-    .logo-name .desk { color: #1A72D4; }
-    .stars-pill {
-      display: flex; align-items: center; gap: 4pt;
-      border: 1.5pt solid #F57C20; border-radius: 20pt;
-      padding: 4pt 10pt; background: rgba(245,124,32,0.07);
-    }
-    .stars-pill .s { color: #F57C20; font-size: 9.5pt; letter-spacing: 1px; }
-    .stars-pill .sl { font-size: 6.5pt; font-weight: 700; color: #F57C20; letter-spacing: 1px; text-transform: uppercase; }
-
-    /* Circular illustration — large, bleeds off right edge like ref 1 */
+    /* Circular illustration on right */
     .circle-wrap {
       position: absolute;
-      top: 12pt; right: -16pt;
+      top: 16pt; right: -12pt;
       width: 170pt; height: 170pt;
       border-radius: 50%;
       border: 5.5pt solid #1A72D4;
       overflow: hidden;
       z-index: 3;
-      box-shadow: 0 4pt 20pt rgba(26,114,212,0.25);
+      box-shadow: 0 6pt 24pt rgba(26,114,212,0.3);
     }
     .circle-wrap svg { width: 100%; height: 100%; display: block; }
 
-    /* Headline block */
-    .headline-block {
-      position: relative; z-index: 2;
-      padding-right: 148pt; /* clear the circle */
+    /* Logo row */
+    .logo-row {
+      position: absolute; top: 16pt; left: 22pt;
+      display: flex; align-items: center; gap: 8pt;
+      z-index: 4;
     }
-    .eyebrow {
-      font-size: 7pt; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase; color: #F57C20; margin-bottom: 6pt;
-    }
-    .h1 {
-      font-family: 'Poppins', sans-serif; font-size: 46pt;
-      font-weight: 900; color: #0D2B5E; line-height: 0.96;
-    }
-    .h2 {
-      font-family: 'Poppins', sans-serif; font-size: 20pt;
-      font-weight: 800; color: #1A72D4; line-height: 1.15; margin-top: 6pt;
-    }
-    .orange-bar { width: 55pt; height: 4pt; background: #F57C20; border-radius: 2pt; margin-top: 12pt; }
+    .logo-icon { width: 28pt; height: 28pt; background: #1A72D4; border-radius: 7pt; display: flex; align-items: center; justify-content: center; }
+    .logo-icon svg { width: 16pt; height: 16pt; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .logo-name { font-family: 'Poppins', sans-serif; font-size: 17pt; font-weight: 800; }
+    .logo-name .s { color: #0D2B5E; }
+    .logo-name .d { color: #1A72D4; }
 
-    /* ───────────────────────────────
+    /* Stars pill */
+    .stars-pill {
+      position: absolute; top: 18pt; right: 14pt;
+      display: flex; align-items: center; gap: 3pt;
+      background: #fff; border: 1.5pt solid #F57C20;
+      border-radius: 20pt; padding: 3.5pt 9pt;
+      z-index: 5;
+    }
+    .stars-pill .s { color: #F57C20; font-size: 8.5pt; }
+    .stars-pill .l { font-size: 6pt; font-weight: 700; color: #F57C20; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    /* Headline text */
+    .headline {
+      position: absolute;
+      bottom: 16pt; left: 22pt;
+      width: 52%;
+      z-index: 4;
+    }
+    .eyebrow { font-size: 7pt; font-weight: 700; color: #F57C20; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5pt; }
+    .h1 { font-family: 'Poppins', sans-serif; font-size: 44pt; font-weight: 900; color: #0D2B5E; line-height: 0.95; }
+    .h2 { font-family: 'Poppins', sans-serif; font-size: 17pt; font-weight: 800; color: #1A72D4; line-height: 1.2; margin-top: 5pt; }
+    .o-rule { width: 50pt; height: 3.5pt; background: #F57C20; border-radius: 2pt; margin-top: 10pt; }
+
+    /* ═══════════════════════════════
        SERVICES
-    ─────────────────────────────── */
+    ═══════════════════════════════ */
     .services { padding: 12pt 22pt 0; flex: 1; }
-    .svc-hdr { display: flex; align-items: center; gap: 10pt; margin-bottom: 8pt; }
-    .svc-box {
+
+    .svc-hdr { display: flex; align-items: center; gap: 10pt; margin-bottom: 10pt; }
+    .svc-label {
       border: 2pt solid #0D2B5E; border-radius: 8pt;
       padding: 4pt 12pt; font-size: 10pt; font-weight: 800; color: #0D2B5E;
       white-space: nowrap; flex-shrink: 0;
     }
-    .svc-line { flex: 1; height: 2.5pt; background: #F57C20; border-radius: 2pt; }
+    .svc-rule { flex: 1; height: 2.5pt; background: #F57C20; border-radius: 2pt; }
 
-    .cards { display: flex; gap: 7pt; }
+    /* 3 cards — icons at TOP CENTER like reference 1 */
+    .cards { display: flex; gap: 8pt; }
     .card {
       flex: 1; border-radius: 14pt;
-      padding: 16pt 9pt 14pt;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 8pt;
+      padding: 14pt 8pt 12pt;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
     }
-    .card.fill { background: #1A72D4; }
-    .card.ring-card { border: 2pt solid #1A72D4; }
-    .icon-ring {
-      width: 44pt; height: 44pt; border-radius: 50%;
+    .card.blue { background: #1A72D4; }
+    .card.outline { border: 2pt solid #1A72D4; }
+
+    /* Orange circle icon at top of each card */
+    .top-icon {
+      width: 46pt; height: 46pt; border-radius: 50%; background: #F57C20;
       display: flex; align-items: center; justify-content: center;
+      margin-bottom: 9pt;
+      box-shadow: 0 3pt 10pt rgba(245,124,32,0.3);
     }
-    .fill .icon-ring { background: rgba(255,255,255,0.18); }
-    .ring-card .icon-ring { background: rgba(245,124,32,0.1); border: 2pt solid #F57C20; }
-    .icon-ring svg { width: 20pt; height: 20pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .fill .icon-ring svg { stroke: #fff; }
-    .ring-card .icon-ring svg { stroke: #F57C20; }
+    .top-icon svg { width: 22pt; height: 22pt; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
     .card-txt { font-size: 9pt; font-weight: 600; line-height: 1.5; }
-    .fill .card-txt { color: #fff; }
-    .ring-card .card-txt { color: #1A72D4; }
+    .card.blue .card-txt { color: #fff; }
+    .card.outline .card-txt { color: #1A72D4; }
 
-    /* ───────────────────────────────
+    /* ═══════════════════════════════
        PRICING
-    ─────────────────────────────── */
+    ═══════════════════════════════ */
     .pricing { padding: 10pt 22pt 4pt; text-align: center; flex-shrink: 0; }
-    .p-tag { font-size: 9.5pt; color: #5A7090; }
-    .p-amt { font-family: 'Poppins', sans-serif; font-size: 17pt; font-weight: 900; color: #0D2B5E; margin-top: 2pt; }
+    .p-sub { font-size: 9.5pt; color: #5A7090; }
+    .p-main { font-family: 'Poppins', sans-serif; font-size: 16pt; font-weight: 900; color: #0D2B5E; margin-top: 2pt; }
 
-    /* ───────────────────────────────
+    /* ═══════════════════════════════
        CONTACT BOTTOM
-    ─────────────────────────────── */
-    .contact-zone {
-      height: 132pt;
+    ═══════════════════════════════ */
+    .bottom {
+      height: 136pt;
       position: relative; flex-shrink: 0; overflow: hidden;
     }
 
-    /* Orange blob — organic rounded shape filling bottom-left */
+    /* Orange organic blob — fills left portion, curved right edge */
     .o-blob {
       position: absolute; bottom: 0; left: 0;
-      width: 240pt; height: 132pt;
+      width: 56%; height: 100%;
       background: #F57C20;
-      border-top-right-radius: 90pt 75pt;
+      border-top-right-radius: 80pt 90pt;
     }
     .o-content {
       position: absolute; bottom: 0; left: 0;
-      width: 240pt; height: 132pt;
-      padding: 16pt 12pt 16pt 22pt;
+      width: 56%; height: 100%;
       display: flex; flex-direction: column; justify-content: center;
+      padding: 0 10pt 12pt 22pt;
     }
-    .c-lbl { font-family: 'Poppins', sans-serif; font-size: 12pt; font-weight: 800; color: #fff; margin-bottom: 9pt; }
+    .c-heading { font-family: 'Poppins', sans-serif; font-size: 13pt; font-weight: 800; color: #fff; margin-bottom: 9pt; }
     .pill {
-      display: inline-flex; align-items: center; gap: 8pt;
-      background: #0D2B5E; border-radius: 20pt;
+      display: inline-flex; align-items: center; gap: 7pt;
+      background: #0D2B5E; border-radius: 24pt;
       padding: 6pt 16pt 6pt 11pt; margin-bottom: 6pt; align-self: flex-start;
     }
     .pill svg { width: 12pt; height: 12pt; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .pill span { font-size: 11pt; font-weight: 700; color: #fff; }
 
-    /* Blue circle — bottom-right, partially bleeds out */
-    .b-circle {
-      position: absolute; bottom: -24pt; right: -24pt;
-      width: 178pt; height: 178pt;
+    /* Blue blob circle — bottom right, mostly clipped */
+    .b-blob {
+      position: absolute; bottom: -28pt; right: -28pt;
+      width: 190pt; height: 190pt;
       border-radius: 50%; background: #1A72D4;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding-top: 22pt;
+      padding-top: 24pt;
     }
-    .w-lbl { font-family: 'Poppins', sans-serif; font-size: 11pt; font-weight: 700; color: #fff; margin-bottom: 5pt; }
+    .w-label { font-family: 'Poppins', sans-serif; font-size: 11pt; font-weight: 700; color: #fff; margin-bottom: 5pt; }
     .qr { background: #fff; border-radius: 6pt; padding: 4pt; }
     .qr img { width: 74pt; height: 74pt; display: block; }
   </style>
@@ -182,98 +179,116 @@
 <body>
 <div class="page">
 
-  <!-- TOP: logo + circle illustration + headline -->
+  <!-- TOP: photo bg + circle illustration + headline -->
   <div class="top">
+    <div class="photo-bg"></div>
+
+    <!-- Logo -->
     <div class="logo-row">
-      <div class="logo">
-        <div class="logo-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="logo-name"><span class="sure">Sure</span><span class="desk">Desk</span></div>
-      </div>
-      <div class="stars-pill"><span class="s">★★★★★</span><span class="sl">5-Star</span></div>
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="logo-name"><span class="s">Sure</span><span class="d">Desk</span></div>
     </div>
 
-    <!-- Large circular tech illustration, bleeds off right -->
+    <!-- Stars -->
+    <div class="stars-pill"><span class="s">★★★★★</span><span class="l">5-Star</span></div>
+
+    <!-- Circular tech illustration — large, bleeds right edge -->
     <div class="circle-wrap">
       <svg viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <pattern id="dp" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+          <pattern id="dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
             <circle cx="7" cy="7" r="0.9" fill="rgba(255,255,255,0.13)"/>
           </pattern>
-          <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="cbg" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#1565C0"/>
             <stop offset="100%" stop-color="#0A3580"/>
           </linearGradient>
         </defs>
-        <circle cx="85" cy="85" r="85" fill="url(#bg)"/>
-        <circle cx="85" cy="85" r="85" fill="url(#dp)"/>
-        <!-- Laptop body -->
-        <rect x="18" y="28" width="134" height="88" rx="8" fill="#071F4F" stroke="#1E5BB8" stroke-width="2"/>
-        <rect x="27" y="38" width="116" height="70" rx="4" fill="#040F2A"/>
+        <circle cx="85" cy="85" r="85" fill="url(#cbg)"/>
+        <circle cx="85" cy="85" r="85" fill="url(#dots)"/>
+        <!-- Desk surface -->
+        <rect x="10" y="125" width="150" height="8" rx="4" fill="rgba(255,255,255,0.15)"/>
+        <!-- Monitor -->
+        <rect x="28" y="38" width="114" height="82" rx="7" fill="#071F4F" stroke="#1E5BB8" stroke-width="2"/>
+        <rect x="36" y="47" width="98" height="64" rx="4" fill="#040F2A"/>
         <!-- Toolbar -->
-        <rect x="27" y="38" width="116" height="14" rx="4" fill="#0D3580"/>
-        <circle cx="39" cy="45" r="4.5" fill="#ff5f57"/>
-        <circle cx="52" cy="45" r="4.5" fill="#febc2e"/>
-        <circle cx="65" cy="45" r="4.5" fill="#28c840"/>
-        <!-- Screen: bar chart area -->
-        <rect x="34" y="58" width="64" height="6" rx="3" fill="#F57C20"/>
-        <rect x="34" y="68" width="86" height="5" rx="2.5" fill="rgba(255,255,255,0.14)"/>
-        <rect x="34" y="76" width="52" height="5" rx="2.5" fill="rgba(255,255,255,0.10)"/>
-        <rect x="34" y="84" width="70" height="5" rx="2.5" fill="rgba(255,255,255,0.08)"/>
-        <!-- Success badge -->
-        <circle cx="124" cy="70" r="18" fill="rgba(245,124,32,0.18)" stroke="#F57C20" stroke-width="2"/>
-        <polyline points="115,70 122,77 134,60" stroke="#F57C20" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Base -->
-        <path d="M10,118 L20,116 L150,116 L160,118 L167,132 L3,132 Z" fill="#071F4F" stroke="#1E5BB8" stroke-width="1.5"/>
-        <rect x="65" y="132" width="40" height="6" rx="3" fill="rgba(30,91,184,0.5)"/>
-        <!-- WiFi signal -->
-        <path d="M48,152 a46 46 0 0 1 74 0" stroke="#1A72D4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M59,152 a32 32 0 0 1 52 0" stroke="#1A72D4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <circle cx="85" cy="152" r="5" fill="#F57C20"/>
+        <rect x="36" y="47" width="98" height="13" rx="4" fill="#0D3580"/>
+        <circle cx="46" cy="53.5" r="4" fill="#ff5f57"/>
+        <circle cx="58" cy="53.5" r="4" fill="#febc2e"/>
+        <circle cx="70" cy="53.5" r="4" fill="#28c840"/>
+        <!-- Screen bars -->
+        <rect x="42" y="66" width="56" height="6" rx="3" fill="#F57C20"/>
+        <rect x="42" y="76" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.16)"/>
+        <rect x="42" y="85" width="50" height="5" rx="2.5" fill="rgba(255,255,255,0.11)"/>
+        <rect x="42" y="94" width="68" height="5" rx="2.5" fill="rgba(255,255,255,0.08)"/>
+        <!-- Checkmark badge -->
+        <circle cx="118" cy="76" r="16" fill="rgba(245,124,32,0.18)" stroke="#F57C20" stroke-width="2"/>
+        <polyline points="110,76 116,83 128,66" stroke="#F57C20" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Monitor stand -->
+        <rect x="76" y="120" width="18" height="5" rx="2" fill="#0D3580"/>
+        <rect x="62" y="125" width="46" height="5" rx="2" fill="#1E5BB8" opacity="0.6"/>
+        <!-- WiFi signal below monitor -->
+        <path d="M52,155 a42 42 0 0 1 66 0" stroke="#1A72D4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M63,155 a30 30 0 0 1 44 0" stroke="#1A72D4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="85" cy="155" r="5" fill="#F57C20"/>
       </svg>
     </div>
 
-    <!-- Headline text — left side, clear of circle -->
-    <div class="headline-block">
+    <!-- Headline -->
+    <div class="headline">
       <div class="eyebrow">Miami's Trusted Tech Experts</div>
       <div class="h1">Expert IT</div>
       <div class="h2">Your neighborhood<br>friendly tech support!</div>
-      <div class="orange-bar"></div>
+      <div class="o-rule"></div>
     </div>
   </div>
 
   <!-- SERVICES -->
   <div class="services">
     <div class="svc-hdr">
-      <div class="svc-box">Our Services:</div>
-      <div class="svc-line"></div>
+      <div class="svc-label">Our Services:</div>
+      <div class="svc-rule"></div>
     </div>
     <div class="cards">
-      <div class="card fill">
-        <div class="icon-ring"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="card-txt">Computer Repair<br>Virus Removal<br>WiFi &amp; Network</div>
+
+      <!-- Card 1: blue fill, IT support -->
+      <div class="card blue">
+        <div class="top-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="card-txt">General IT support<br>and Simple AI<br>Training</div>
       </div>
-      <div class="card ring-card">
-        <div class="icon-ring"><svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
-        <div class="card-txt">Device Setup<br>Data Transfer<br>&amp; Recovery</div>
+
+      <!-- Card 2: outlined, data/passwords -->
+      <div class="card outline">
+        <div class="top-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="card-txt">Password Reset<br>Data Transfer<br>&amp; Recovery</div>
       </div>
-      <div class="card ring-card">
-        <div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="card-txt">ChatGPT<br>Claude<br>AI Training</div>
+
+      <!-- Card 3: outlined, AI tools -->
+      <div class="card outline">
+        <div class="top-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="card-txt">ChatGPT<br>Copilot<br>Gemini</div>
       </div>
+
     </div>
   </div>
 
   <!-- PRICING -->
   <div class="pricing">
-    <div class="p-tag">Technology made simple for everyday life.</div>
-    <div class="p-amt">Starting at $50/Hour</div>
+    <div class="p-sub">Technology made simple for everyday life.</div>
+    <div class="p-main">Starting at $50/Hour</div>
   </div>
 
   <!-- CONTACT BOTTOM -->
-  <div class="contact-zone">
+  <div class="bottom">
     <div class="o-blob"></div>
     <div class="o-content">
-      <div class="c-lbl">Contact Us</div>
+      <div class="c-heading">Contact Us</div>
       <div class="pill">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.08.96.3 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 7.09 7.09l.97-.97a2 2 0 0 1 2.11-.45c.9.4 1.85.62 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
         <span>561 481 7911</span>
@@ -284,8 +299,8 @@
       </div>
     </div>
 
-    <div class="b-circle">
-      <div class="w-lbl">Website!</div>
+    <div class="b-blob">
+      <div class="w-label">Website!</div>
       <div class="qr">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=148x148&data=https://suredesk.net" alt="QR suredesk.net"/>
       </div>
