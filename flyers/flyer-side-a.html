@@ -4,392 +4,313 @@
   <meta charset="UTF-8">
   <title>SureDesk — Side A</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     @page { size: 5.5in 8.5in; margin: 0; }
     html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    body { width: 5.5in; height: 8.5in; overflow: hidden; background: #fff; font-family: 'Inter', sans-serif; }
+    body { width: 5.5in; height: 8.5in; overflow: hidden; }
 
-    .page { width: 5.5in; height: 8.5in; background: #fff; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+    .page {
+      width: 5.5in; height: 8.5in;
+      position: relative; display: flex; flex-direction: column; overflow: hidden;
+    }
 
-    /* ═══════════════════════════════
-       TOP — white bg, image right, text left
-    ═══════════════════════════════ */
-    .top {
-      position: relative;
+    /* ── BACKGROUND ── */
+    .bg-gradient {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(165deg, #3B0764 0%, #5B21B6 28%, #1E3A8A 62%, #1D4ED8 100%);
+    }
+    .circuit-bg { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; }
+    .orb { position: absolute; border-radius: 50%; z-index: 2; pointer-events: none; }
+    .orb-tl { top: -60pt; left: -60pt; width: 190pt; height: 190pt;
+      background: radial-gradient(circle, rgba(192,132,252,0.45) 0%, transparent 65%); }
+    .orb-tr { top: -50pt; right: -65pt; width: 175pt; height: 175pt;
+      background: radial-gradient(circle, rgba(167,139,250,0.4) 0%, transparent 65%); }
+    .orb-bm { bottom: 50pt; left: 50%; transform: translateX(-50%); width: 220pt; height: 120pt;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%); }
+
+    /* ── CONTENT ── */
+    .content { position: relative; z-index: 3; display: flex; flex-direction: column; height: 100%; }
+
+    /* HEADER */
+    .header { padding: 20pt 24pt 0; text-align: center; flex-shrink: 0; }
+    .brand { font-family: 'Poppins', sans-serif; font-size: 30pt; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.5pt; }
+    .brand-sub { font-size: 10pt; color: rgba(255,255,255,0.65); margin-top: 3pt; }
+
+    /* ICON */
+    .icon-zone { text-align: center; padding: 8pt 0 0; flex-shrink: 0; }
+
+    /* HEADLINE */
+    .headline-block { text-align: center; padding: 4pt 20pt 0; flex-shrink: 0; }
+    .main-title { font-family: 'Poppins', sans-serif; font-size: 44pt; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -1.5pt; }
+    .main-sub { font-size: 11pt; color: rgba(255,255,255,0.72); font-weight: 500; margin-top: 6pt; }
+
+    /* SERVICES PANEL */
+    .services-panel {
+      margin: 10pt 22pt 0;
+      background: rgba(255,255,255,0.1);
+      border: 1pt solid rgba(255,255,255,0.22);
+      border-radius: 14pt; padding: 14pt 18pt;
+      flex: 1;
+    }
+    .panel-hdr { display: flex; align-items: center; gap: 10pt; margin-bottom: 12pt; }
+    .panel-hdr-lbl {
+      font-size: 9pt; font-weight: 800; color: rgba(255,255,255,0.88); white-space: nowrap;
+      border: 1pt solid rgba(255,255,255,0.32); border-radius: 8pt; padding: 3pt 10pt;
+    }
+    .panel-hdr-rule { flex: 1; height: 1pt; background: rgba(245,124,32,0.6); border-radius: 1pt; }
+
+    .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt 14pt; }
+    .svc-item { display: flex; align-items: center; gap: 8pt; }
+    .svc-dot {
+      width: 8pt; height: 8pt; border-radius: 50%;
+      background: #F57C20; flex-shrink: 0;
+      box-shadow: 0 0 6pt rgba(245,124,32,0.55);
+    }
+    .svc-txt { font-size: 11pt; font-weight: 600; color: #fff; line-height: 1.2; }
+
+    .price-bar {
+      margin-top: 12pt; padding-top: 11pt;
+      border-top: 1pt solid rgba(255,255,255,0.18);
+      display: flex; align-items: baseline; justify-content: center; gap: 8pt;
+    }
+    .price-lbl { font-size: 9pt; color: rgba(255,255,255,0.5); font-weight: 600; }
+    .price-amt { font-family: 'Poppins', sans-serif; font-size: 22pt; font-weight: 900; color: #fff; }
+    .price-per { font-size: 10pt; color: rgba(255,255,255,0.55); font-weight: 600; }
+
+    /* TRUST */
+    .trust { padding: 8pt 24pt 8pt; display: flex; flex-wrap: wrap; gap: 6pt; justify-content: center; flex-shrink: 0; }
+    .tpill {
+      background: rgba(255,255,255,0.12); border: 1pt solid rgba(255,255,255,0.26);
+      border-radius: 20pt; padding: 5.5pt 13pt;
+      font-size: 8.5pt; font-weight: 600; color: rgba(255,255,255,0.92);
+      display: flex; align-items: center; gap: 5pt;
+    }
+
+    /* CONTACT BAR */
+    .cbar {
+      background: rgba(0,0,0,0.38); border-top: 1pt solid rgba(255,255,255,0.12);
+      padding: 12pt 24pt; display: flex; align-items: center; justify-content: space-between;
       flex-shrink: 0;
-      height: 205pt;
-      overflow: hidden;
     }
-
-    /* Light blue tinted photo-background area (right portion) */
-    .photo-bg {
-      position: absolute;
-      top: 0; right: 0;
-      width: 58%; height: 100%;
-      background: linear-gradient(135deg, #C8DFF8 0%, #A8CAF0 40%, #BDD9F5 100%);
-    }
-    /* Angled left edge on photo bg */
-    .photo-bg::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -30pt; bottom: 0;
-      width: 50pt;
-      background: #fff;
-      transform: skewX(-6deg);
-      transform-origin: bottom left;
-    }
-    /* Circuit board overlay on photo-bg */
-    .photo-circuit {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 1;
-    }
-
-    /* Circular illustration on right */
-    .circle-wrap {
-      position: absolute;
-      top: 16pt; right: -12pt;
-      width: 170pt; height: 170pt;
-      border-radius: 50%;
-      border: 5.5pt solid #1A72D4;
-      overflow: hidden;
-      z-index: 3;
-      box-shadow: 0 6pt 24pt rgba(26,114,212,0.3);
-    }
-    .circle-wrap svg { width: 100%; height: 100%; display: block; }
-
-    /* Logo row */
-    .logo-row {
-      position: absolute; top: 16pt; left: 22pt;
-      display: flex; align-items: center; gap: 8pt;
-      z-index: 4;
-    }
-    .logo-icon { width: 28pt; height: 28pt; background: #1A72D4; border-radius: 7pt; display: flex; align-items: center; justify-content: center; }
-    .logo-icon svg { width: 16pt; height: 16pt; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-    .logo-name { font-family: 'Poppins', sans-serif; font-size: 17pt; font-weight: 800; }
-    .logo-name .s { color: #0D2B5E; }
-    .logo-name .d { color: #1A72D4; }
-
-    /* Stars pill */
-    .stars-pill {
-      position: absolute; top: 18pt; right: 14pt;
-      display: flex; align-items: center; gap: 3pt;
-      background: #fff; border: 1.5pt solid #F57C20;
-      border-radius: 20pt; padding: 3.5pt 9pt;
-      z-index: 5;
-    }
-    .stars-pill .s { color: #F57C20; font-size: 8.5pt; }
-    .stars-pill .l { font-size: 6pt; font-weight: 700; color: #F57C20; letter-spacing: 0.5px; text-transform: uppercase; }
-
-    /* Headline text */
-    .headline {
-      position: absolute;
-      bottom: 16pt; left: 22pt;
-      width: 52%;
-      z-index: 4;
-    }
-    .eyebrow { font-size: 7pt; font-weight: 700; color: #F57C20; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5pt; }
-    .h1 { font-family: 'Poppins', sans-serif; font-size: 44pt; font-weight: 900; color: #0D2B5E; line-height: 0.95; }
-    .h2 { font-family: 'Poppins', sans-serif; font-size: 17pt; font-weight: 800; color: #1A72D4; line-height: 1.2; margin-top: 5pt; }
-    .o-rule { width: 50pt; height: 3.5pt; background: #F57C20; border-radius: 2pt; margin-top: 10pt; }
-
-    /* ═══════════════════════════════
-       SERVICES
-    ═══════════════════════════════ */
-    .services { padding: 12pt 22pt 0; flex: 1; }
-
-    .svc-hdr { display: flex; align-items: center; gap: 10pt; margin-bottom: 10pt; }
-    .svc-label {
-      border: 2pt solid #0D2B5E; border-radius: 8pt;
-      padding: 4pt 12pt; font-size: 10pt; font-weight: 800; color: #0D2B5E;
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .svc-rule { flex: 1; height: 2.5pt; background: #F57C20; border-radius: 2pt; }
-
-    /* 3 cards — icons at TOP CENTER like reference 1 */
-    .cards { display: flex; gap: 8pt; }
-    .card {
-      flex: 1; border-radius: 14pt;
-      padding: 14pt 8pt 12pt;
-      display: flex; flex-direction: column; align-items: center; text-align: center;
-    }
-    .card.blue { background: #1A72D4; }
-    .card.outline { border: 2pt solid #1A72D4; }
-
-    /* Orange circle icon at top of each card */
-    .top-icon {
-      width: 46pt; height: 46pt; border-radius: 50%; background: #F57C20;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 9pt;
-      box-shadow: 0 3pt 10pt rgba(245,124,32,0.3);
-    }
-    .top-icon svg { width: 22pt; height: 22pt; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-    .card-txt { font-size: 9pt; font-weight: 600; line-height: 1.5; }
-    .card.blue .card-txt { color: #fff; }
-    .card.outline .card-txt { color: #1A72D4; }
-
-    /* ═══════════════════════════════
-       PRICING
-    ═══════════════════════════════ */
-    .pricing { padding: 10pt 22pt 4pt; text-align: center; flex-shrink: 0; }
-    .p-sub { font-size: 9.5pt; color: #5A7090; }
-    .p-main { font-family: 'Poppins', sans-serif; font-size: 16pt; font-weight: 900; color: #0D2B5E; margin-top: 2pt; }
-
-    /* ═══════════════════════════════
-       CONTACT BOTTOM
-    ═══════════════════════════════ */
-    .bottom {
-      height: 136pt;
-      position: relative; flex-shrink: 0; overflow: hidden;
-    }
-
-    /* Orange organic blob — fills left portion, curved right edge */
-    .o-blob {
-      position: absolute; bottom: 0; left: 0;
-      width: 56%; height: 100%;
-      background: #F57C20;
-      border-top-right-radius: 80pt 90pt;
-    }
-    .o-content {
-      position: absolute; bottom: 0; left: 0;
-      width: 56%; height: 100%;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 0 10pt 12pt 22pt;
-    }
-    .c-heading { font-family: 'Poppins', sans-serif; font-size: 13pt; font-weight: 800; color: #fff; margin-bottom: 4pt; }
-    .c-sub { font-size: 7pt; font-weight: 600; color: rgba(255,255,255,0.78); margin-bottom: 8pt; letter-spacing: 0.3px; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 7pt;
-      background: #0D2B5E; border-radius: 24pt;
-      padding: 6pt 16pt 6pt 11pt; margin-bottom: 6pt; align-self: flex-start;
-    }
-    .pill svg { width: 12pt; height: 12pt; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .pill span { font-size: 11pt; font-weight: 700; color: #fff; }
-
-    /* Blue blob circle — bottom right, mostly clipped */
-    .b-blob {
-      position: absolute; bottom: -28pt; right: -28pt;
-      width: 190pt; height: 190pt;
-      border-radius: 50%; background: #1A72D4;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding-top: 24pt;
-    }
-    .w-label { font-family: 'Poppins', sans-serif; font-size: 11pt; font-weight: 700; color: #fff; margin-bottom: 5pt; }
+    .phone { font-family: 'Poppins', sans-serif; font-size: 21pt; font-weight: 800; color: #fff; line-height: 1; }
+    .cmeta { margin-top: 4pt; font-size: 9pt; color: rgba(255,255,255,0.55); }
     .qr { background: #fff; border-radius: 6pt; padding: 4pt; }
-    .qr img { width: 74pt; height: 74pt; display: block; }
+    .qr img { width: 66pt; height: 66pt; display: block; }
   </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- TOP: photo bg + circle illustration + headline -->
-  <div class="top">
-    <div class="photo-bg">
-      <!-- Orbital rings — matching Side B's constellation language -->
-      <svg class="photo-circuit" viewBox="0 0 230 205" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <!-- TL — deep blue rings -->
-        <circle cx="0"   cy="0"   r="32"  fill="none" stroke="rgba(13,43,94,0.38)" stroke-width="1.2"/>
-        <circle cx="0"   cy="0"   r="60"  fill="none" stroke="rgba(13,43,94,0.26)" stroke-width="1"/>
-        <circle cx="0"   cy="0"   r="95"  fill="none" stroke="rgba(13,43,94,0.18)" stroke-width="1"/>
-        <circle cx="0"   cy="0"   r="140" fill="none" stroke="rgba(13,43,94,0.12)" stroke-width="0.8"/>
-        <circle cx="0"   cy="0"   r="195" fill="none" stroke="rgba(13,43,94,0.07)" stroke-width="0.8"/>
-        <!-- TR — orange rings -->
-        <circle cx="230" cy="0"   r="32"  fill="none" stroke="rgba(245,124,32,0.35)" stroke-width="1.2"/>
-        <circle cx="230" cy="0"   r="60"  fill="none" stroke="rgba(245,124,32,0.22)" stroke-width="1"/>
-        <circle cx="230" cy="0"   r="95"  fill="none" stroke="rgba(245,124,32,0.15)" stroke-width="1"/>
-        <circle cx="230" cy="0"   r="140" fill="none" stroke="rgba(245,124,32,0.09)" stroke-width="0.8"/>
-        <circle cx="230" cy="0"   r="195" fill="none" stroke="rgba(245,124,32,0.05)" stroke-width="0.8"/>
-        <!-- BL — orange rings -->
-        <circle cx="0"   cy="205" r="32"  fill="none" stroke="rgba(245,124,32,0.38)" stroke-width="1.2"/>
-        <circle cx="0"   cy="205" r="60"  fill="none" stroke="rgba(245,124,32,0.24)" stroke-width="1"/>
-        <circle cx="0"   cy="205" r="95"  fill="none" stroke="rgba(245,124,32,0.16)" stroke-width="1"/>
-        <circle cx="0"   cy="205" r="140" fill="none" stroke="rgba(245,124,32,0.10)" stroke-width="0.8"/>
-        <circle cx="0"   cy="205" r="195" fill="none" stroke="rgba(245,124,32,0.06)" stroke-width="0.8"/>
-        <!-- BR — deep blue rings -->
-        <circle cx="230" cy="205" r="32"  fill="none" stroke="rgba(13,43,94,0.38)" stroke-width="1.2"/>
-        <circle cx="230" cy="205" r="60"  fill="none" stroke="rgba(13,43,94,0.26)" stroke-width="1"/>
-        <circle cx="230" cy="205" r="95"  fill="none" stroke="rgba(13,43,94,0.18)" stroke-width="1"/>
-        <circle cx="230" cy="205" r="140" fill="none" stroke="rgba(13,43,94,0.12)" stroke-width="0.8"/>
-        <circle cx="230" cy="205" r="195" fill="none" stroke="rgba(13,43,94,0.07)" stroke-width="0.8"/>
-        <!-- Star field — top row -->
-        <circle cx="20"  cy="16"  r="2.2" fill="rgba(13,43,94,0.60)"/>
-        <circle cx="50"  cy="9"   r="1.6" fill="rgba(13,43,94,0.42)"/>
-        <circle cx="84"  cy="20"  r="1.3" fill="rgba(13,43,94,0.30)"/>
-        <circle cx="118" cy="12"  r="2"   fill="rgba(245,124,32,0.72)"/>
-        <circle cx="155" cy="16"  r="1.4" fill="rgba(245,124,32,0.52)"/>
-        <circle cx="198" cy="10"  r="1.8" fill="rgba(245,124,32,0.65)"/>
-        <!-- Left edge -->
-        <circle cx="11"  cy="58"  r="1.8" fill="rgba(13,43,94,0.48)"/>
-        <circle cx="8"   cy="108" r="1.6" fill="rgba(13,43,94,0.36)"/>
-        <circle cx="13"  cy="158" r="2"   fill="rgba(245,124,32,0.58)"/>
-        <!-- Right edge -->
-        <circle cx="219" cy="48"  r="1.8" fill="rgba(245,124,32,0.58)"/>
-        <circle cx="222" cy="100" r="1.6" fill="rgba(245,124,32,0.42)"/>
-        <circle cx="217" cy="155" r="2"   fill="rgba(13,43,94,0.52)"/>
-        <!-- Bottom row -->
-        <circle cx="20"  cy="190" r="2.2" fill="rgba(13,43,94,0.58)"/>
-        <circle cx="58"  cy="197" r="1.6" fill="rgba(13,43,94,0.42)"/>
-        <circle cx="104" cy="184" r="1.3" fill="rgba(245,124,32,0.65)"/>
-        <circle cx="148" cy="194" r="1.8" fill="rgba(245,124,32,0.55)"/>
-        <circle cx="196" cy="188" r="2.2" fill="rgba(13,43,94,0.55)"/>
-        <!-- Constellation lines — blue clusters -->
-        <g stroke="rgba(13,43,94,0.22)" stroke-width="0.8" fill="none">
-          <line x1="20"  y1="16"  x2="50"  y2="9"/>
-          <line x1="20"  y1="16"  x2="11"  y2="58"/>
-          <line x1="50"  y1="9"   x2="84"  y2="20"/>
-          <line x1="11"  y1="58"  x2="8"   y2="108"/>
-          <line x1="20"  y1="190" x2="58"  y2="197"/>
-          <line x1="20"  y1="190" x2="13"  y2="158"/>
-          <line x1="13"  y1="158" x2="8"   y2="108"/>
-          <line x1="196" y1="188" x2="148" y2="194"/>
-          <line x1="196" y1="188" x2="217" y2="155"/>
-          <line x1="217" y1="155" x2="222" y2="100"/>
-        </g>
-        <!-- Constellation lines — orange clusters -->
-        <g stroke="rgba(245,124,32,0.28)" stroke-width="0.8" fill="none">
-          <line x1="198" y1="10"  x2="155" y2="16"/>
-          <line x1="198" y1="10"  x2="219" y2="48"/>
-          <line x1="155" y1="16"  x2="118" y2="12"/>
-          <line x1="219" y1="48"  x2="222" y2="100"/>
-          <line x1="58"  y1="197" x2="104" y2="184"/>
-          <line x1="104" y1="184" x2="148" y2="194"/>
-        </g>
-        <!-- Corner anchor dots -->
-        <circle cx="0"   cy="0"   r="3.2" fill="rgba(13,43,94,0.65)"/>
-        <circle cx="230" cy="0"   r="3.2" fill="rgba(245,124,32,0.85)"/>
-        <circle cx="0"   cy="205" r="3.2" fill="rgba(245,124,32,0.85)"/>
-        <circle cx="230" cy="205" r="3.2" fill="rgba(13,43,94,0.65)"/>
-      </svg>
+  <div class="bg-gradient"></div>
+
+  <!-- Orbital rings — identical to Side B -->
+  <svg class="circuit-bg" viewBox="0 0 396 612" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <pattern id="ai-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="14" cy="14" r="1" fill="rgba(255,255,255,0.06)"/>
+      </pattern>
+      <radialGradient id="cvig" cx="50%" cy="42%" r="54%">
+        <stop offset="0%"   stop-color="rgba(6,1,34,0.35)"/>
+        <stop offset="100%" stop-color="rgba(6,1,34,0)"/>
+      </radialGradient>
+    </defs>
+    <rect width="396" height="612" fill="url(#ai-dots)"/>
+    <rect width="396" height="612" fill="url(#cvig)"/>
+    <!-- TOP-LEFT — white rings -->
+    <circle cx="0"   cy="0"   r="75"  fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="1.2"/>
+    <circle cx="0"   cy="0"   r="145" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    <circle cx="0"   cy="0"   r="230" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+    <circle cx="0"   cy="0"   r="335" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <circle cx="0"   cy="0"   r="460" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    <!-- TOP-RIGHT — orange accent rings -->
+    <circle cx="396" cy="0"   r="75"  fill="none" stroke="rgba(245,124,32,0.30)" stroke-width="1.2"/>
+    <circle cx="396" cy="0"   r="145" fill="none" stroke="rgba(245,124,32,0.20)" stroke-width="1"/>
+    <circle cx="396" cy="0"   r="230" fill="none" stroke="rgba(245,124,32,0.12)" stroke-width="1"/>
+    <circle cx="396" cy="0"   r="335" fill="none" stroke="rgba(245,124,32,0.07)" stroke-width="1"/>
+    <circle cx="396" cy="0"   r="460" fill="none" stroke="rgba(245,124,32,0.04)" stroke-width="1"/>
+    <!-- BOTTOM-LEFT — orange accent rings -->
+    <circle cx="0"   cy="612" r="75"  fill="none" stroke="rgba(245,124,32,0.30)" stroke-width="1.2"/>
+    <circle cx="0"   cy="612" r="145" fill="none" stroke="rgba(245,124,32,0.20)" stroke-width="1"/>
+    <circle cx="0"   cy="612" r="230" fill="none" stroke="rgba(245,124,32,0.12)" stroke-width="1"/>
+    <circle cx="0"   cy="612" r="335" fill="none" stroke="rgba(245,124,32,0.07)" stroke-width="1"/>
+    <circle cx="0"   cy="612" r="460" fill="none" stroke="rgba(245,124,32,0.04)" stroke-width="1"/>
+    <!-- BOTTOM-RIGHT — white rings -->
+    <circle cx="396" cy="612" r="75"  fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="1.2"/>
+    <circle cx="396" cy="612" r="145" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    <circle cx="396" cy="612" r="230" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+    <circle cx="396" cy="612" r="335" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <circle cx="396" cy="612" r="460" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    <!-- CENTER concentric rings -->
+    <circle cx="198" cy="300" r="72"  fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+    <circle cx="198" cy="300" r="148" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+    <circle cx="198" cy="300" r="224" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.8"/>
+    <!-- Star field — top row -->
+    <circle cx="28"  cy="22"  r="3"   fill="rgba(255,255,255,0.65)"/>
+    <circle cx="62"  cy="12"  r="2"   fill="rgba(255,255,255,0.48)"/>
+    <circle cx="98"  cy="32"  r="1.5" fill="rgba(255,255,255,0.36)"/>
+    <circle cx="146" cy="18"  r="2.5" fill="rgba(245,124,32,0.75)"/>
+    <circle cx="198" cy="28"  r="1.5" fill="rgba(255,255,255,0.28)"/>
+    <circle cx="250" cy="16"  r="2"   fill="rgba(255,255,255,0.34)"/>
+    <circle cx="298" cy="30"  r="1.5" fill="rgba(255,255,255,0.32)"/>
+    <circle cx="346" cy="14"  r="2.5" fill="rgba(245,124,32,0.72)"/>
+    <circle cx="372" cy="26"  r="3"   fill="rgba(255,255,255,0.62)"/>
+    <!-- Left edge -->
+    <circle cx="14"  cy="78"  r="2.5" fill="rgba(255,255,255,0.45)"/>
+    <circle cx="22"  cy="148" r="2"   fill="rgba(255,255,255,0.34)"/>
+    <circle cx="10"  cy="212" r="2.5" fill="rgba(245,124,32,0.58)"/>
+    <circle cx="18"  cy="282" r="1.8" fill="rgba(255,255,255,0.25)"/>
+    <circle cx="8"   cy="348" r="2"   fill="rgba(255,255,255,0.22)"/>
+    <circle cx="20"  cy="412" r="1.8" fill="rgba(255,255,255,0.26)"/>
+    <circle cx="12"  cy="472" r="2.5" fill="rgba(245,124,32,0.54)"/>
+    <circle cx="24"  cy="534" r="2"   fill="rgba(255,255,255,0.36)"/>
+    <!-- Right edge -->
+    <circle cx="382" cy="78"  r="2.5" fill="rgba(255,255,255,0.45)"/>
+    <circle cx="374" cy="148" r="2"   fill="rgba(255,255,255,0.34)"/>
+    <circle cx="386" cy="212" r="2.5" fill="rgba(245,124,32,0.58)"/>
+    <circle cx="378" cy="282" r="1.8" fill="rgba(255,255,255,0.25)"/>
+    <circle cx="388" cy="348" r="2"   fill="rgba(255,255,255,0.22)"/>
+    <circle cx="376" cy="412" r="1.8" fill="rgba(255,255,255,0.26)"/>
+    <circle cx="384" cy="472" r="2.5" fill="rgba(245,124,32,0.54)"/>
+    <circle cx="372" cy="534" r="2"   fill="rgba(255,255,255,0.36)"/>
+    <!-- Bottom row -->
+    <circle cx="28"  cy="584" r="3"   fill="rgba(255,255,255,0.62)"/>
+    <circle cx="64"  cy="598" r="2"   fill="rgba(255,255,255,0.46)"/>
+    <circle cx="106" cy="580" r="1.5" fill="rgba(255,255,255,0.36)"/>
+    <circle cx="152" cy="594" r="2.5" fill="rgba(245,124,32,0.72)"/>
+    <circle cx="198" cy="582" r="1.5" fill="rgba(255,255,255,0.28)"/>
+    <circle cx="246" cy="596" r="2"   fill="rgba(255,255,255,0.34)"/>
+    <circle cx="292" cy="580" r="1.5" fill="rgba(255,255,255,0.32)"/>
+    <circle cx="342" cy="594" r="2.5" fill="rgba(245,124,32,0.70)"/>
+    <circle cx="370" cy="582" r="3"   fill="rgba(255,255,255,0.60)"/>
+    <!-- Mid scatter -->
+    <circle cx="58"  cy="170" r="1.5" fill="rgba(255,255,255,0.16)"/>
+    <circle cx="340" cy="185" r="1.5" fill="rgba(255,255,255,0.16)"/>
+    <circle cx="45"  cy="440" r="1.5" fill="rgba(255,255,255,0.16)"/>
+    <circle cx="352" cy="428" r="1.5" fill="rgba(255,255,255,0.16)"/>
+    <circle cx="82"  cy="252" r="1.2" fill="rgba(255,255,255,0.11)"/>
+    <circle cx="314" cy="268" r="1.2" fill="rgba(255,255,255,0.11)"/>
+    <circle cx="76"  cy="372" r="1.2" fill="rgba(255,255,255,0.11)"/>
+    <circle cx="320" cy="356" r="1.2" fill="rgba(255,255,255,0.11)"/>
+    <!-- Constellation lines -->
+    <g stroke="rgba(255,255,255,0.18)" stroke-width="0.9" fill="none">
+      <line x1="28"  y1="22"  x2="62"  y2="12"/>
+      <line x1="28"  y1="22"  x2="14"  y2="78"/>
+      <line x1="62"  y1="12"  x2="98"  y2="32"/>
+      <line x1="62"  y1="12"  x2="146" y2="18"/>
+      <line x1="14"  y1="78"  x2="22"  y2="148"/>
+      <line x1="372" y1="26"  x2="346" y2="14"/>
+      <line x1="372" y1="26"  x2="382" y2="78"/>
+      <line x1="346" y1="14"  x2="298" y2="30"/>
+      <line x1="346" y1="14"  x2="250" y2="16"/>
+      <line x1="382" y1="78"  x2="374" y2="148"/>
+      <line x1="28"  y1="584" x2="64"  y2="598"/>
+      <line x1="28"  y1="584" x2="24"  y2="534"/>
+      <line x1="64"  y1="598" x2="106" y2="580"/>
+      <line x1="64"  y1="598" x2="152" y2="594"/>
+      <line x1="24"  y1="534" x2="12"  y2="472"/>
+      <line x1="370" y1="582" x2="342" y2="594"/>
+      <line x1="370" y1="582" x2="372" y2="534"/>
+      <line x1="342" y1="594" x2="292" y2="580"/>
+      <line x1="342" y1="594" x2="246" y2="596"/>
+      <line x1="372" y1="534" x2="384" y2="472"/>
+    </g>
+    <!-- Corner anchor dots -->
+    <circle cx="0"   cy="0"   r="4"   fill="rgba(255,255,255,0.7)"/>
+    <circle cx="396" cy="0"   r="4"   fill="rgba(245,124,32,0.85)"/>
+    <circle cx="0"   cy="612" r="4"   fill="rgba(245,124,32,0.85)"/>
+    <circle cx="396" cy="612" r="4"   fill="rgba(255,255,255,0.7)"/>
+  </svg>
+
+  <div class="orb orb-tl"></div>
+  <div class="orb orb-tr"></div>
+  <div class="orb orb-bm"></div>
+
+  <div class="content">
+
+    <div class="header">
+      <div class="brand">SureDesk</div>
+      <div class="brand-sub">Personal IT Support · Miami, FL</div>
     </div>
 
-    <!-- Logo -->
-    <div class="logo-row">
-      <div class="logo-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-      <div class="logo-name"><span class="s">Sure</span><span class="d">Desk</span></div>
-    </div>
-
-    <!-- Stars -->
-    <div class="stars-pill"><span class="s">★★★★★</span><span class="l">5-Star</span></div>
-
-    <!-- Circular tech illustration — large, bleeds right edge -->
-    <div class="circle-wrap">
-      <svg viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-            <circle cx="7" cy="7" r="0.9" fill="rgba(255,255,255,0.13)"/>
-          </pattern>
-          <linearGradient id="cbg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1565C0"/>
-            <stop offset="100%" stop-color="#0A3580"/>
-          </linearGradient>
-        </defs>
-        <circle cx="85" cy="85" r="85" fill="url(#cbg)"/>
-        <circle cx="85" cy="85" r="85" fill="url(#dots)"/>
-        <!-- Desk surface -->
-        <rect x="10" y="125" width="150" height="8" rx="4" fill="rgba(255,255,255,0.15)"/>
-        <!-- Monitor -->
-        <rect x="28" y="38" width="114" height="82" rx="7" fill="#071F4F" stroke="#1E5BB8" stroke-width="2"/>
-        <rect x="36" y="47" width="98" height="64" rx="4" fill="#040F2A"/>
+    <!-- Monitor icon -->
+    <div class="icon-zone">
+      <svg width="70pt" height="64pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="48" rx="46" ry="40" fill="rgba(26,114,212,0.18)"/>
+        <!-- Monitor body -->
+        <rect x="8" y="8" width="84" height="58" rx="7"
+              fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.72)" stroke-width="2.5"/>
+        <!-- Screen -->
+        <rect x="16" y="16" width="68" height="42" rx="3" fill="rgba(0,0,20,0.55)"/>
         <!-- Toolbar -->
-        <rect x="36" y="47" width="98" height="13" rx="4" fill="#0D3580"/>
-        <circle cx="46" cy="53.5" r="4" fill="#ff5f57"/>
-        <circle cx="58" cy="53.5" r="4" fill="#febc2e"/>
-        <circle cx="70" cy="53.5" r="4" fill="#28c840"/>
+        <rect x="16" y="16" width="68" height="10" rx="3" fill="rgba(26,114,212,0.6)"/>
+        <circle cx="24" cy="21" r="2.4" fill="rgba(255,95,87,0.85)"/>
+        <circle cx="32" cy="21" r="2.4" fill="rgba(254,188,46,0.85)"/>
+        <circle cx="40" cy="21" r="2.4" fill="rgba(40,200,64,0.85)"/>
         <!-- Screen bars -->
-        <rect x="42" y="66" width="56" height="6" rx="3" fill="#F57C20"/>
-        <rect x="42" y="76" width="80" height="5" rx="2.5" fill="rgba(255,255,255,0.16)"/>
-        <rect x="42" y="85" width="50" height="5" rx="2.5" fill="rgba(255,255,255,0.11)"/>
-        <rect x="42" y="94" width="68" height="5" rx="2.5" fill="rgba(255,255,255,0.08)"/>
+        <rect x="22" y="31" width="30" height="5" rx="2.5" fill="#F57C20" opacity="0.92"/>
+        <rect x="22" y="40" width="50" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+        <rect x="22" y="48" width="36" height="4" rx="2" fill="rgba(255,255,255,0.14)"/>
         <!-- Checkmark badge -->
-        <circle cx="118" cy="76" r="16" fill="rgba(245,124,32,0.18)" stroke="#F57C20" stroke-width="2"/>
-        <polyline points="110,76 116,83 128,66" stroke="#F57C20" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Monitor stand -->
-        <rect x="76" y="120" width="18" height="5" rx="2" fill="#0D3580"/>
-        <rect x="62" y="125" width="46" height="5" rx="2" fill="#1E5BB8" opacity="0.6"/>
-        <!-- WiFi signal below monitor -->
-        <path d="M52,155 a42 42 0 0 1 66 0" stroke="#1A72D4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M63,155 a30 30 0 0 1 44 0" stroke="#1A72D4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <circle cx="85" cy="155" r="5" fill="#F57C20"/>
+        <circle cx="74" cy="34" r="12" fill="rgba(245,124,32,0.2)" stroke="#F57C20" stroke-width="2"/>
+        <polyline points="68,34 72,40 82,26" stroke="#F57C20" stroke-width="2.5" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Stand -->
+        <rect x="44" y="66" width="12" height="5" rx="2" fill="rgba(255,255,255,0.45)"/>
+        <rect x="34" y="71" width="32" height="4" rx="2" fill="rgba(255,255,255,0.28)"/>
+        <!-- WiFi -->
+        <path d="M34,84 a20 20 0 0 1 32 0" stroke="rgba(255,255,255,0.35)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M40,84 a13 13 0 0 1 20 0" stroke="rgba(255,255,255,0.5)"  stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <circle cx="50" cy="84" r="3" fill="#F57C20" opacity="0.9"/>
       </svg>
     </div>
 
-    <!-- Headline -->
-    <div class="headline">
-      <div class="eyebrow">Miami's Trusted Tech Experts</div>
-      <div class="h1">Expert IT</div>
-      <div class="h2">Your neighborhood<br>friendly tech support!</div>
-      <div class="o-rule"></div>
+    <div class="headline-block">
+      <div class="main-title">Tech Help<br>Made Easy</div>
+      <div class="main-sub">Your neighborhood friendly tech support!</div>
     </div>
-  </div>
 
-  <!-- SERVICES -->
-  <div class="services">
-    <div class="svc-hdr">
-      <div class="svc-label">Our Services:</div>
-      <div class="svc-rule"></div>
-    </div>
-    <div class="cards">
-
-      <!-- Card 1: blue fill, IT support -->
-      <div class="card blue">
-        <div class="top-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <div class="card-txt">General IT support<br>and Simple AI<br>Training</div>
+    <div class="services-panel">
+      <div class="panel-hdr">
+        <div class="panel-hdr-lbl">Our Services</div>
+        <div class="panel-hdr-rule"></div>
       </div>
-
-      <!-- Card 2: outlined, data/passwords -->
-      <div class="card outline">
-        <div class="top-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <div class="card-txt">Password Reset<br>Data Transfer<br>&amp; Recovery</div>
+      <div class="svc-grid">
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">Computer Repair</div></div>
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">Virus Removal</div></div>
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">New Device Setup</div></div>
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">WiFi &amp; Network</div></div>
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">Data Transfer</div></div>
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">Password Resets</div></div>
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">Same-Day Service</div></div>
+        <div class="svc-item"><div class="svc-dot"></div><div class="svc-txt">AI Training</div></div>
       </div>
-
-      <!-- Card 3: outlined, AI tools -->
-      <div class="card outline">
-        <div class="top-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <div class="card-txt">ChatGPT<br>Copilot<br>Gemini</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- PRICING -->
-  <div class="pricing">
-    <div class="p-sub">Technology made simple for everyday life.</div>
-    <div class="p-main">Starting at $50/Hour</div>
-  </div>
-
-  <!-- CONTACT BOTTOM -->
-  <div class="bottom">
-    <div class="o-blob"></div>
-    <div class="o-content">
-      <div class="c-heading">Contact Us</div>
-      <div class="c-sub">After Hours · Weekends · Bilingual EN/ES</div>
-      <div class="pill">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.08.96.3 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 7.09 7.09l.97-.97a2 2 0 0 1 2.11-.45c.9.4 1.85.62 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
-        <span>(561) 481-7911</span>
-      </div>
-      <div class="pill">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Miami, FL</span>
+      <div class="price-bar">
+        <div class="price-lbl">Starting At</div>
+        <div class="price-amt">$50</div>
+        <div class="price-per">/ Hour</div>
       </div>
     </div>
 
-    <div class="b-blob">
-      <div class="w-label">suredesk.net</div>
+    <div class="trust">
+      <div class="tpill">⏰ After Hours &amp; Weekends</div>
+      <div class="tpill">🌐 Bilingual EN/ES</div>
+      <div class="tpill">📋 No Contracts</div>
+      <div class="tpill">⭐ 5-Star Rated</div>
+    </div>
+
+    <div class="cbar">
+      <div>
+        <div class="phone">(561) 481-7911</div>
+        <div class="cmeta">🌐 suredesk.net · 📍 Miami, FL</div>
+      </div>
       <div class="qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=148x148&data=https://suredesk.net" alt="QR suredesk.net"/>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&data=https://suredesk.net" alt="QR suredesk.net"/>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
 </body>
 </html>
