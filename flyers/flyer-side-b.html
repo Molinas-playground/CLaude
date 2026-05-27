@@ -13,74 +13,63 @@
 
     .page {
       width: 5.5in; height: 8.5in;
-      position: relative;
-      display: flex; flex-direction: column;
-      overflow: hidden;
+      position: relative; display: flex; flex-direction: column; overflow: hidden;
     }
 
-    /* Full-bleed purple-to-blue gradient */
-    .bg {
-      position: absolute; inset: 0;
-      background: linear-gradient(170deg, #4C1D95 0%, #6D28D9 25%, #1E3A8A 60%, #1D4ED8 100%);
-      z-index: 0;
+    /* ── BACKGROUND LAYERS ── */
+    .bg-gradient {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(165deg, #3B0764 0%, #5B21B6 28%, #1E3A8A 62%, #1D4ED8 100%);
     }
 
-    /* City skyline silhouette — low opacity, sits over gradient */
-    .skyline {
-      position: absolute;
-      bottom: 80pt; left: 0; right: 0;
-      z-index: 1;
-      opacity: 1;
+    /* Circuit board SVG — full-bleed tech background */
+    .circuit-bg {
+      position: absolute; inset: 0; z-index: 1;
+      width: 100%; height: 100%;
     }
 
-    /* Corner glow orbs like ref 3 */
-    .orb { position: absolute; border-radius: 50%; z-index: 1; pointer-events: none; }
-    .orb-tl { top: -55pt; left: -55pt; width: 180pt; height: 180pt;
-      background: radial-gradient(circle, rgba(192,132,252,0.5) 0%, transparent 65%); }
-    .orb-tr { top: -45pt; right: -60pt; width: 170pt; height: 170pt;
-      background: radial-gradient(circle, rgba(167,139,250,0.45) 0%, transparent 65%); }
+    /* Corner glow orbs */
+    .orb { position: absolute; border-radius: 50%; z-index: 2; pointer-events: none; }
+    .orb-tl { top: -60pt; left: -60pt; width: 190pt; height: 190pt;
+      background: radial-gradient(circle, rgba(192,132,252,0.45) 0%, transparent 65%); }
+    .orb-tr { top: -50pt; right: -65pt; width: 175pt; height: 175pt;
+      background: radial-gradient(circle, rgba(167,139,250,0.4) 0%, transparent 65%); }
+    .orb-bm { bottom: 50pt; left: 50%; transform: translateX(-50%); width: 220pt; height: 120pt;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%); }
 
-    /* All content z-index 2+ */
-    .content { position: relative; z-index: 2; display: flex; flex-direction: column; height: 100%; }
+    /* All content sits above background */
+    .content { position: relative; z-index: 3; display: flex; flex-direction: column; height: 100%; }
 
     /* ── HEADER ── */
     .header { padding: 22pt 24pt 0; text-align: center; flex-shrink: 0; }
     .brand { font-family: 'Poppins', sans-serif; font-size: 30pt; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.5pt; }
     .brand-sub { font-size: 10pt; color: rgba(255,255,255,0.65); margin-top: 3pt; }
 
-    /* ── BRAIN ICON ── centered, large */
+    /* ── BRAIN ── */
     .brain-zone { text-align: center; padding: 10pt 0 2pt; flex-shrink: 0; }
 
-    /* ── LEARN AI HEADLINE ── very large like ref 3 */
-    .learn-block { text-align: center; padding: 0 20pt 0; flex-shrink: 0; }
+    /* ── HEADLINE ── */
+    .learn-block { text-align: center; padding: 0 20pt; flex-shrink: 0; }
     .learn-title { font-family: 'Poppins', sans-serif; font-size: 54pt; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -2pt; }
     .learn-sub  { font-size: 13pt; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 5pt; }
     .learn-lang { font-size: 9.5pt; color: rgba(255,255,255,0.5); margin-top: 3pt; font-style: italic; }
 
     /* ── 2×2 GRID ── */
-    .grid {
-      padding: 10pt 22pt;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8pt;
-      flex: 1;
-    }
+    .grid { padding: 10pt 22pt; display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; flex: 1; }
     .gcell {
-      background: rgba(255,255,255,0.12);
-      border: 1pt solid rgba(255,255,255,0.25);
-      border-radius: 12pt;
-      padding: 12pt 12pt;
+      background: rgba(255,255,255,0.1);
+      border: 1pt solid rgba(255,255,255,0.22);
+      border-radius: 12pt; padding: 12pt 12pt;
       display: flex; align-items: center; gap: 10pt;
     }
-    .gicon {
-      width: 40pt; height: 40pt; border-radius: 10pt;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
+    .gicon { width: 40pt; height: 40pt; border-radius: 10pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .gicon svg { width: 20pt; height: 20pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .gtxt { font-size: 11pt; font-weight: 700; color: #fff; line-height: 1.25; }
 
-    .g-gr { background: rgba(34,197,94,0.25); }  .g-gr svg { stroke: #4ADE80; }
-    .g-pu { background: rgba(192,132,252,0.3);  } .g-pu svg { stroke: #D8B4FE; }
-    .g-or { background: rgba(245,124,32,0.25); }  .g-or svg { stroke: #FB923C; }
-    .g-bl { background: rgba(56,189,248,0.25); }  .g-bl svg { stroke: #7DD3FC; }
+    .g-gr { background: rgba(34,197,94,0.25); }   .g-gr svg { stroke: #4ADE80; }
+    .g-pu { background: rgba(192,132,252,0.28); }  .g-pu svg { stroke: #D8B4FE; }
+    .g-or { background: rgba(245,124,32,0.25); }   .g-or svg { stroke: #FB923C; }
+    .g-bl { background: rgba(56,189,248,0.25); }   .g-bl svg { stroke: #7DD3FC; }
 
     /* ── AI TOOLS ── */
     .tools { padding: 3pt 24pt 7pt; text-align: center; flex-shrink: 0; }
@@ -90,19 +79,16 @@
     /* ── TRUST ── */
     .trust { padding: 0 24pt 9pt; display: flex; gap: 7pt; justify-content: center; flex-shrink: 0; }
     .tpill {
-      background: rgba(255,255,255,0.13);
-      border: 1pt solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.12); border: 1pt solid rgba(255,255,255,0.26);
       border-radius: 20pt; padding: 5.5pt 13pt;
       font-size: 8.5pt; font-weight: 600; color: rgba(255,255,255,0.92);
       display: flex; align-items: center; gap: 5pt;
     }
 
-    /* ── CONTACT BAR ── */
+    /* ── CONTACT ── */
     .cbar {
-      background: rgba(0,0,0,0.35);
-      border-top: 1pt solid rgba(255,255,255,0.12);
-      padding: 13pt 24pt;
-      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(0,0,0,0.38); border-top: 1pt solid rgba(255,255,255,0.12);
+      padding: 13pt 24pt; display: flex; align-items: center; justify-content: space-between;
       flex-shrink: 0;
     }
     .phone { font-family: 'Poppins', sans-serif; font-size: 21pt; font-weight: 800; color: #fff; line-height: 1; }
@@ -114,53 +100,155 @@
 <body>
 <div class="page">
 
-  <!-- Gradient background -->
-  <div class="bg"></div>
+  <!-- Gradient -->
+  <div class="bg-gradient"></div>
 
-  <!-- Miami city skyline silhouette (like the photo overlay in ref 3) -->
-  <div class="skyline">
-    <svg width="528" height="110" viewBox="0 0 528 110" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
-      <path d="
-        M0,110 L0,75 L12,75 L12,60 L18,60 L18,50 L24,50 L24,38 L30,38 L30,28 L34,28 L34,22 L38,22 L38,28 L42,28 L42,40 L48,40 L48,55 L54,55 L54,42 L60,42 L60,35 L64,35 L64,28 L68,28 L68,35 L72,35 L72,50 L78,50 L78,40 L84,40 L84,30 L88,30 L88,20 L92,20 L92,14 L96,14 L96,20 L100,20 L100,30 L104,30 L104,40 L110,40 L110,45 L116,45 L116,38 L122,38 L122,30 L126,30 L126,22 L130,22 L130,30 L134,30 L134,38 L140,38 L140,50 L146,50 L146,42 L152,42 L152,35 L158,35 L158,42 L164,42 L164,55 L170,55 L170,48 L174,48 L174,38 L178,38 L178,30 L184,30 L184,38 L190,38 L190,28 L196,28 L196,18 L200,18 L200,10 L204,10 L204,18 L208,18 L208,28 L214,28 L214,38 L220,38 L220,32 L226,32 L226,24 L230,24 L230,16 L234,16 L234,24 L238,24 L238,32 L244,32 L244,44 L250,44 L250,50 L256,50 L256,42 L262,42 L262,34 L268,34 L268,26 L272,26 L272,18 L276,18 L276,26 L280,26 L280,34 L286,34 L286,48 L292,48 L292,55 L298,55 L298,45 L304,45 L304,36 L310,36 L310,28 L314,28 L314,20 L318,20 L318,28 L322,28 L322,36 L328,36 L328,48 L334,48 L334,40 L340,40 L340,30 L346,30 L346,22 L350,22 L350,30 L354,30 L354,40 L360,40 L360,52 L366,52 L366,44 L372,44 L372,36 L376,36 L376,28 L380,28 L380,20 L384,20 L384,28 L388,28 L388,36 L394,36 L394,50 L400,50 L400,42 L406,42 L406,34 L412,34 L412,42 L418,42 L418,55 L424,55 L424,48 L428,48 L428,38 L432,38 L432,28 L436,28 L436,38 L440,38 L440,48 L446,48 L446,58 L452,58 L452,50 L458,50 L458,60 L464,60 L464,70 L470,70 L470,60 L476,60 L476,70 L482,70 L482,80 L488,80 L488,75 L494,75 L494,85 L500,85 L500,90 L506,90 L506,80 L512,80 L512,90 L518,90 L518,95 L524,95 L524,110 L528,110 Z
-      " fill="rgba(255,255,255,0.07)"/>
-      <!-- Second layer, offset, for depth -->
-      <path d="
-        M0,110 L0,85 L15,85 L15,72 L22,72 L22,62 L30,62 L30,72 L38,72 L38,80 L46,80 L46,68 L52,68 L52,58 L58,58 L58,68 L64,68 L64,78 L72,78 L72,70 L78,70 L78,60 L86,60 L86,70 L94,70 L94,80 L102,80 L102,72 L108,72 L108,62 L116,62 L116,72 L124,72 L124,82 L132,82 L132,74 L138,74 L138,66 L146,66 L146,74 L154,74 L154,84 L162,84 L162,76 L168,76 L168,66 L176,66 L176,76 L184,76 L184,86 L192,86 L192,78 L200,78 L200,68 L208,68 L208,78 L216,78 L216,88 L224,88 L224,80 L232,80 L232,70 L240,70 L240,80 L248,80 L248,88 L256,88 L256,80 L264,80 L264,70 L272,70 L272,80 L280,80 L280,90 L288,90 L288,82 L296,82 L296,72 L304,72 L304,82 L312,82 L312,90 L320,90 L320,82 L328,82 L328,72 L336,72 L336,82 L344,82 L344,90 L352,90 L352,82 L360,82 L360,72 L368,72 L368,82 L376,82 L376,90 L384,90 L384,82 L392,82 L392,72 L400,72 L400,82 L408,82 L408,92 L416,92 L416,84 L424,84 L424,74 L432,74 L432,84 L440,84 L440,92 L448,92 L448,84 L456,84 L456,74 L464,74 L464,84 L472,84 L472,94 L480,94 L480,88 L488,88 L488,94 L496,94 L496,100 L504,100 L504,94 L512,94 L512,100 L520,100 L520,106 L528,106 L528,110 Z
-      " fill="rgba(255,255,255,0.04)"/>
-    </svg>
-  </div>
+  <!-- ══════════════════════════════════════════
+       CIRCUIT BOARD TECH BACKGROUND
+       Semi-transparent PCB traces + nodes spread
+       around the edges, corners clear of content.
+  ══════════════════════════════════════════ -->
+  <svg class="circuit-bg" viewBox="0 0 396 612" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <g fill="none" stroke-linecap="square">
 
+      <!-- ── TOP-LEFT CLUSTER ── -->
+      <g stroke="rgba(255,255,255,0.18)" stroke-width="1.4">
+        <path d="M0,44 H52 V24 H88"/>
+        <path d="M52,44 V70 H36 V92"/>
+        <path d="M88,24 V52 H110 V38 H144"/>
+        <path d="M110,52 V78 H88 V96 H60"/>
+      </g>
+      <!-- Orange accent nodes top-left -->
+      <circle cx="52" cy="44" r="3.5" fill="#F57C20" opacity="0.7"/>
+      <circle cx="88" cy="24" r="2.5" fill="rgba(255,255,255,0.35)"/>
+      <circle cx="110" cy="52" r="3"   fill="#F57C20" opacity="0.6"/>
+      <circle cx="36"  cy="92" r="2"   fill="rgba(255,255,255,0.3)"/>
+      <circle cx="60"  cy="96" r="2"   fill="rgba(255,255,255,0.25)"/>
+      <circle cx="144" cy="38" r="2"   fill="rgba(255,255,255,0.25)"/>
+      <!-- Via (ring + dot) -->
+      <circle cx="88" cy="96" r="5"   stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="88" cy="96" r="2"   fill="rgba(255,255,255,0.2)"/>
+
+      <!-- ── TOP-RIGHT CLUSTER ── -->
+      <g stroke="rgba(255,255,255,0.18)" stroke-width="1.4">
+        <path d="M396,40 H348 V22 H312"/>
+        <path d="M348,40 V64 H368 V86"/>
+        <path d="M312,22 V50 H280 V36 H250"/>
+        <path d="M280,50 V76 H304 V94 H328"/>
+      </g>
+      <circle cx="348" cy="40"  r="3.5" fill="#F57C20" opacity="0.7"/>
+      <circle cx="312" cy="22"  r="2.5" fill="rgba(255,255,255,0.35)"/>
+      <circle cx="280" cy="50"  r="3"   fill="#F57C20" opacity="0.6"/>
+      <circle cx="368" cy="86"  r="2"   fill="rgba(255,255,255,0.28)"/>
+      <circle cx="328" cy="94"  r="2"   fill="rgba(255,255,255,0.25)"/>
+      <circle cx="250" cy="36"  r="2"   fill="rgba(255,255,255,0.25)"/>
+      <circle cx="304" cy="94"  r="5"   stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="304" cy="94"  r="2"   fill="rgba(255,255,255,0.2)"/>
+
+      <!-- ── LEFT-EDGE MID ── -->
+      <g stroke="rgba(255,255,255,0.14)" stroke-width="1.2">
+        <path d="M0,270 H44 V250 H76"/>
+        <path d="M44,270 V298 H28 V318"/>
+        <path d="M76,250 V280 H104 V264 H128"/>
+      </g>
+      <circle cx="44"  cy="270" r="3"   fill="#F57C20" opacity="0.6"/>
+      <circle cx="76"  cy="250" r="2.5" fill="rgba(255,255,255,0.3)"/>
+      <circle cx="104" cy="280" r="3"   fill="#F57C20" opacity="0.5"/>
+      <circle cx="28"  cy="318" r="2"   fill="rgba(255,255,255,0.25)"/>
+      <circle cx="128" cy="264" r="2"   fill="rgba(255,255,255,0.22)"/>
+      <!-- Capacitor symbol -->
+      <line x1="58" y1="288" x2="58" y2="302" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" stroke-linecap="butt"/>
+      <line x1="65" y1="288" x2="65" y2="302" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" stroke-linecap="butt"/>
+
+      <!-- ── RIGHT-EDGE MID ── -->
+      <g stroke="rgba(255,255,255,0.14)" stroke-width="1.2">
+        <path d="M396,280 H352 V260 H320"/>
+        <path d="M352,280 V308 H374 V326"/>
+        <path d="M320,260 V288 H292 V272 H268"/>
+      </g>
+      <circle cx="352" cy="280" r="3"   fill="#F57C20" opacity="0.6"/>
+      <circle cx="320" cy="260" r="2.5" fill="rgba(255,255,255,0.3)"/>
+      <circle cx="292" cy="288" r="3"   fill="#F57C20" opacity="0.5"/>
+      <circle cx="374" cy="326" r="2"   fill="rgba(255,255,255,0.25)"/>
+      <circle cx="268" cy="272" r="2"   fill="rgba(255,255,255,0.22)"/>
+      <line x1="330" y1="298" x2="330" y2="312" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" stroke-linecap="butt"/>
+      <line x1="337" y1="298" x2="337" y2="312" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" stroke-linecap="butt"/>
+
+      <!-- ── BOTTOM-LEFT CLUSTER ── -->
+      <g stroke="rgba(255,255,255,0.16)" stroke-width="1.3">
+        <path d="M0,490 H48 V470 H80 V450 H112"/>
+        <path d="M48,490 V516 H32"/>
+        <path d="M80,450 V428 H108 V412 H136"/>
+        <path d="M112,450 V472 H140 V458"/>
+      </g>
+      <circle cx="48"  cy="490" r="3.5" fill="#F57C20" opacity="0.65"/>
+      <circle cx="80"  cy="450" r="3"   fill="rgba(255,255,255,0.32)"/>
+      <circle cx="108" cy="428" r="3"   fill="#F57C20" opacity="0.55"/>
+      <circle cx="32"  cy="516" r="2"   fill="rgba(255,255,255,0.25)"/>
+      <circle cx="136" cy="412" r="2"   fill="rgba(255,255,255,0.22)"/>
+      <circle cx="140" cy="458" r="5"   stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="140" cy="458" r="2"   fill="rgba(255,255,255,0.2)"/>
+
+      <!-- ── BOTTOM-RIGHT CLUSTER ── -->
+      <g stroke="rgba(255,255,255,0.16)" stroke-width="1.3">
+        <path d="M396,496 H350 V476 H316 V456 H284"/>
+        <path d="M350,496 V520 H368"/>
+        <path d="M316,456 V432 H288 V416 H260"/>
+        <path d="M284,456 V478 H256 V462"/>
+      </g>
+      <circle cx="350" cy="496" r="3.5" fill="#F57C20" opacity="0.65"/>
+      <circle cx="316" cy="456" r="3"   fill="rgba(255,255,255,0.32)"/>
+      <circle cx="288" cy="432" r="3"   fill="#F57C20" opacity="0.55"/>
+      <circle cx="368" cy="520" r="2"   fill="rgba(255,255,255,0.25)"/>
+      <circle cx="260" cy="416" r="2"   fill="rgba(255,255,255,0.22)"/>
+      <circle cx="256" cy="462" r="5"   stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="256" cy="462" r="2"   fill="rgba(255,255,255,0.2)"/>
+
+      <!-- ── SCATTERED MICRO ELEMENTS ── -->
+      <!-- Small isolated nodes suggest a denser hidden board -->
+      <circle cx="160" cy="70"  r="2" fill="rgba(255,255,255,0.14)"/>
+      <circle cx="196" cy="56"  r="2" fill="rgba(245,124,32,0.3)"/>
+      <circle cx="228" cy="82"  r="2" fill="rgba(255,255,255,0.14)"/>
+      <circle cx="158" cy="530" r="2" fill="rgba(255,255,255,0.14)"/>
+      <circle cx="200" cy="518" r="2" fill="rgba(245,124,32,0.28)"/>
+      <circle cx="236" cy="540" r="2" fill="rgba(255,255,255,0.14)"/>
+
+      <!-- Short isolated trace fragments (mid areas) -->
+      <path d="M156,72 H180 V60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <path d="M220,84 H244 V72" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <path d="M152,528 H176 V516" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <path d="M218,542 H242 V530" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    </g>
+  </svg>
+
+  <!-- Corner orbs -->
   <div class="orb orb-tl"></div>
   <div class="orb orb-tr"></div>
+  <div class="orb orb-bm"></div>
 
+  <!-- CONTENT -->
   <div class="content">
 
-    <!-- Header -->
     <div class="header">
       <div class="brand">Sure Desk</div>
       <div class="brand-sub">Personal IT Support + AI Training · Miami, FL</div>
     </div>
 
-    <!-- Brain icon — large, centered, like ref 3 -->
+    <!-- Brain icon -->
     <div class="brain-zone">
       <svg width="78pt" height="72pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer ambient glow -->
         <ellipse cx="50" cy="52" rx="48" ry="44" fill="rgba(168,85,247,0.15)"/>
-        <!-- Brain shape -->
         <path d="M50,76 C41,76 31,71 25,63 C17,55 16,44 21,35 C17,28 16,19 22,13 C28,7 38,6 46,10 C48,6 52,4 56,4 C60,4 64,6 66,10 C74,6 84,7 90,13 C96,19 95,28 91,35 C96,44 95,55 87,63 C81,71 71,76 62,76 Z"
               fill="rgba(168,85,247,0.28)" stroke="#C084FC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Folds -->
         <path d="M46,10 C42,20 43,33 49,44" stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M56,4 C53,16 55,29 61,40" stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M56,4 C53,16 55,29 61,40"  stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
         <path d="M21,35 C29,37 37,34 45,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
         <path d="M91,35 C83,37 75,34 67,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <!-- Neural nodes -->
         <circle cx="33" cy="38" r="4" fill="#C084FC"/>
         <circle cx="50" cy="29" r="4" fill="#C084FC"/>
         <circle cx="67" cy="38" r="4" fill="#C084FC"/>
         <circle cx="43" cy="54" r="4" fill="#C084FC"/>
         <circle cx="61" cy="54" r="4" fill="#C084FC"/>
-        <!-- Connections -->
         <line x1="33" y1="38" x2="50" y2="29" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
         <line x1="50" y1="29" x2="67" y2="38" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
         <line x1="33" y1="38" x2="43" y2="54" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
@@ -171,14 +259,12 @@
       </svg>
     </div>
 
-    <!-- LEARN AI — massive headline -->
     <div class="learn-block">
       <div class="learn-title">Learn AI</div>
       <div class="learn-sub">Personal AI Training</div>
       <div class="learn-lang">Personal training in English or Spanish</div>
     </div>
 
-    <!-- 2×2 capability grid -->
     <div class="grid">
       <div class="gcell">
         <div class="gicon g-gr"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
@@ -198,19 +284,16 @@
       </div>
     </div>
 
-    <!-- AI Tools -->
     <div class="tools">
       <div class="tools-lbl">Learn popular AI tools:</div>
       <div class="tools-list">ChatGPT · Claude · DALL-E · Siri · Alexa · Google AI</div>
     </div>
 
-    <!-- Trust pills -->
     <div class="trust">
       <div class="tpill">🕐 After Hours &amp; Weekends</div>
       <div class="tpill">🌐 Bilingual EN/ES</div>
     </div>
 
-    <!-- Contact + QR -->
     <div class="cbar">
       <div>
         <div class="phone">(561) 481-7911</div>
