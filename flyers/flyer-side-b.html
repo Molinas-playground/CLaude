@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SureDesk — Learn AI (Side B)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Inter', sans-serif; overflow: hidden; }
+
+    .flyer {
+      width: 5.5in;
+      height: 8.5in;
+      background: linear-gradient(165deg, #2D0A6B 0%, #4A0E8F 22%, #1E2E8A 55%, #0D47A1 100%);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Decorative corner orbs (like the brain circles in ref 3) */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .orb-tl { top: -55pt; left: -55pt; width: 160pt; height: 160pt; background: radial-gradient(circle, rgba(168,85,247,0.35) 0%, transparent 70%); }
+    .orb-tr { top: -45pt; right: -55pt; width: 150pt; height: 150pt; background: radial-gradient(circle, rgba(192,132,252,0.3) 0%, transparent 70%); }
+    .orb-bl { bottom: 60pt; left: -50pt; width: 130pt; height: 130pt; background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%); }
+
+    /* ── HEADER ── */
+    .header {
+      padding: 22pt 24pt 0;
+      text-align: center;
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+    }
+    .brand { font-family: 'Poppins', sans-serif; font-size: 28pt; font-weight: 900; color: #fff; letter-spacing: -0.5pt; line-height: 1; }
+    .brand-sub { font-size: 9.5pt; color: rgba(255,255,255,0.65); font-weight: 500; margin-top: 4pt; }
+
+    /* ── BRAIN ICON ── */
+    .brain-zone {
+      padding: 10pt 0 4pt;
+      text-align: center;
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+    }
+
+    /* ── LEARN AI HEADLINE ── */
+    .ai-head {
+      text-align: center;
+      padding: 0 24pt 6pt;
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+    }
+    .ai-title { font-family: 'Poppins', sans-serif; font-size: 40pt; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -1pt; }
+    .ai-sub { font-size: 11pt; color: rgba(255,255,255,0.8); font-weight: 500; margin-top: 4pt; }
+    .ai-lang { font-size: 9pt; color: rgba(255,255,255,0.5); margin-top: 3pt; font-style: italic; }
+
+    /* ── 2×2 CAPABILITY GRID ── */
+    .caps-grid {
+      padding: 8pt 22pt;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8pt;
+      flex: 1;
+      position: relative; z-index: 1;
+    }
+    .cap-card {
+      background: rgba(255,255,255,0.1);
+      border: 1pt solid rgba(255,255,255,0.22);
+      border-radius: 12pt;
+      padding: 12pt 10pt;
+      display: flex;
+      align-items: center;
+      gap: 9pt;
+    }
+    .cap-icon {
+      width: 36pt; height: 36pt;
+      border-radius: 9pt;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cap-icon svg { width: 18pt; height: 18pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .cap-text { font-size: 10pt; font-weight: 700; color: #fff; line-height: 1.3; }
+
+    /* Icon colour variants */
+    .ico-g { background: rgba(34,197,94,0.2); }  .ico-g svg { stroke: #4ADE80; }
+    .ico-p { background: rgba(192,132,252,0.25); } .ico-p svg { stroke: #C084FC; }
+    .ico-o { background: rgba(245,124,32,0.2); }  .ico-o svg { stroke: #FB923C; }
+    .ico-b { background: rgba(56,189,248,0.2); }  .ico-b svg { stroke: #38BDF8; }
+
+    /* ── AI TOOLS ── */
+    .tools {
+      padding: 4pt 24pt 8pt;
+      text-align: center;
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+    }
+    .tools-lbl { font-size: 7.5pt; color: rgba(255,255,255,0.45); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5pt; }
+    .tools-list { font-size: 10pt; color: rgba(255,255,255,0.85); font-weight: 500; line-height: 1.5; }
+
+    /* ── TRUST PILLS ── */
+    .trust {
+      padding: 0 24pt 10pt;
+      display: flex; gap: 7pt; justify-content: center;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .tpill {
+      background: rgba(255,255,255,0.12);
+      border: 1pt solid rgba(255,255,255,0.22);
+      border-radius: 20pt;
+      padding: 5.5pt 13pt;
+      font-size: 8pt; font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      display: flex; align-items: center; gap: 5pt;
+    }
+
+    /* ── CONTACT BAR ── */
+    .contact-bar {
+      background: rgba(0,0,0,0.35);
+      border-top: 1pt solid rgba(255,255,255,0.1);
+      padding: 13pt 24pt;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .phone { font-family: 'Poppins', sans-serif; font-size: 19pt; font-weight: 800; color: #fff; line-height: 1; }
+    .contact-meta { margin-top: 4pt; font-size: 9pt; color: rgba(255,255,255,0.55); }
+    .qr-wrap { background: #fff; border-radius: 6pt; padding: 4pt; }
+    .qr-wrap img { width: 65pt; height: 65pt; display: block; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+
+  <div class="orb orb-tl"></div>
+  <div class="orb orb-tr"></div>
+  <div class="orb orb-bl"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">Sure Desk</div>
+    <div class="brand-sub">Personal IT Support + AI Training</div>
+  </div>
+
+  <!-- Brain SVG (centered, like ref 3) -->
+  <div class="brain-zone">
+    <svg width="72pt" height="62pt" viewBox="0 0 90 78" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left lobe -->
+      <path d="M45,68 C38,68 30,64 26,58 C20,52 18,44 22,37 C18,32 17,25 21,19 C25,13 33,11 40,14 C42,10 46,8 50,8 C54,8 58,10 60,14 C67,11 75,13 79,19 C83,25 82,32 78,37 C82,44 80,52 74,58 C70,64 62,68 55,68 L45,68 Z"
+            fill="rgba(168,85,247,0.2)" stroke="#C084FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Brain fold lines -->
+      <path d="M40,14 C37,22 38,32 43,40" stroke="rgba(192,132,252,0.55)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M50,8 C48,18 50,28 55,36" stroke="rgba(192,132,252,0.55)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M22,37 C28,38 34,36 40,40" stroke="rgba(192,132,252,0.55)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M78,37 C72,38 66,36 60,40" stroke="rgba(192,132,252,0.55)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M43,40 C45,46 47,50 45,56" stroke="rgba(192,132,252,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M55,36 C53,43 51,49 53,56" stroke="rgba(192,132,252,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Neural dots -->
+      <circle cx="31" cy="34" r="3" fill="#C084FC" opacity="0.9"/>
+      <circle cx="45" cy="26" r="3" fill="#C084FC" opacity="0.9"/>
+      <circle cx="59" cy="34" r="3" fill="#C084FC" opacity="0.9"/>
+      <circle cx="40" cy="48" r="3" fill="#C084FC" opacity="0.9"/>
+      <circle cx="55" cy="48" r="3" fill="#C084FC" opacity="0.9"/>
+      <!-- Connections -->
+      <line x1="31" y1="34" x2="45" y2="26" stroke="rgba(192,132,252,0.5)" stroke-width="1.3"/>
+      <line x1="45" y1="26" x2="59" y2="34" stroke="rgba(192,132,252,0.5)" stroke-width="1.3"/>
+      <line x1="31" y1="34" x2="40" y2="48" stroke="rgba(192,132,252,0.5)" stroke-width="1.3"/>
+      <line x1="59" y1="34" x2="55" y2="48" stroke="rgba(192,132,252,0.5)" stroke-width="1.3"/>
+      <line x1="40" y1="48" x2="55" y2="48" stroke="rgba(192,132,252,0.5)" stroke-width="1.3"/>
+      <line x1="45" y1="26" x2="40" y2="48" stroke="rgba(192,132,252,0.35)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- AI Headline -->
+  <div class="ai-head">
+    <div class="ai-title">Learn AI</div>
+    <div class="ai-sub">Personal AI Training</div>
+    <div class="ai-lang">Personal training in English or Spanish</div>
+  </div>
+
+  <!-- 2×2 Capability Grid -->
+  <div class="caps-grid">
+
+    <div class="cap-card">
+      <div class="cap-icon ico-g">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="cap-text">Write Emails<br>&amp; Messages</div>
+    </div>
+
+    <div class="cap-card">
+      <div class="cap-icon ico-p">
+        <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </div>
+      <div class="cap-text">Summarize<br>Info</div>
+    </div>
+
+    <div class="cap-card">
+      <div class="cap-icon ico-o">
+        <svg viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+      </div>
+      <div class="cap-text">Brainstorm<br>Ideas</div>
+    </div>
+
+    <div class="cap-card">
+      <div class="cap-icon ico-b">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="cap-text">Research<br>Topics</div>
+    </div>
+
+  </div>
+
+  <!-- AI Tools list -->
+  <div class="tools">
+    <div class="tools-lbl">Learn popular AI tools:</div>
+    <div class="tools-list">ChatGPT · Claude · DALL-E · Siri · Alexa · Google AI</div>
+  </div>
+
+  <!-- Trust pills -->
+  <div class="trust">
+    <div class="tpill">🕐 After Hours &amp; Weekends</div>
+    <div class="tpill">🌐 Bilingual EN/ES</div>
+  </div>
+
+  <!-- Contact + QR -->
+  <div class="contact-bar">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="contact-meta">🌐 suredesk.net · 📍 Miami, FL</div>
+    </div>
+    <div class="qr-wrap">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https://suredesk.net" alt="suredesk.net QR code"/>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

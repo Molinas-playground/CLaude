@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SureDesk — IT Support (Side A)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @page { size: 5.5in 8.5in; margin: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: 5.5in; height: 8.5in; font-family: 'Inter', sans-serif; overflow: hidden; background: #fff; }
+
+    .flyer {
+      width: 5.5in;
+      height: 8.5in;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── HEADER ── */
+    .header-bar {
+      padding: 16pt 22pt 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .logo { display: flex; align-items: center; gap: 8pt; }
+    .logo-icon {
+      width: 28pt; height: 28pt;
+      background: #1A72D4; border-radius: 7pt;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-icon svg { width: 16pt; height: 16pt; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .logo-name { font-family: 'Poppins', sans-serif; font-size: 17pt; font-weight: 800; line-height: 1; }
+    .logo-name .sure { color: #0D2B5E; }
+    .logo-name .desk { color: #1A72D4; }
+    .star-badge {
+      display: flex; align-items: center; gap: 4pt;
+      background: rgba(245,124,32,0.08);
+      border: 1pt solid rgba(245,124,32,0.3);
+      border-radius: 20pt;
+      padding: 4pt 10pt;
+    }
+    .star-badge .stars { color: #F57C20; font-size: 9pt; letter-spacing: 1px; }
+    .star-badge .star-lbl { font-size: 6.5pt; font-weight: 700; color: #F57C20; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      padding: 14pt 22pt 0;
+      flex-shrink: 0;
+    }
+
+    /* Circular illustration — top right, mimics the circular photo in ref 1 */
+    .circle-illus {
+      position: absolute;
+      top: 8pt; right: 16pt;
+      width: 148pt; height: 148pt;
+      border-radius: 50%;
+      border: 5pt solid #1A72D4;
+      overflow: hidden;
+    }
+    .circle-illus svg { width: 100%; height: 100%; display: block; }
+
+    .hero-text { padding-right: 160pt; }
+    .eyebrow {
+      font-size: 7pt; font-weight: 700;
+      color: #F57C20; letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8pt;
+    }
+    .h1 { font-family: 'Poppins', sans-serif; font-size: 34pt; font-weight: 900; color: #0D2B5E; line-height: 1.0; }
+    .h2 { font-family: 'Poppins', sans-serif; font-size: 19pt; font-weight: 800; color: #1A72D4; line-height: 1.15; margin-top: 5pt; }
+    .orange-rule { width: 52pt; height: 3.5pt; background: #F57C20; border-radius: 2pt; margin-top: 14pt; }
+
+    /* ── SERVICES ── */
+    .services { padding: 12pt 22pt 0; flex: 1; }
+    .svc-header { display: flex; align-items: center; gap: 10pt; margin-bottom: 8pt; }
+    .svc-label-box {
+      border: 2pt solid #0D2B5E; border-radius: 8pt;
+      padding: 4pt 12pt;
+      font-size: 9.5pt; font-weight: 800; color: #0D2B5E;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .orange-line { flex: 1; height: 2pt; background: #F57C20; border-radius: 1pt; }
+    .cards-row { display: flex; gap: 8pt; }
+    .card {
+      flex: 1;
+      border-radius: 12pt;
+      padding: 16pt 10pt 14pt;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center; gap: 8pt;
+    }
+    .card.blue { background: #1A72D4; }
+    .card.out  { border: 2pt solid #1A72D4; background: #fff; }
+    .card-ring {
+      width: 40pt; height: 40pt; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card.blue .card-ring { background: rgba(255,255,255,0.2); }
+    .card.out  .card-ring { background: rgba(245,124,32,0.1); border: 2pt solid #F57C20; }
+    .card-ring svg { width: 19pt; height: 19pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .card.blue .card-ring svg { stroke: #fff; }
+    .card.out  .card-ring svg { stroke: #F57C20; }
+    .card-text { font-size: 9pt; font-weight: 600; line-height: 1.5; }
+    .card.blue .card-text { color: #fff; }
+    .card.out  .card-text { color: #1A72D4; }
+
+    /* ── PRICING ── */
+    .pricing { padding: 10pt 22pt 6pt; text-align: center; flex-shrink: 0; }
+    .price-tag { font-size: 9.5pt; color: #5A7090; }
+    .price-amt { font-family: 'Poppins', sans-serif; font-size: 16pt; font-weight: 900; color: #0D2B5E; margin-top: 2pt; }
+
+    /* ── CONTACT BOTTOM ── */
+    .contact-zone {
+      height: 128pt;
+      position: relative;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    /* Orange organic blob — bottom-left */
+    .orange-blob {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 225pt; height: 128pt;
+      clip-path: ellipse(55% 100% at 35% 100%);
+      background: #F57C20;
+    }
+    .blob-inner {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 225pt; height: 128pt;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 16pt 14pt 16pt 24pt;
+    }
+    .contact-lbl { font-family: 'Poppins', sans-serif; font-size: 12pt; font-weight: 800; color: #fff; margin-bottom: 9pt; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8pt;
+      background: #0D2B5E; border-radius: 20pt;
+      padding: 5.5pt 16pt 5.5pt 11pt;
+      margin-bottom: 6pt; align-self: flex-start;
+    }
+    .pill svg { width: 12pt; height: 12pt; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pill span { font-size: 11pt; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
+
+    /* Blue circle — bottom-right, QR */
+    .blue-circle {
+      position: absolute;
+      bottom: -22pt; right: -22pt;
+      width: 172pt; height: 172pt;
+      border-radius: 50%;
+      background: #1A72D4;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding-top: 20pt;
+    }
+    .website-lbl { font-family: 'Poppins', sans-serif; font-size: 11pt; font-weight: 700; color: #fff; margin-bottom: 6pt; }
+    .qr-box { background: #fff; border-radius: 5pt; padding: 4pt; }
+    .qr-box img { width: 72pt; height: 72pt; display: block; }
+  </style>
+</head>
+<body>
+<div class="flyer">
+
+  <!-- Header -->
+  <div class="header-bar">
+    <div class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="logo-name"><span class="sure">Sure</span><span class="desk">Desk</span></div>
+    </div>
+    <div class="star-badge">
+      <span class="stars">★★★★★</span>
+      <span class="star-lbl">5-Star Rated</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+
+    <!-- Circular tech illustration (top-right, like the circular photo in reference 1) -->
+    <div class="circle-illus">
+      <svg viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="dp" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+            <circle cx="7" cy="7" r="0.8" fill="rgba(255,255,255,0.12)"/>
+          </pattern>
+          <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1565C0"/>
+            <stop offset="100%" stop-color="#0D3B82"/>
+          </linearGradient>
+        </defs>
+        <circle cx="74" cy="74" r="74" fill="url(#bg)"/>
+        <circle cx="74" cy="74" r="74" fill="url(#dp)"/>
+        <!-- Laptop screen -->
+        <rect x="20" y="26" width="108" height="72" rx="6" fill="#071F4F" stroke="#1E5BB8" stroke-width="1.5"/>
+        <rect x="28" y="34" width="92" height="56" rx="3" fill="#040F2A"/>
+        <!-- Toolbar -->
+        <rect x="28" y="34" width="92" height="13" rx="3" fill="#0D3580"/>
+        <circle cx="38" cy="40.5" r="4" fill="#ff5f57"/>
+        <circle cx="50" cy="40.5" r="4" fill="#febc2e"/>
+        <circle cx="62" cy="40.5" r="4" fill="#28c840"/>
+        <!-- Screen bars -->
+        <rect x="34" y="52" width="56" height="5" rx="2.5" fill="#F57C20"/>
+        <rect x="34" y="61" width="72" height="4" rx="2" fill="rgba(255,255,255,0.12)"/>
+        <rect x="34" y="69" width="46" height="4" rx="2" fill="rgba(255,255,255,0.09)"/>
+        <rect x="34" y="77" width="60" height="4" rx="2" fill="rgba(255,255,255,0.07)"/>
+        <!-- Success badge -->
+        <circle cx="105" cy="62" r="16" fill="rgba(245,124,32,0.15)" stroke="#F57C20" stroke-width="1.8"/>
+        <polyline points="97,62 103,68 114,53" stroke="#F57C20" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Base -->
+        <path d="M14,100 L22,98 L126,98 L134,100 L140,112 L8,112 Z" fill="#071F4F" stroke="#1E5BB8" stroke-width="1"/>
+        <rect x="56" y="112" width="36" height="5" rx="2" fill="rgba(30,91,184,0.5)"/>
+        <!-- WiFi icon bottom-center -->
+        <path d="M44,132 a40 40 0 0 1 60 0" stroke="#1A72D4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M53,132 a28 28 0 0 1 42 0" stroke="#1A72D4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <circle cx="74" cy="132" r="4.5" fill="#F57C20"/>
+      </svg>
+    </div>
+
+    <!-- Text content — left side, cleared of circle -->
+    <div class="hero-text">
+      <div class="eyebrow">Miami's Trusted Tech Experts</div>
+      <div class="h1">Expert IT</div>
+      <div class="h2">Your neighborhood<br>friendly tech support!</div>
+      <div class="orange-rule"></div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="services">
+    <div class="svc-header">
+      <div class="svc-label-box">Our Services:</div>
+      <div class="orange-line"></div>
+    </div>
+    <div class="cards-row">
+
+      <div class="card blue">
+        <div class="card-ring">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="card-text">Computer Repair<br>Virus Removal<br>WiFi &amp; Network</div>
+      </div>
+
+      <div class="card out">
+        <div class="card-ring">
+          <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        </div>
+        <div class="card-text">Device Setup<br>Data Transfer<br>&amp; Recovery</div>
+      </div>
+
+      <div class="card out">
+        <div class="card-ring">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="card-text">ChatGPT<br>Claude<br>AI Training</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing">
+    <div class="price-tag">Technology made simple for everyday life.</div>
+    <div class="price-amt">Starting at $50/Hour</div>
+  </div>
+
+  <!-- Contact + QR bottom -->
+  <div class="contact-zone">
+
+    <div class="orange-blob"></div>
+    <div class="blob-inner">
+      <div class="contact-lbl">Contact Us</div>
+      <div class="pill">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 7.09 7.09l.97-.97a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2z"/></svg>
+        <span>561 481 7911</span>
+      </div>
+      <div class="pill">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Miami, FL</span>
+      </div>
+    </div>
+
+    <div class="blue-circle">
+      <div class="website-lbl">Website!</div>
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=144x144&data=https://suredesk.net" alt="suredesk.net QR code"/>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
