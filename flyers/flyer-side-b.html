@@ -34,6 +34,8 @@
       background: radial-gradient(circle, rgba(192,132,252,0.45) 0%, transparent 65%); }
     .orb-tr { top: -50pt; right: -65pt; width: 175pt; height: 175pt;
       background: radial-gradient(circle, rgba(167,139,250,0.4) 0%, transparent 65%); }
+    .orb-hero { top: 55pt; left: 50%; transform: translateX(-50%); width: 210pt; height: 210pt;
+      background: radial-gradient(circle, rgba(251,191,36,0.14) 0%, rgba(168,85,247,0.10) 55%, transparent 72%); }
     .orb-bm { bottom: 50pt; left: 50%; transform: translateX(-50%); width: 220pt; height: 120pt;
       background: radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%); }
 
@@ -252,6 +254,7 @@
   <!-- Corner orbs -->
   <div class="orb orb-tl"></div>
   <div class="orb orb-tr"></div>
+  <div class="orb orb-hero"></div>
   <div class="orb orb-bm"></div>
 
   <!-- CONTENT -->
@@ -264,26 +267,44 @@
 
     <!-- Brain icon -->
     <div class="brain-zone">
-      <svg width="78pt" height="72pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="50" cy="52" rx="48" ry="44" fill="rgba(168,85,247,0.15)"/>
+      <svg width="92pt" height="86pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer golden halo ring -->
+        <circle cx="50" cy="44" r="52" fill="none" stroke="rgba(251,191,36,0.14)" stroke-width="2.5" stroke-dasharray="5,7"/>
+        <circle cx="50" cy="44" r="44" fill="none" stroke="rgba(251,191,36,0.09)" stroke-width="1.5"/>
+        <!-- Outer neural connections -->
+        <g stroke="rgba(216,180,254,0.22)" stroke-width="0.8" fill="none">
+          <line x1="50" y1="3"  x2="50" y2="18"/>
+          <line x1="95" y1="22" x2="83" y2="30"/>
+          <line x1="5"  y1="22" x2="17" y2="30"/>
+          <line x1="2"  y1="58" x2="15" y2="52"/>
+          <line x1="98" y1="58" x2="85" y2="52"/>
+        </g>
+        <circle cx="50" cy="3"  r="3.5" fill="rgba(251,191,36,0.80)"/>
+        <circle cx="95" cy="22" r="2.5" fill="rgba(216,180,254,0.65)"/>
+        <circle cx="5"  cy="22" r="2.5" fill="rgba(216,180,254,0.65)"/>
+        <circle cx="2"  cy="58" r="2.5" fill="rgba(245,124,32,0.62)"/>
+        <circle cx="98" cy="58" r="2.5" fill="rgba(245,124,32,0.62)"/>
+        <!-- Brain glow -->
+        <ellipse cx="50" cy="52" rx="48" ry="44" fill="rgba(168,85,247,0.18)"/>
+        <ellipse cx="50" cy="46" rx="36" ry="32" fill="rgba(251,191,36,0.06)"/>
         <path d="M50,76 C41,76 31,71 25,63 C17,55 16,44 21,35 C17,28 16,19 22,13 C28,7 38,6 46,10 C48,6 52,4 56,4 C60,4 64,6 66,10 C74,6 84,7 90,13 C96,19 95,28 91,35 C96,44 95,55 87,63 C81,71 71,76 62,76 Z"
-              fill="rgba(168,85,247,0.28)" stroke="#C084FC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              fill="rgba(168,85,247,0.30)" stroke="#C084FC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M46,10 C42,20 43,33 49,44" stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
         <path d="M56,4 C53,16 55,29 61,40"  stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
         <path d="M21,35 C29,37 37,34 45,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
         <path d="M91,35 C83,37 75,34 67,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <circle cx="33" cy="38" r="4" fill="#C084FC"/>
-        <circle cx="50" cy="29" r="4" fill="#C084FC"/>
-        <circle cx="67" cy="38" r="4" fill="#C084FC"/>
-        <circle cx="43" cy="54" r="4" fill="#C084FC"/>
-        <circle cx="61" cy="54" r="4" fill="#C084FC"/>
-        <line x1="33" y1="38" x2="50" y2="29" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
-        <line x1="50" y1="29" x2="67" y2="38" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
-        <line x1="33" y1="38" x2="43" y2="54" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
-        <line x1="67" y1="38" x2="61" y2="54" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
-        <line x1="43" y1="54" x2="61" y2="54" stroke="rgba(192,132,252,0.6)" stroke-width="1.5"/>
-        <line x1="50" y1="29" x2="43" y2="54" stroke="rgba(192,132,252,0.4)" stroke-width="1"/>
-        <line x1="50" y1="29" x2="61" y2="54" stroke="rgba(192,132,252,0.4)" stroke-width="1"/>
+        <circle cx="33" cy="38" r="4.5" fill="#C084FC"/>
+        <circle cx="50" cy="29" r="4.5" fill="#C084FC"/>
+        <circle cx="67" cy="38" r="4.5" fill="#C084FC"/>
+        <circle cx="43" cy="54" r="4.5" fill="#C084FC"/>
+        <circle cx="61" cy="54" r="4.5" fill="#C084FC"/>
+        <line x1="33" y1="38" x2="50" y2="29" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
+        <line x1="50" y1="29" x2="67" y2="38" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
+        <line x1="33" y1="38" x2="43" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
+        <line x1="67" y1="38" x2="61" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
+        <line x1="43" y1="54" x2="61" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
+        <line x1="50" y1="29" x2="43" y2="54" stroke="rgba(192,132,252,0.42)" stroke-width="1.2"/>
+        <line x1="50" y1="29" x2="61" y2="54" stroke="rgba(192,132,252,0.42)" stroke-width="1.2"/>
       </svg>
     </div>
 
