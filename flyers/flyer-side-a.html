@@ -16,39 +16,59 @@
       position: relative; display: flex; flex-direction: column; overflow: hidden;
     }
 
-    /* ── BACKGROUND ── */
-    .bg-gradient {
+    /* ── BACKGROUND LAYERS ── */
+    /* 1 — real Miami city photo */
+    .bg-photo {
       position: absolute; inset: 0; z-index: 0;
-      background: linear-gradient(165deg, #071A3E 0%, #0D2B5E 30%, #0A4494 62%, #1A72D4 100%);
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80');
+      background-size: cover; background-position: center 40%;
     }
-    .circuit-bg { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; }
+    /* 2 — blue gradient overlay (keeps text readable, gives brand color) */
+    .bg-gradient {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(165deg,
+        rgba(7,26,62,0.90)  0%,
+        rgba(13,43,94,0.84) 30%,
+        rgba(10,68,148,0.76) 62%,
+        rgba(26,114,212,0.62) 100%);
+    }
+    /* 3 — orbital rings on top */
+    .circuit-bg { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; }
 
     /* ── GLOW ORBS ── */
-    .orb { position: absolute; border-radius: 50%; z-index: 2; pointer-events: none; }
+    .orb { position: absolute; border-radius: 50%; z-index: 3; pointer-events: none; }
     .orb-tl { top: -60pt; left: -60pt; width: 190pt; height: 190pt;
-      background: radial-gradient(circle, rgba(56,189,248,0.38) 0%, transparent 65%); }
+      background: radial-gradient(circle, rgba(56,189,248,0.35) 0%, transparent 65%); }
     .orb-tr { top: -50pt; right: -65pt; width: 175pt; height: 175pt;
-      background: radial-gradient(circle, rgba(26,114,212,0.45) 0%, transparent 65%); }
-    .orb-hero { top: 52pt; left: 50%; transform: translateX(-50%); width: 220pt; height: 220pt;
-      background: radial-gradient(circle, rgba(245,124,32,0.15) 0%, rgba(26,114,212,0.10) 50%, transparent 70%); }
+      background: radial-gradient(circle, rgba(26,114,212,0.42) 0%, transparent 65%); }
+    .orb-hero { top: 50pt; left: 50%; transform: translateX(-50%); width: 220pt; height: 220pt;
+      background: radial-gradient(circle, rgba(245,124,32,0.14) 0%, rgba(26,114,212,0.08) 55%, transparent 72%); }
     .orb-bm { bottom: 50pt; left: 50%; transform: translateX(-50%); width: 220pt; height: 120pt;
-      background: radial-gradient(ellipse, rgba(26,114,212,0.28) 0%, transparent 70%); }
+      background: radial-gradient(ellipse, rgba(26,114,212,0.25) 0%, transparent 70%); }
 
     /* ── CONTENT ── */
-    .content { position: relative; z-index: 3; display: flex; flex-direction: column; height: 100%; }
+    .content { position: relative; z-index: 4; display: flex; flex-direction: column; height: 100%; }
 
     /* HEADER */
     .header { padding: 20pt 24pt 0; text-align: center; flex-shrink: 0; }
     .brand { font-family: 'Poppins', sans-serif; font-size: 30pt; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.5pt; }
     .brand-sub { font-size: 10pt; color: rgba(255,255,255,0.65); margin-top: 3pt; }
 
-    /* ICON */
-    .icon-zone { text-align: center; padding: 6pt 0 0; flex-shrink: 0; }
+    /* HERO PHOTO RING */
+    .icon-zone { text-align: center; padding: 8pt 0 0; flex-shrink: 0; }
+    .hero-ring {
+      width: 110pt; height: 110pt; border-radius: 50%;
+      border: 4pt solid #1A72D4;
+      overflow: hidden; display: inline-block;
+      box-shadow: 0 0 22pt rgba(26,114,212,0.55), 0 0 44pt rgba(245,124,32,0.22);
+    }
+    .hero-ring img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     /* HEADLINE */
-    .headline-block { text-align: center; padding: 4pt 20pt 0; flex-shrink: 0; }
-    .main-title { font-family: 'Poppins', sans-serif; font-size: 44pt; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -1.5pt; }
-    .main-sub { font-size: 11pt; color: rgba(255,255,255,0.72); font-weight: 500; margin-top: 6pt; }
+    .headline-block { text-align: center; padding: 6pt 20pt 0; flex-shrink: 0; }
+    .main-title { font-family: 'Poppins', sans-serif; font-size: 42pt; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -1.5pt; }
+    .main-sub { font-size: 11pt; color: rgba(255,255,255,0.75); font-weight: 500; margin-top: 6pt; }
 
     /* SERVICES PANEL */
     .services-panel {
@@ -57,6 +77,7 @@
       border: 1pt solid rgba(255,255,255,0.22);
       border-radius: 14pt; padding: 14pt 18pt;
       flex: 1;
+      backdrop-filter: blur(4px);
     }
     .panel-hdr { display: flex; align-items: center; gap: 10pt; margin-bottom: 12pt; }
     .panel-hdr-lbl {
@@ -86,15 +107,16 @@
     /* TRUST */
     .trust { padding: 8pt 24pt 8pt; display: flex; flex-wrap: wrap; gap: 6pt; justify-content: center; flex-shrink: 0; }
     .tpill {
-      background: rgba(255,255,255,0.12); border: 1pt solid rgba(255,255,255,0.26);
+      background: rgba(255,255,255,0.14); border: 1pt solid rgba(255,255,255,0.28);
       border-radius: 20pt; padding: 5.5pt 13pt;
       font-size: 8.5pt; font-weight: 600; color: rgba(255,255,255,0.92);
       display: flex; align-items: center; gap: 5pt;
+      backdrop-filter: blur(4px);
     }
 
     /* CONTACT BAR */
     .cbar {
-      background: rgba(0,0,0,0.38); border-top: 1pt solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.45); border-top: 1pt solid rgba(255,255,255,0.12);
       padding: 12pt 24pt; display: flex; align-items: center; justify-content: space-between;
       flex-shrink: 0;
     }
@@ -107,116 +129,59 @@
 <body>
 <div class="page">
 
+  <!-- Miami city photo background -->
+  <div class="bg-photo"></div>
+  <!-- Blue brand overlay -->
   <div class="bg-gradient"></div>
 
-  <!-- Background: orbital rings + Miami skyline silhouette -->
+  <!-- Orbital rings -->
   <svg class="circuit-bg" viewBox="0 0 396 612" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
     <defs>
       <pattern id="ai-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-        <circle cx="14" cy="14" r="1" fill="rgba(255,255,255,0.06)"/>
+        <circle cx="14" cy="14" r="1" fill="rgba(255,255,255,0.05)"/>
       </pattern>
       <radialGradient id="cvig" cx="50%" cy="42%" r="54%">
-        <stop offset="0%"   stop-color="rgba(6,1,34,0.35)"/>
+        <stop offset="0%"   stop-color="rgba(6,1,34,0.30)"/>
         <stop offset="100%" stop-color="rgba(6,1,34,0)"/>
       </radialGradient>
     </defs>
     <rect width="396" height="612" fill="url(#ai-dots)"/>
     <rect width="396" height="612" fill="url(#cvig)"/>
-
-    <!-- Orbital rings -->
-    <circle cx="0"   cy="0"   r="75"  fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="1.2"/>
-    <circle cx="0"   cy="0"   r="145" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-    <circle cx="0"   cy="0"   r="230" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-    <circle cx="0"   cy="0"   r="335" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <circle cx="0"   cy="0"   r="460" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-    <circle cx="396" cy="0"   r="75"  fill="none" stroke="rgba(245,124,32,0.30)" stroke-width="1.2"/>
-    <circle cx="396" cy="0"   r="145" fill="none" stroke="rgba(245,124,32,0.20)" stroke-width="1"/>
-    <circle cx="396" cy="0"   r="230" fill="none" stroke="rgba(245,124,32,0.12)" stroke-width="1"/>
-    <circle cx="396" cy="0"   r="335" fill="none" stroke="rgba(245,124,32,0.07)" stroke-width="1"/>
-    <circle cx="396" cy="0"   r="460" fill="none" stroke="rgba(245,124,32,0.04)" stroke-width="1"/>
-    <circle cx="0"   cy="612" r="75"  fill="none" stroke="rgba(245,124,32,0.30)" stroke-width="1.2"/>
-    <circle cx="0"   cy="612" r="145" fill="none" stroke="rgba(245,124,32,0.20)" stroke-width="1"/>
-    <circle cx="0"   cy="612" r="230" fill="none" stroke="rgba(245,124,32,0.12)" stroke-width="1"/>
-    <circle cx="0"   cy="612" r="335" fill="none" stroke="rgba(245,124,32,0.07)" stroke-width="1"/>
-    <circle cx="0"   cy="612" r="460" fill="none" stroke="rgba(245,124,32,0.04)" stroke-width="1"/>
-    <circle cx="396" cy="612" r="75"  fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="1.2"/>
-    <circle cx="396" cy="612" r="145" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-    <circle cx="396" cy="612" r="230" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-    <circle cx="396" cy="612" r="335" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <circle cx="396" cy="612" r="460" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-    <circle cx="198" cy="300" r="72"  fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
-    <circle cx="198" cy="300" r="148" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
-    <circle cx="198" cy="300" r="224" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.8"/>
-
-    <!-- Star field -->
-    <circle cx="28"  cy="22"  r="3"   fill="rgba(255,255,255,0.65)"/>
-    <circle cx="62"  cy="12"  r="2"   fill="rgba(255,255,255,0.48)"/>
-    <circle cx="98"  cy="32"  r="1.5" fill="rgba(255,255,255,0.36)"/>
-    <circle cx="146" cy="18"  r="2.5" fill="rgba(245,124,32,0.75)"/>
-    <circle cx="198" cy="28"  r="1.5" fill="rgba(255,255,255,0.28)"/>
-    <circle cx="250" cy="16"  r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="298" cy="30"  r="1.5" fill="rgba(255,255,255,0.32)"/>
-    <circle cx="346" cy="14"  r="2.5" fill="rgba(245,124,32,0.72)"/>
-    <circle cx="372" cy="26"  r="3"   fill="rgba(255,255,255,0.62)"/>
-    <circle cx="14"  cy="78"  r="2.5" fill="rgba(255,255,255,0.45)"/>
-    <circle cx="22"  cy="148" r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="10"  cy="212" r="2.5" fill="rgba(245,124,32,0.58)"/>
-    <circle cx="18"  cy="282" r="1.8" fill="rgba(255,255,255,0.25)"/>
-    <circle cx="8"   cy="348" r="2"   fill="rgba(255,255,255,0.22)"/>
-    <circle cx="20"  cy="412" r="1.8" fill="rgba(255,255,255,0.26)"/>
-    <circle cx="12"  cy="472" r="2.5" fill="rgba(245,124,32,0.54)"/>
-    <circle cx="24"  cy="534" r="2"   fill="rgba(255,255,255,0.36)"/>
-    <circle cx="382" cy="78"  r="2.5" fill="rgba(255,255,255,0.45)"/>
-    <circle cx="374" cy="148" r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="386" cy="212" r="2.5" fill="rgba(245,124,32,0.58)"/>
-    <circle cx="378" cy="282" r="1.8" fill="rgba(255,255,255,0.25)"/>
-    <circle cx="388" cy="348" r="2"   fill="rgba(255,255,255,0.22)"/>
-    <circle cx="376" cy="412" r="1.8" fill="rgba(255,255,255,0.26)"/>
-    <circle cx="384" cy="472" r="2.5" fill="rgba(245,124,32,0.54)"/>
-    <circle cx="372" cy="534" r="2"   fill="rgba(255,255,255,0.36)"/>
-    <circle cx="28"  cy="584" r="3"   fill="rgba(255,255,255,0.62)"/>
-    <circle cx="64"  cy="598" r="2"   fill="rgba(255,255,255,0.46)"/>
-    <circle cx="106" cy="580" r="1.5" fill="rgba(255,255,255,0.36)"/>
-    <circle cx="152" cy="594" r="2.5" fill="rgba(245,124,32,0.72)"/>
-    <circle cx="198" cy="582" r="1.5" fill="rgba(255,255,255,0.28)"/>
-    <circle cx="246" cy="596" r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="292" cy="580" r="1.5" fill="rgba(255,255,255,0.32)"/>
-    <circle cx="342" cy="594" r="2.5" fill="rgba(245,124,32,0.70)"/>
-    <circle cx="370" cy="582" r="3"   fill="rgba(255,255,255,0.60)"/>
-    <circle cx="58"  cy="170" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="340" cy="185" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="45"  cy="440" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="352" cy="428" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="82"  cy="252" r="1.2" fill="rgba(255,255,255,0.11)"/>
-    <circle cx="314" cy="268" r="1.2" fill="rgba(255,255,255,0.11)"/>
-    <circle cx="76"  cy="372" r="1.2" fill="rgba(255,255,255,0.11)"/>
-    <circle cx="320" cy="356" r="1.2" fill="rgba(255,255,255,0.11)"/>
-    <!-- Constellation lines -->
-    <g stroke="rgba(255,255,255,0.18)" stroke-width="0.9" fill="none">
-      <line x1="28"  y1="22"  x2="62"  y2="12"/>
-      <line x1="28"  y1="22"  x2="14"  y2="78"/>
-      <line x1="62"  y1="12"  x2="98"  y2="32"/>
-      <line x1="62"  y1="12"  x2="146" y2="18"/>
-      <line x1="14"  y1="78"  x2="22"  y2="148"/>
-      <line x1="372" y1="26"  x2="346" y2="14"/>
-      <line x1="372" y1="26"  x2="382" y2="78"/>
-      <line x1="346" y1="14"  x2="298" y2="30"/>
-      <line x1="346" y1="14"  x2="250" y2="16"/>
-      <line x1="382" y1="78"  x2="374" y2="148"/>
-      <line x1="28"  y1="584" x2="64"  y2="598"/>
-      <line x1="28"  y1="584" x2="24"  y2="534"/>
-      <line x1="64"  y1="598" x2="106" y2="580"/>
-      <line x1="64"  y1="598" x2="152" y2="594"/>
-      <line x1="24"  y1="534" x2="12"  y2="472"/>
-      <line x1="370" y1="582" x2="342" y2="594"/>
-      <line x1="370" y1="582" x2="372" y2="534"/>
-      <line x1="342" y1="594" x2="292" y2="580"/>
-      <line x1="342" y1="594" x2="246" y2="596"/>
-      <line x1="372" y1="534" x2="384" y2="472"/>
-    </g>
-
-    <!-- Miami skyline silhouette — Brickell-style buildings -->
-    <g fill="rgba(255,255,255,0.07)" stroke="none">
+    <circle cx="0"   cy="0"   r="75"  fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+    <circle cx="0"   cy="0"   r="145" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+    <circle cx="0"   cy="0"   r="230" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+    <circle cx="0"   cy="0"   r="335" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    <circle cx="396" cy="0"   r="75"  fill="none" stroke="rgba(245,124,32,0.28)" stroke-width="1.2"/>
+    <circle cx="396" cy="0"   r="145" fill="none" stroke="rgba(245,124,32,0.18)" stroke-width="1"/>
+    <circle cx="396" cy="0"   r="230" fill="none" stroke="rgba(245,124,32,0.10)" stroke-width="1"/>
+    <circle cx="0"   cy="612" r="75"  fill="none" stroke="rgba(245,124,32,0.28)" stroke-width="1.2"/>
+    <circle cx="0"   cy="612" r="145" fill="none" stroke="rgba(245,124,32,0.18)" stroke-width="1"/>
+    <circle cx="0"   cy="612" r="230" fill="none" stroke="rgba(245,124,32,0.10)" stroke-width="1"/>
+    <circle cx="396" cy="612" r="75"  fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+    <circle cx="396" cy="612" r="145" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+    <circle cx="396" cy="612" r="230" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+    <!-- Star field top -->
+    <circle cx="28"  cy="22"  r="2.8" fill="rgba(255,255,255,0.60)"/>
+    <circle cx="62"  cy="12"  r="1.8" fill="rgba(255,255,255,0.44)"/>
+    <circle cx="146" cy="18"  r="2.5" fill="rgba(245,124,32,0.72)"/>
+    <circle cx="250" cy="16"  r="1.8" fill="rgba(255,255,255,0.32)"/>
+    <circle cx="346" cy="14"  r="2.5" fill="rgba(245,124,32,0.70)"/>
+    <circle cx="372" cy="26"  r="2.8" fill="rgba(255,255,255,0.58)"/>
+    <!-- Left edge -->
+    <circle cx="14"  cy="78"  r="2.2" fill="rgba(255,255,255,0.42)"/>
+    <circle cx="10"  cy="212" r="2.2" fill="rgba(245,124,32,0.55)"/>
+    <circle cx="12"  cy="472" r="2.2" fill="rgba(245,124,32,0.50)"/>
+    <!-- Right edge -->
+    <circle cx="382" cy="78"  r="2.2" fill="rgba(255,255,255,0.42)"/>
+    <circle cx="386" cy="212" r="2.2" fill="rgba(245,124,32,0.55)"/>
+    <circle cx="384" cy="472" r="2.2" fill="rgba(245,124,32,0.50)"/>
+    <!-- Bottom row -->
+    <circle cx="28"  cy="584" r="2.8" fill="rgba(255,255,255,0.58)"/>
+    <circle cx="152" cy="594" r="2.2" fill="rgba(245,124,32,0.68)"/>
+    <circle cx="342" cy="594" r="2.2" fill="rgba(245,124,32,0.66)"/>
+    <circle cx="370" cy="582" r="2.8" fill="rgba(255,255,255,0.56)"/>
+    <!-- Miami skyline silhouette -->
+    <g fill="rgba(255,255,255,0.06)" stroke="none">
       <rect x="0"   y="577" width="24" height="35"/>
       <rect x="26"  y="560" width="20" height="52"/>
       <rect x="37"  y="552" width="8"  height="8"/>
@@ -234,14 +199,23 @@
       <rect x="349" y="551" width="32" height="61"/>
       <rect x="383" y="568" width="13" height="44"/>
     </g>
-    <!-- Warm city horizon glow -->
-    <ellipse cx="198" cy="612" rx="230" ry="20" fill="rgba(245,124,32,0.07)"/>
-
-    <!-- Corner anchor dots -->
-    <circle cx="0"   cy="0"   r="4"   fill="rgba(255,255,255,0.7)"/>
-    <circle cx="396" cy="0"   r="4"   fill="rgba(245,124,32,0.85)"/>
-    <circle cx="0"   cy="612" r="4"   fill="rgba(245,124,32,0.85)"/>
-    <circle cx="396" cy="612" r="4"   fill="rgba(255,255,255,0.7)"/>
+    <ellipse cx="198" cy="612" rx="230" ry="18" fill="rgba(245,124,32,0.06)"/>
+    <!-- Constellation lines -->
+    <g stroke="rgba(255,255,255,0.16)" stroke-width="0.9" fill="none">
+      <line x1="28"  y1="22"  x2="62"  y2="12"/>
+      <line x1="28"  y1="22"  x2="14"  y2="78"/>
+      <line x1="62"  y1="12"  x2="146" y2="18"/>
+      <line x1="372" y1="26"  x2="346" y2="14"/>
+      <line x1="372" y1="26"  x2="382" y2="78"/>
+      <line x1="346" y1="14"  x2="250" y2="16"/>
+      <line x1="28"  y1="584" x2="152" y2="594"/>
+      <line x1="370" y1="582" x2="342" y2="594"/>
+    </g>
+    <!-- Corner dots -->
+    <circle cx="0"   cy="0"   r="4" fill="rgba(255,255,255,0.65)"/>
+    <circle cx="396" cy="0"   r="4" fill="rgba(245,124,32,0.85)"/>
+    <circle cx="0"   cy="612" r="4" fill="rgba(245,124,32,0.85)"/>
+    <circle cx="396" cy="612" r="4" fill="rgba(255,255,255,0.65)"/>
   </svg>
 
   <div class="orb orb-tl"></div>
@@ -256,73 +230,11 @@
       <div class="brand-sub">Personal IT Support · Miami, FL</div>
     </div>
 
-    <!-- Laptop hero illustration -->
+    <!-- Lifestyle photo in circular frame -->
     <div class="icon-zone">
-      <svg width="130pt" height="100pt" viewBox="0 0 175 132" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="sglow" cx="50%" cy="48%" r="52%">
-            <stop offset="0%"   stop-color="rgba(245,124,32,0.30)"/>
-            <stop offset="60%"  stop-color="rgba(26,114,212,0.16)"/>
-            <stop offset="100%" stop-color="rgba(26,114,212,0)"/>
-          </radialGradient>
-        </defs>
-        <!-- Ambient warm glow -->
-        <ellipse cx="87" cy="62" rx="82" ry="64" fill="rgba(26,114,212,0.13)"/>
-        <ellipse cx="87" cy="66" rx="56" ry="46" fill="rgba(245,124,32,0.09)"/>
-        <!-- WiFi signal above laptop -->
-        <path d="M62,15 a30 30 0 0 1 51 0"  stroke="rgba(255,255,255,0.26)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <path d="M70,15 a19 19 0 0 1 35 0"  stroke="rgba(255,255,255,0.44)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        <circle cx="87" cy="15" r="4.2" fill="#F57C20"/>
-        <!-- Screen lid -->
-        <rect x="14" y="18" width="147" height="94" rx="8"
-              fill="rgba(4,14,50,0.92)" stroke="rgba(255,255,255,0.70)" stroke-width="2.8"/>
-        <!-- Screen bezel -->
-        <rect x="22" y="26" width="131" height="78" rx="4" fill="rgba(0,0,0,0.6)"/>
-        <!-- Warm glow overlay on screen -->
-        <rect x="22" y="26" width="131" height="78" rx="4" fill="url(#sglow)"/>
-        <!-- Screen blue tint -->
-        <rect x="22" y="26" width="131" height="78" rx="4" fill="rgba(26,114,212,0.35)"/>
-        <!-- App toolbar -->
-        <rect x="22" y="26" width="131" height="15" rx="4" fill="rgba(10,35,100,0.78)"/>
-        <circle cx="31" cy="33.5" r="3.5" fill="rgba(255,95,87,0.88)"/>
-        <circle cx="42" cy="33.5" r="3.5" fill="rgba(254,188,46,0.88)"/>
-        <circle cx="53" cy="33.5" r="3.5" fill="rgba(40,200,64,0.88)"/>
-        <rect x="65" y="29" width="80" height="9" rx="4" fill="rgba(255,255,255,0.08)"/>
-        <!-- Screen content -->
-        <rect x="30" y="47" width="44" height="8" rx="4"   fill="#F57C20" opacity="0.96"/>
-        <rect x="30" y="59" width="72" height="5" rx="2.5" fill="rgba(255,255,255,0.44)"/>
-        <rect x="30" y="68" width="58" height="5" rx="2.5" fill="rgba(255,255,255,0.28)"/>
-        <rect x="30" y="77" width="66" height="5" rx="2.5" fill="rgba(255,255,255,0.18)"/>
-        <rect x="30" y="86" width="44" height="5" rx="2.5" fill="rgba(255,255,255,0.11)"/>
-        <!-- Checkmark badge -->
-        <circle cx="122" cy="68" r="24" fill="rgba(245,124,32,0.20)" stroke="#F57C20" stroke-width="2.8"/>
-        <polyline points="112,68 119,76 134,56" stroke="#F57C20" stroke-width="3.5" fill="none"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Keyboard base -->
-        <rect x="14" y="112" width="147" height="14" rx="7"
-              fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.42)" stroke-width="2"/>
-        <!-- Trackpad -->
-        <rect x="66" y="114" width="44" height="10" rx="3"
-              fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.26)" stroke-width="1"/>
-        <!-- Sparkle left (white) -->
-        <line x1="6"  y1="50" x2="6"  y2="42" stroke="rgba(255,255,255,0.62)" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="2"  y1="46" x2="10" y2="46" stroke="rgba(255,255,255,0.62)" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="6" cy="46" r="2.8" fill="rgba(255,255,255,0.38)"/>
-        <!-- Sparkle right (orange) -->
-        <line x1="169" y1="44" x2="169" y2="36" stroke="rgba(245,124,32,0.80)" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="165" y1="40" x2="173" y2="40" stroke="rgba(245,124,32,0.80)" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="169" cy="40" r="2.8" fill="rgba(245,124,32,0.55)"/>
-        <!-- Mini constellation top-right -->
-        <circle cx="148" cy="9"  r="2.2" fill="rgba(245,124,32,0.72)"/>
-        <circle cx="136" cy="5"  r="1.6" fill="rgba(255,255,255,0.52)"/>
-        <circle cx="160" cy="4"  r="1.6" fill="rgba(255,255,255,0.42)"/>
-        <line x1="136" y1="5" x2="148" y2="9"  stroke="rgba(245,124,32,0.32)" stroke-width="0.9"/>
-        <line x1="148" y1="9" x2="160" y2="4"  stroke="rgba(255,255,255,0.22)" stroke-width="0.9"/>
-        <!-- Mini constellation top-left -->
-        <circle cx="26"  cy="7"  r="2.2" fill="rgba(255,255,255,0.58)"/>
-        <circle cx="38"  cy="11" r="1.6" fill="rgba(255,255,255,0.38)"/>
-        <line x1="26" y1="7" x2="38" y2="11" stroke="rgba(255,255,255,0.22)" stroke-width="0.9"/>
-      </svg>
+      <div class="hero-ring">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80" alt="Tech support"/>
+      </div>
     </div>
 
     <div class="headline-block">
