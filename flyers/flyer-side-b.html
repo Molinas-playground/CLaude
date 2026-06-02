@@ -9,289 +9,100 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     @page { size: 5.5in 8.5in; margin: 0; }
     html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    body { width: 5.5in; }
+    body { width: 5.5in; background: #fff; }
     @media screen { body { overflow-y: auto; } }
 
     .page {
       width: 5.5in; height: 8.5in;
+      background: #fff;
       position: relative; display: flex; flex-direction: column; overflow: hidden;
     }
 
-    /* ── BACKGROUND LAYERS ── */
-    .bg-gradient {
-      position: absolute; inset: 0; z-index: 0;
-      background: linear-gradient(165deg, #3B0764 0%, #5B21B6 28%, #1E3A8A 62%, #1D4ED8 100%);
+    /* ── COLORED HEADER BAND ── */
+    .header-band {
+      background: linear-gradient(135deg, #3B0764 0%, #5B21B6 45%, #1D4ED8 100%);
+      padding: 14pt 22pt 16pt;
+      position: relative; overflow: hidden; flex-shrink: 0; text-align: center;
     }
+    .hdr-circuit { position: absolute; inset: 0; pointer-events: none; }
+    .brand-name { font-family: Poppins,sans-serif; font-size: 27pt; font-weight: 900; color: #fff; line-height: 1; position: relative; z-index: 1; }
+    .brand-tagline { font-size: 9pt; color: rgba(255,255,255,0.65); margin-top: 2pt; position: relative; z-index: 1; }
+    .brain-zone { padding: 8pt 0 4pt; position: relative; z-index: 1; }
+    .learn-title { font-family: Poppins,sans-serif; font-size: 44pt; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -2pt; position: relative; z-index: 1; }
+    .learn-sub { font-size: 11pt; color: rgba(255,255,255,0.82); font-weight: 600; margin-top: 4pt; position: relative; z-index: 1; }
+    .learn-lang { font-size: 8.5pt; color: rgba(255,255,255,0.50); margin-top: 2pt; font-style: italic; position: relative; z-index: 1; }
 
-    /* Circuit board SVG — full-bleed tech background */
-    .circuit-bg {
-      position: absolute; inset: 0; z-index: 1;
-      width: 100%; height: 100%;
-    }
+    /* ── WHITE BODY ── */
+    .body-wrap { flex: 1; display: flex; flex-direction: column; padding: 12pt 22pt 0; }
+    .section-lbl { font-size: 7pt; font-weight: 800; color: #5B21B6; letter-spacing: 1.8pt; text-transform: uppercase; margin-bottom: 7pt; flex-shrink: 0; }
 
-    /* Corner glow orbs */
-    .orb { position: absolute; border-radius: 50%; z-index: 2; pointer-events: none; }
-    .orb-tl { top: -60pt; left: -60pt; width: 190pt; height: 190pt;
-      background: radial-gradient(circle, rgba(192,132,252,0.45) 0%, transparent 65%); }
-    .orb-tr { top: -50pt; right: -65pt; width: 175pt; height: 175pt;
-      background: radial-gradient(circle, rgba(167,139,250,0.4) 0%, transparent 65%); }
-    .orb-hero { top: 55pt; left: 50%; transform: translateX(-50%); width: 210pt; height: 210pt;
-      background: radial-gradient(circle, rgba(251,191,36,0.14) 0%, rgba(168,85,247,0.10) 55%, transparent 72%); }
-    .orb-bm { bottom: 50pt; left: 50%; transform: translateX(-50%); width: 220pt; height: 120pt;
-      background: radial-gradient(ellipse, rgba(99,102,241,0.2) 0%, transparent 70%); }
-
-    /* All content sits above background */
-    .content { position: relative; z-index: 3; display: flex; flex-direction: column; height: 100%; }
-
-    /* ── HEADER ── */
-    .header { padding: 14pt 24pt 0; text-align: center; flex-shrink: 0; }
-    .brand { font-family: 'Poppins', sans-serif; font-size: 28pt; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.5pt; }
-    .brand-sub { font-size: 9.5pt; color: rgba(255,255,255,0.65); margin-top: 2pt; }
-
-    /* ── BRAIN ── */
-    .brain-zone { text-align: center; padding: 6pt 0 2pt; flex-shrink: 0; }
-
-    /* ── HEADLINE ── */
-    .learn-block { text-align: center; padding: 0 20pt; flex-shrink: 0; }
-    .learn-title { font-family: 'Poppins', sans-serif; font-size: 48pt; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -2pt; }
-    .learn-sub  { font-size: 12pt; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 4pt; }
-    .learn-lang { font-size: 9pt; color: rgba(255,255,255,0.5); margin-top: 2pt; font-style: italic; }
-
-    /* ── 2×2 GRID ── */
-    .grid { padding: 6pt 22pt; display: grid; grid-template-columns: 1fr 1fr; gap: 7pt; flex: 1; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7pt 8pt; flex: 1; }
     .gcell {
-      background: rgba(255,255,255,0.1);
-      border: 1pt solid rgba(255,255,255,0.22);
-      border-radius: 12pt; padding: 12pt 12pt;
-      display: flex; align-items: center; gap: 10pt;
+      display: flex; align-items: center; gap: 8pt; padding: 8pt 10pt;
+      border: 1pt solid #e5e7eb; border-radius: 10pt; background: #fafafa;
     }
-    .gicon { width: 40pt; height: 40pt; border-radius: 10pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .gicon svg { width: 20pt; height: 20pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .gtxt { font-size: 11pt; font-weight: 700; color: #fff; line-height: 1.25; }
+    .gicon { width: 30pt; height: 30pt; border-radius: 8pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gicon svg { width: 15pt; height: 15pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .gtxt { font-size: 10.5pt; font-weight: 700; color: #1e1b4b; line-height: 1.25; }
 
-    .g-gr { background: rgba(34,197,94,0.25); }   .g-gr svg { stroke: #4ADE80; }
-    .g-pu { background: rgba(192,132,252,0.28); }  .g-pu svg { stroke: #D8B4FE; }
-    .g-or { background: rgba(245,124,32,0.25); }   .g-or svg { stroke: #FB923C; }
-    .g-bl { background: rgba(56,189,248,0.25); }   .g-bl svg { stroke: #7DD3FC; }
+    .g-gr { background: rgba(34,197,94,0.15); }  .g-gr svg { stroke: #16a34a; }
+    .g-pu { background: rgba(139,92,246,0.15); } .g-pu svg { stroke: #7c3aed; }
+    .g-or { background: rgba(245,124,32,0.15); } .g-or svg { stroke: #ea580c; }
+    .g-bl { background: rgba(59,130,246,0.15); } .g-bl svg { stroke: #2563eb; }
 
-    /* ── AI TOOLS ── */
-    .tools { padding: 2pt 24pt 5pt; text-align: center; flex-shrink: 0; }
-    .tools-lbl { font-size: 7pt; color: rgba(255,255,255,0.4); font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 3pt; }
-    .tools-list { font-size: 9.5pt; color: rgba(255,255,255,0.88); font-weight: 500; }
+    .tools { padding: 8pt 0 6pt; flex-shrink: 0; border-top: 1pt solid #e5e7eb; }
+    .tools-lbl { font-size: 7pt; color: #9ca3af; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4pt; }
+    .tools-list { font-size: 10pt; color: #374151; font-weight: 500; }
 
-    /* ── TRUST ── */
-    .trust { padding: 0 24pt 5pt; display: flex; gap: 7pt; justify-content: center; flex-shrink: 0; }
+    .trust { display: flex; gap: 8pt; padding-bottom: 8pt; flex-shrink: 0; }
     .tpill {
-      background: rgba(255,255,255,0.12); border: 1pt solid rgba(255,255,255,0.26);
-      border-radius: 20pt; padding: 5.5pt 13pt;
-      font-size: 8.5pt; font-weight: 600; color: rgba(255,255,255,0.92);
-      display: flex; align-items: center; gap: 5pt;
+      flex: 1; background: rgba(91,33,182,0.06); border: 1pt solid rgba(91,33,182,0.22);
+      border-radius: 20pt; padding: 5pt 10pt;
+      font-size: 8pt; font-weight: 600; color: #5B21B6;
+      display: flex; align-items: center; justify-content: center; gap: 4pt; white-space: nowrap;
     }
 
-    /* ── CONTACT ── */
+    /* ── CONTACT BAR ── */
     .cbar {
-      background: rgba(0,0,0,0.38); border-top: 1pt solid rgba(255,255,255,0.12);
-      padding: 10pt 24pt; display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
+      background: #1e1b4b; padding: 10pt 22pt;
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
     }
-    .phone { font-family: 'Poppins', sans-serif; font-size: 21pt; font-weight: 800; color: #fff; line-height: 1; }
-    .cmeta { margin-top: 4pt; font-size: 9pt; color: rgba(255,255,255,0.55); }
+    .phone { font-family: Poppins,sans-serif; font-size: 20pt; font-weight: 800; color: #fff; line-height: 1; }
+    .cmeta { margin-top: 3pt; font-size: 9pt; color: rgba(255,255,255,0.58); }
     .qr { background: #fff; border-radius: 6pt; padding: 4pt; }
-    .qr img { width: 66pt; height: 66pt; display: block; }
+    .qr img { width: 62pt; height: 62pt; display: block; }
   </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- Gradient -->
-  <div class="bg-gradient"></div>
-
-  <!-- ══════════════════════════════════════════
-       CIRCUIT BOARD TECH BACKGROUND
-       Semi-transparent PCB traces + nodes spread
-       around the edges, corners clear of content.
-  ══════════════════════════════════════════ -->
-  <svg class="circuit-bg" viewBox="0 0 396 612" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <pattern id="ai-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-        <circle cx="14" cy="14" r="1" fill="rgba(255,255,255,0.06)"/>
-      </pattern>
-      <radialGradient id="cvig" cx="50%" cy="42%" r="54%">
-        <stop offset="0%"   stop-color="rgba(6,1,34,0.35)"/>
-        <stop offset="100%" stop-color="rgba(6,1,34,0)"/>
-      </radialGradient>
-    </defs>
-    <!-- Fine particle field -->
-    <rect width="396" height="612" fill="url(#ai-dots)"/>
-    <!-- Center readability vignette -->
-    <rect width="396" height="612" fill="url(#cvig)"/>
-
-    <!-- ════════════════════════════════════
-         ORBITAL RINGS — 4 corner origins
-    ════════════════════════════════════ -->
-    <!-- TOP-LEFT — white rings -->
-    <circle cx="0"   cy="0"   r="75"  fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="1.2"/>
-    <circle cx="0"   cy="0"   r="145" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-    <circle cx="0"   cy="0"   r="230" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-    <circle cx="0"   cy="0"   r="335" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <circle cx="0"   cy="0"   r="460" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-
-    <!-- TOP-RIGHT — orange accent rings -->
-    <circle cx="396" cy="0"   r="75"  fill="none" stroke="rgba(245,124,32,0.30)" stroke-width="1.2"/>
-    <circle cx="396" cy="0"   r="145" fill="none" stroke="rgba(245,124,32,0.20)" stroke-width="1"/>
-    <circle cx="396" cy="0"   r="230" fill="none" stroke="rgba(245,124,32,0.12)" stroke-width="1"/>
-    <circle cx="396" cy="0"   r="335" fill="none" stroke="rgba(245,124,32,0.07)" stroke-width="1"/>
-    <circle cx="396" cy="0"   r="460" fill="none" stroke="rgba(245,124,32,0.04)" stroke-width="1"/>
-
-    <!-- BOTTOM-LEFT — orange accent rings -->
-    <circle cx="0"   cy="612" r="75"  fill="none" stroke="rgba(245,124,32,0.30)" stroke-width="1.2"/>
-    <circle cx="0"   cy="612" r="145" fill="none" stroke="rgba(245,124,32,0.20)" stroke-width="1"/>
-    <circle cx="0"   cy="612" r="230" fill="none" stroke="rgba(245,124,32,0.12)" stroke-width="1"/>
-    <circle cx="0"   cy="612" r="335" fill="none" stroke="rgba(245,124,32,0.07)" stroke-width="1"/>
-    <circle cx="0"   cy="612" r="460" fill="none" stroke="rgba(245,124,32,0.04)" stroke-width="1"/>
-
-    <!-- BOTTOM-RIGHT — white rings -->
-    <circle cx="396" cy="612" r="75"  fill="none" stroke="rgba(255,255,255,0.26)" stroke-width="1.2"/>
-    <circle cx="396" cy="612" r="145" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-    <circle cx="396" cy="612" r="230" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-    <circle cx="396" cy="612" r="335" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <circle cx="396" cy="612" r="460" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-
-    <!-- CENTER concentric rings (very faint, depth) -->
-    <circle cx="198" cy="300" r="72"  fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
-    <circle cx="198" cy="300" r="148" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
-    <circle cx="198" cy="300" r="224" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.8"/>
-
-    <!-- ════════════════════════════════════
-         STAR FIELD — scattered glowing dots
-    ════════════════════════════════════ -->
-    <!-- Top row -->
-    <circle cx="28"  cy="22"  r="3"   fill="rgba(255,255,255,0.65)"/>
-    <circle cx="62"  cy="12"  r="2"   fill="rgba(255,255,255,0.48)"/>
-    <circle cx="98"  cy="32"  r="1.5" fill="rgba(255,255,255,0.36)"/>
-    <circle cx="146" cy="18"  r="2.5" fill="rgba(245,124,32,0.75)"/>
-    <circle cx="198" cy="28"  r="1.5" fill="rgba(255,255,255,0.28)"/>
-    <circle cx="250" cy="16"  r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="298" cy="30"  r="1.5" fill="rgba(255,255,255,0.32)"/>
-    <circle cx="346" cy="14"  r="2.5" fill="rgba(245,124,32,0.72)"/>
-    <circle cx="372" cy="26"  r="3"   fill="rgba(255,255,255,0.62)"/>
-    <!-- Left edge -->
-    <circle cx="14"  cy="78"  r="2.5" fill="rgba(255,255,255,0.45)"/>
-    <circle cx="22"  cy="148" r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="10"  cy="212" r="2.5" fill="rgba(245,124,32,0.58)"/>
-    <circle cx="18"  cy="282" r="1.8" fill="rgba(255,255,255,0.25)"/>
-    <circle cx="8"   cy="348" r="2"   fill="rgba(255,255,255,0.22)"/>
-    <circle cx="20"  cy="412" r="1.8" fill="rgba(255,255,255,0.26)"/>
-    <circle cx="12"  cy="472" r="2.5" fill="rgba(245,124,32,0.54)"/>
-    <circle cx="24"  cy="534" r="2"   fill="rgba(255,255,255,0.36)"/>
-    <!-- Right edge -->
-    <circle cx="382" cy="78"  r="2.5" fill="rgba(255,255,255,0.45)"/>
-    <circle cx="374" cy="148" r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="386" cy="212" r="2.5" fill="rgba(245,124,32,0.58)"/>
-    <circle cx="378" cy="282" r="1.8" fill="rgba(255,255,255,0.25)"/>
-    <circle cx="388" cy="348" r="2"   fill="rgba(255,255,255,0.22)"/>
-    <circle cx="376" cy="412" r="1.8" fill="rgba(255,255,255,0.26)"/>
-    <circle cx="384" cy="472" r="2.5" fill="rgba(245,124,32,0.54)"/>
-    <circle cx="372" cy="534" r="2"   fill="rgba(255,255,255,0.36)"/>
-    <!-- Bottom row -->
-    <circle cx="28"  cy="584" r="3"   fill="rgba(255,255,255,0.62)"/>
-    <circle cx="64"  cy="598" r="2"   fill="rgba(255,255,255,0.46)"/>
-    <circle cx="106" cy="580" r="1.5" fill="rgba(255,255,255,0.36)"/>
-    <circle cx="152" cy="594" r="2.5" fill="rgba(245,124,32,0.72)"/>
-    <circle cx="198" cy="582" r="1.5" fill="rgba(255,255,255,0.28)"/>
-    <circle cx="246" cy="596" r="2"   fill="rgba(255,255,255,0.34)"/>
-    <circle cx="292" cy="580" r="1.5" fill="rgba(255,255,255,0.32)"/>
-    <circle cx="342" cy="594" r="2.5" fill="rgba(245,124,32,0.70)"/>
-    <circle cx="370" cy="582" r="3"   fill="rgba(255,255,255,0.60)"/>
-    <!-- Mid scatter (sparse, low opacity — depth layer only) -->
-    <circle cx="58"  cy="170" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="340" cy="185" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="45"  cy="440" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="352" cy="428" r="1.5" fill="rgba(255,255,255,0.16)"/>
-    <circle cx="82"  cy="252" r="1.2" fill="rgba(255,255,255,0.11)"/>
-    <circle cx="314" cy="268" r="1.2" fill="rgba(255,255,255,0.11)"/>
-    <circle cx="76"  cy="372" r="1.2" fill="rgba(255,255,255,0.11)"/>
-    <circle cx="320" cy="356" r="1.2" fill="rgba(255,255,255,0.11)"/>
-
-    <!-- ════════════════════════════════════
-         CONSTELLATION LINES — edge clusters
-    ════════════════════════════════════ -->
-    <g stroke="rgba(255,255,255,0.18)" stroke-width="0.9" fill="none">
-      <!-- Top-left cluster -->
-      <line x1="28"  y1="22"  x2="62"  y2="12"/>
-      <line x1="28"  y1="22"  x2="14"  y2="78"/>
-      <line x1="62"  y1="12"  x2="98"  y2="32"/>
-      <line x1="62"  y1="12"  x2="146" y2="18"/>
-      <line x1="14"  y1="78"  x2="22"  y2="148"/>
-      <!-- Top-right cluster -->
-      <line x1="372" y1="26"  x2="346" y2="14"/>
-      <line x1="372" y1="26"  x2="382" y2="78"/>
-      <line x1="346" y1="14"  x2="298" y2="30"/>
-      <line x1="346" y1="14"  x2="250" y2="16"/>
-      <line x1="382" y1="78"  x2="374" y2="148"/>
-      <!-- Bottom-left cluster -->
-      <line x1="28"  y1="584" x2="64"  y2="598"/>
-      <line x1="28"  y1="584" x2="24"  y2="534"/>
-      <line x1="64"  y1="598" x2="106" y2="580"/>
-      <line x1="64"  y1="598" x2="152" y2="594"/>
-      <line x1="24"  y1="534" x2="12"  y2="472"/>
-      <!-- Bottom-right cluster -->
-      <line x1="370" y1="582" x2="342" y2="594"/>
-      <line x1="370" y1="582" x2="372" y2="534"/>
-      <line x1="342" y1="594" x2="292" y2="580"/>
-      <line x1="342" y1="594" x2="246" y2="596"/>
-      <line x1="372" y1="534" x2="384" y2="472"/>
-    </g>
-
-    <!-- Bright corner anchor dots (on top of rings) -->
-    <circle cx="0"   cy="0"   r="4"   fill="rgba(255,255,255,0.7)"/>
-    <circle cx="396" cy="0"   r="4"   fill="rgba(245,124,32,0.85)"/>
-    <circle cx="0"   cy="612" r="4"   fill="rgba(245,124,32,0.85)"/>
-    <circle cx="396" cy="612" r="4"   fill="rgba(255,255,255,0.7)"/>
-  </svg>
-
-
-
-  <!-- Corner orbs -->
-  <div class="orb orb-tl"></div>
-  <div class="orb orb-tr"></div>
-  <div class="orb orb-hero"></div>
-  <div class="orb orb-bm"></div>
-
-  <!-- CONTENT -->
-  <div class="content">
-
-    <div class="header">
-      <div class="brand">SureDesk</div>
-      <div class="brand-sub">Personal IT Support + AI Training · Miami, FL</div>
-    </div>
-
-    <!-- Brain icon -->
+  <!-- HEADER BAND -->
+  <div class="header-band">
+    <svg class="hdr-circuit" viewBox="0 0 396 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g stroke="rgba(255,255,255,0.07)" stroke-width="1" fill="none">
+        <line x1="0" y1="14" x2="396" y2="14"/><line x1="0" y1="28" x2="396" y2="28"/>
+        <line x1="14" y1="0" x2="14" y2="240"/><line x1="382" y1="0" x2="382" y2="240"/>
+        <line x1="56" y1="0" x2="56" y2="56"/><line x1="336" y1="0" x2="336" y2="56"/>
+        <line x1="126" y1="28" x2="126" y2="70"/><line x1="270" y1="28" x2="270" y2="70"/>
+      </g>
+      <g fill="rgba(255,255,255,0.15)">
+        <circle cx="56" cy="14" r="2"/><circle cx="336" cy="14" r="2"/>
+        <circle cx="126" cy="28" r="2"/><circle cx="270" cy="28" r="2"/>
+        <circle cx="14" cy="0" r="2.5"/><circle cx="382" cy="0" r="2.5"/>
+      </g>
+      <g fill="rgba(245,124,32,0.70)">
+        <circle cx="0" cy="0" r="3.5"/><circle cx="396" cy="0" r="3.5"/>
+      </g>
+    </svg>
+    <div class="brand-name">SureDesk</div>
+    <div class="brand-tagline">Personal IT Support + AI Training · Miami, FL</div>
     <div class="brain-zone">
-      <svg width="92pt" height="86pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer golden halo ring -->
-        <circle cx="50" cy="44" r="52" fill="none" stroke="rgba(251,191,36,0.14)" stroke-width="2.5" stroke-dasharray="5,7"/>
-        <circle cx="50" cy="44" r="44" fill="none" stroke="rgba(251,191,36,0.09)" stroke-width="1.5"/>
-        <!-- Outer neural connections -->
-        <g stroke="rgba(216,180,254,0.22)" stroke-width="0.8" fill="none">
-          <line x1="50" y1="3"  x2="50" y2="18"/>
-          <line x1="95" y1="22" x2="83" y2="30"/>
-          <line x1="5"  y1="22" x2="17" y2="30"/>
-          <line x1="2"  y1="58" x2="15" y2="52"/>
-          <line x1="98" y1="58" x2="85" y2="52"/>
-        </g>
-        <circle cx="50" cy="3"  r="3.5" fill="rgba(251,191,36,0.80)"/>
-        <circle cx="95" cy="22" r="2.5" fill="rgba(216,180,254,0.65)"/>
-        <circle cx="5"  cy="22" r="2.5" fill="rgba(216,180,254,0.65)"/>
-        <circle cx="2"  cy="58" r="2.5" fill="rgba(245,124,32,0.62)"/>
-        <circle cx="98" cy="58" r="2.5" fill="rgba(245,124,32,0.62)"/>
-        <!-- Brain glow -->
-        <ellipse cx="50" cy="52" rx="48" ry="44" fill="rgba(168,85,247,0.18)"/>
-        <ellipse cx="50" cy="46" rx="36" ry="32" fill="rgba(251,191,36,0.06)"/>
+      <svg width="74pt" height="68pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="52" rx="46" ry="42" fill="rgba(168,85,247,0.18)"/>
         <path d="M50,76 C41,76 31,71 25,63 C17,55 16,44 21,35 C17,28 16,19 22,13 C28,7 38,6 46,10 C48,6 52,4 56,4 C60,4 64,6 66,10 C74,6 84,7 90,13 C96,19 95,28 91,35 C96,44 95,55 87,63 C81,71 71,76 62,76 Z"
               fill="rgba(168,85,247,0.30)" stroke="#C084FC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M46,10 C42,20 43,33 49,44" stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M56,4 C53,16 55,29 61,40"  stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M56,4 C53,16 55,29 61,40" stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
         <path d="M21,35 C29,37 37,34 45,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
         <path d="M91,35 C83,37 75,34 67,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
         <circle cx="33" cy="38" r="4.5" fill="#C084FC"/>
@@ -304,56 +115,41 @@
         <line x1="33" y1="38" x2="43" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
         <line x1="67" y1="38" x2="61" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
         <line x1="43" y1="54" x2="61" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
-        <line x1="50" y1="29" x2="43" y2="54" stroke="rgba(192,132,252,0.42)" stroke-width="1.2"/>
-        <line x1="50" y1="29" x2="61" y2="54" stroke="rgba(192,132,252,0.42)" stroke-width="1.2"/>
       </svg>
     </div>
+    <div class="learn-title">Learn AI</div>
+    <div class="learn-sub">Personal AI Training</div>
+    <div class="learn-lang">One-on-one training in English or Spanish</div>
+  </div>
 
-    <div class="learn-block">
-      <div class="learn-title">Learn AI</div>
-      <div class="learn-sub">Personal AI Training</div>
-      <div class="learn-lang">Personal training in English or Spanish</div>
-    </div>
-
+  <!-- WHITE BODY -->
+  <div class="body-wrap">
+    <div class="section-lbl">What You Can Do With AI</div>
     <div class="grid">
-      <div class="gcell">
-        <div class="gicon g-gr"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="gtxt">Write Emails<br>&amp; Messages</div>
-      </div>
-      <div class="gcell">
-        <div class="gicon g-pu"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
-        <div class="gtxt">Summarize<br>Info</div>
-      </div>
-      <div class="gcell">
-        <div class="gicon g-or"><svg viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div>
-        <div class="gtxt">Brainstorm<br>Ideas</div>
-      </div>
-      <div class="gcell">
-        <div class="gicon g-bl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <div class="gtxt">Research<br>Topics</div>
-      </div>
+      <div class="gcell"><div class="gicon g-gr"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="gtxt">Write Emails<br>&amp; Messages</div></div>
+      <div class="gcell"><div class="gicon g-pu"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="gtxt">Summarize<br>Information</div></div>
+      <div class="gcell"><div class="gicon g-or"><svg viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div><div class="gtxt">Brainstorm<br>Ideas</div></div>
+      <div class="gcell"><div class="gicon g-bl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="gtxt">Research<br>Any Topic</div></div>
     </div>
 
     <div class="tools">
-      <div class="tools-lbl">Learn popular AI tools:</div>
-      <div class="tools-list">ChatGPT · Claude · DALL-E · Siri · Alexa · Google AI</div>
+      <div class="tools-lbl">Tools We Cover</div>
+      <div class="tools-list">ChatGPT · Claude · Gemini · DALL-E · Copilot</div>
     </div>
 
     <div class="trust">
       <div class="tpill">🕐 After Hours &amp; Weekends</div>
       <div class="tpill">🌐 Bilingual EN/ES</div>
     </div>
+  </div>
 
-    <div class="cbar">
-      <div>
-        <div class="phone">(561) 481-7911</div>
-        <div class="cmeta">🌐 suredesk.net · 📍 Miami, FL</div>
-      </div>
-      <div class="qr">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&data=https://suredesk.net" alt="QR suredesk.net"/>
-      </div>
+  <!-- CONTACT BAR -->
+  <div class="cbar">
+    <div>
+      <div class="phone">(561) 481-7911</div>
+      <div class="cmeta">🌐 suredesk.net · 📍 Miami, FL</div>
     </div>
-
+    <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&data=https://suredesk.net" alt="QR"/></div>
   </div>
 </div>
 </body>
