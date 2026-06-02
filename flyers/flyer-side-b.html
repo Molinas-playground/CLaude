@@ -36,19 +36,23 @@
     .body-wrap { flex: 1; display: flex; flex-direction: column; padding: 12pt 22pt 0; }
     .section-lbl { font-size: 7pt; font-weight: 800; color: #5B21B6; letter-spacing: 1.8pt; text-transform: uppercase; margin-bottom: 7pt; flex-shrink: 0; }
 
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7pt 8pt; flex: 1; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; flex: 1; }
     .gcell {
-      display: flex; align-items: center; gap: 8pt; padding: 8pt 10pt;
-      border: 1pt solid #e5e7eb; border-radius: 10pt; background: #fafafa;
+      display: flex; flex-direction: column; gap: 6pt; padding: 10pt 11pt;
+      border-radius: 10pt; background: #fff;
+      border-left: 4pt solid #e5e7eb;
+      box-shadow: 0 1pt 4pt rgba(0,0,0,0.07);
     }
-    .gicon { width: 30pt; height: 30pt; border-radius: 8pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .gicon svg { width: 15pt; height: 15pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .gtxt { font-size: 10.5pt; font-weight: 700; color: #1e1b4b; line-height: 1.25; }
+    .gcell-top { display: flex; align-items: center; gap: 8pt; }
+    .gicon { width: 34pt; height: 34pt; border-radius: 9pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gicon svg { width: 17pt; height: 17pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .gtxt { font-size: 11pt; font-weight: 800; color: #1e1b4b; line-height: 1.2; }
+    .gdesc { font-size: 8.5pt; color: #6b7280; font-weight: 500; line-height: 1.3; }
 
-    .g-gr { background: rgba(34,197,94,0.15); }  .g-gr svg { stroke: #16a34a; }
-    .g-pu { background: rgba(139,92,246,0.15); } .g-pu svg { stroke: #7c3aed; }
-    .g-or { background: rgba(245,124,32,0.15); } .g-or svg { stroke: #ea580c; }
-    .g-bl { background: rgba(59,130,246,0.15); } .g-bl svg { stroke: #2563eb; }
+    .g-gr { background: rgba(34,197,94,0.12); border-color: #16a34a; }  .g-gr svg { stroke: #16a34a; }
+    .g-pu { background: rgba(139,92,246,0.12); border-color: #7c3aed; } .g-pu svg { stroke: #7c3aed; }
+    .g-or { background: rgba(245,124,32,0.12); border-color: #ea580c; } .g-or svg { stroke: #ea580c; }
+    .g-bl { background: rgba(59,130,246,0.12); border-color: #2563eb; } .g-bl svg { stroke: #2563eb; }
 
     .tools { padding: 8pt 0 6pt; flex-shrink: 0; border-top: 1pt solid #e5e7eb; }
     .tools-lbl { font-size: 7pt; color: #9ca3af; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4pt; }
@@ -126,10 +130,22 @@
   <div class="body-wrap">
     <div class="section-lbl">What You Can Do With AI</div>
     <div class="grid">
-      <div class="gcell"><div class="gicon g-gr"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="gtxt">Write Emails<br>&amp; Messages</div></div>
-      <div class="gcell"><div class="gicon g-pu"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="gtxt">Summarize<br>Information</div></div>
-      <div class="gcell"><div class="gicon g-or"><svg viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div><div class="gtxt">Brainstorm<br>Ideas</div></div>
-      <div class="gcell"><div class="gicon g-bl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="gtxt">Research<br>Any Topic</div></div>
+      <div class="gcell">
+        <div class="gcell-top"><div class="gicon g-gr"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="gtxt">Write Emails &amp; Messages</div></div>
+        <div class="gdesc">Draft professional emails in seconds — just describe what you need</div>
+      </div>
+      <div class="gcell">
+        <div class="gcell-top"><div class="gicon g-pu"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="gtxt">Summarize Long Documents</div></div>
+        <div class="gdesc">Turn pages of text into a short, clear summary instantly</div>
+      </div>
+      <div class="gcell">
+        <div class="gcell-top"><div class="gicon g-or"><svg viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div><div class="gtxt">Brainstorm &amp; Plan Ideas</div></div>
+        <div class="gdesc">Get suggestions, outlines, and ideas for any project or goal</div>
+      </div>
+      <div class="gcell">
+        <div class="gcell-top"><div class="gicon g-bl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="gtxt">Research Any Topic Fast</div></div>
+        <div class="gdesc">Ask questions in plain language and get clear, useful answers</div>
+      </div>
     </div>
 
     <div class="tools">
