@@ -18,155 +18,165 @@
       position: relative; display: flex; flex-direction: column; overflow: hidden;
     }
 
-    /* ── COLORED HEADER BAND ── */
-    .header-band {
-      background: linear-gradient(135deg, #3B0764 0%, #5B21B6 45%, #1D4ED8 100%);
-      padding: 14pt 22pt 16pt;
-      position: relative; overflow: hidden; flex-shrink: 0; text-align: center;
+    /* ── TOP BAR ── */
+    .topbar { background: #2D1B69; padding: 9pt 22pt; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+    .topbar-brand { font-family: Poppins,sans-serif; font-size: 15pt; font-weight: 900; color: #fff; letter-spacing: -0.3pt; }
+    .topbar-loc { font-size: 8.5pt; color: rgba(255,255,255,0.55); font-weight: 500; }
+
+    /* ── HERO ── */
+    .hero { padding: 18pt 22pt 0; flex-shrink: 0; }
+    .hero-top { display: flex; align-items: center; gap: 14pt; }
+    .brain-wrap { flex-shrink: 0; }
+    .hero-copy { flex: 1; }
+    .hero-eyebrow { font-size: 8pt; font-weight: 800; color: #F57C20; letter-spacing: 2pt; text-transform: uppercase; margin-bottom: 4pt; }
+    .hero-headline { font-family: Poppins,sans-serif; font-size: 46pt; font-weight: 900; color: #2D1B69; line-height: 0.88; letter-spacing: -2pt; }
+    .hero-headline span { color: #F57C20; }
+    .hero-sub { font-size: 9.5pt; color: #64748b; font-weight: 500; margin-top: 7pt; line-height: 1.4; }
+
+    /* ── ACCENT BAR ── */
+    .accent-bar { margin: 14pt 22pt 0; height: 3pt; border-radius: 2pt; flex-shrink: 0; background: linear-gradient(90deg, #F57C20 0%, #7C3AED 55%, transparent 100%); }
+
+    /* ── LEARN LIST ── */
+    .learn-section { padding: 12pt 22pt 0; flex: 1; display: flex; flex-direction: column; }
+    .learn-label { font-size: 7pt; font-weight: 800; color: #7C3AED; letter-spacing: 2pt; text-transform: uppercase; margin-bottom: 10pt; flex-shrink: 0; }
+
+    .learn-list { display: flex; flex-direction: column; gap: 8pt; flex: 1; align-content: start; }
+    .learn-item { display: flex; align-items: flex-start; gap: 10pt; }
+    .learn-num {
+      width: 24pt; height: 24pt; border-radius: 50%; flex-shrink: 0;
+      background: #7C3AED; color: #fff;
+      font-family: Poppins,sans-serif; font-size: 11pt; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
     }
-    .hdr-circuit { position: absolute; inset: 0; pointer-events: none; }
-    .brand-name { font-family: Poppins,sans-serif; font-size: 27pt; font-weight: 900; color: #fff; line-height: 1; position: relative; z-index: 1; }
-    .brand-tagline { font-size: 9pt; color: rgba(255,255,255,0.65); margin-top: 2pt; position: relative; z-index: 1; }
-    .brain-zone { padding: 8pt 0 4pt; position: relative; z-index: 1; }
-    .learn-title { font-family: Poppins,sans-serif; font-size: 44pt; font-weight: 900; color: #fff; line-height: 0.92; letter-spacing: -2pt; position: relative; z-index: 1; }
-    .learn-sub { font-size: 11pt; color: rgba(255,255,255,0.82); font-weight: 600; margin-top: 4pt; position: relative; z-index: 1; }
-    .learn-lang { font-size: 8.5pt; color: rgba(255,255,255,0.50); margin-top: 2pt; font-style: italic; position: relative; z-index: 1; }
+    .learn-num.or { background: #F57C20; }
+    .learn-num.bl { background: #1A72D4; }
+    .learn-num.gr { background: #16a34a; }
+    .learn-text { flex: 1; }
+    .learn-title { font-size: 11pt; font-weight: 800; color: #1e293b; line-height: 1.2; }
+    .learn-desc { font-size: 8.5pt; color: #64748b; font-weight: 500; margin-top: 2pt; line-height: 1.35; }
 
-    /* ── WHITE BODY ── */
-    .body-wrap { flex: 1; display: flex; flex-direction: column; padding: 12pt 22pt 0; }
-    .section-lbl { font-size: 7pt; font-weight: 800; color: #5B21B6; letter-spacing: 1.8pt; text-transform: uppercase; margin-bottom: 7pt; flex-shrink: 0; }
-
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; flex: 1; }
-    .gcell {
-      display: flex; flex-direction: column; gap: 6pt; padding: 10pt 11pt;
-      border-radius: 10pt; background: #fff;
-      border-left: 4pt solid #e5e7eb;
-      box-shadow: 0 1pt 4pt rgba(0,0,0,0.07);
+    /* ── TOOLS ── */
+    .tools-row { padding: 10pt 22pt 0; flex-shrink: 0; }
+    .tools-label { font-size: 7pt; font-weight: 800; color: #94a3b8; letter-spacing: 2pt; text-transform: uppercase; margin-bottom: 4pt; }
+    .tools-chips { display: flex; flex-wrap: wrap; gap: 5pt; }
+    .tool-chip {
+      background: #f1f5f9; border: 1pt solid #e2e8f0; border-radius: 6pt;
+      padding: 4pt 9pt; font-size: 9pt; font-weight: 700; color: #334155;
     }
-    .gcell-top { display: flex; align-items: center; gap: 8pt; }
-    .gicon { width: 34pt; height: 34pt; border-radius: 9pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .gicon svg { width: 17pt; height: 17pt; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .gtxt { font-size: 11pt; font-weight: 800; color: #1e1b4b; line-height: 1.2; }
-    .gdesc { font-size: 8.5pt; color: #6b7280; font-weight: 500; line-height: 1.3; }
 
-    .g-gr { background: rgba(34,197,94,0.12); border-color: #16a34a; }  .g-gr svg { stroke: #16a34a; }
-    .g-pu { background: rgba(139,92,246,0.12); border-color: #7c3aed; } .g-pu svg { stroke: #7c3aed; }
-    .g-or { background: rgba(245,124,32,0.12); border-color: #ea580c; } .g-or svg { stroke: #ea580c; }
-    .g-bl { background: rgba(59,130,246,0.12); border-color: #2563eb; } .g-bl svg { stroke: #2563eb; }
-
-    .tools { padding: 8pt 0 6pt; flex-shrink: 0; border-top: 1pt solid #e5e7eb; }
-    .tools-lbl { font-size: 7pt; color: #9ca3af; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4pt; }
-    .tools-list { font-size: 10pt; color: #374151; font-weight: 500; }
-
-    .trust { display: flex; gap: 8pt; padding-bottom: 8pt; flex-shrink: 0; }
-    .tpill {
-      flex: 1; background: rgba(91,33,182,0.06); border: 1pt solid rgba(91,33,182,0.22);
-      border-radius: 20pt; padding: 5pt 10pt;
-      font-size: 8pt; font-weight: 600; color: #5B21B6;
-      display: flex; align-items: center; justify-content: center; gap: 4pt; white-space: nowrap;
-    }
+    /* ── TRUST ROW ── */
+    .trust-row { display: flex; gap: 6pt; padding: 8pt 22pt 8pt; flex-shrink: 0; }
+    .tbadge { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4pt; font-size: 7.5pt; font-weight: 700; color: #475569; background: #f8fafc; border: 1pt solid #e2e8f0; border-radius: 20pt; padding: 4pt 8pt; white-space: nowrap; }
 
     /* ── CONTACT BAR ── */
-    .cbar {
-      background: #1e1b4b; padding: 10pt 22pt;
-      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
-    }
-    .phone { font-family: Poppins,sans-serif; font-size: 20pt; font-weight: 800; color: #fff; line-height: 1; }
-    .cmeta { margin-top: 3pt; font-size: 9pt; color: rgba(255,255,255,0.58); }
+    .cbar { background: #2D1B69; padding: 10pt 22pt; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .phone { font-family: Poppins,sans-serif; font-size: 21pt; font-weight: 800; color: #fff; line-height: 1; }
+    .cmeta { margin-top: 3pt; font-size: 9pt; color: rgba(255,255,255,0.55); }
     .qr { background: #fff; border-radius: 6pt; padding: 4pt; }
-    .qr img { width: 62pt; height: 62pt; display: block; }
+    .qr img { width: 64pt; height: 64pt; display: block; }
   </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- HEADER BAND -->
-  <div class="header-band">
-    <svg class="hdr-circuit" viewBox="0 0 396 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-      <g stroke="rgba(255,255,255,0.07)" stroke-width="1" fill="none">
-        <line x1="0" y1="14" x2="396" y2="14"/><line x1="0" y1="28" x2="396" y2="28"/>
-        <line x1="14" y1="0" x2="14" y2="240"/><line x1="382" y1="0" x2="382" y2="240"/>
-        <line x1="56" y1="0" x2="56" y2="56"/><line x1="336" y1="0" x2="336" y2="56"/>
-        <line x1="126" y1="28" x2="126" y2="70"/><line x1="270" y1="28" x2="270" y2="70"/>
-      </g>
-      <g fill="rgba(255,255,255,0.15)">
-        <circle cx="56" cy="14" r="2"/><circle cx="336" cy="14" r="2"/>
-        <circle cx="126" cy="28" r="2"/><circle cx="270" cy="28" r="2"/>
-        <circle cx="14" cy="0" r="2.5"/><circle cx="382" cy="0" r="2.5"/>
-      </g>
-      <g fill="rgba(245,124,32,0.70)">
-        <circle cx="0" cy="0" r="3.5"/><circle cx="396" cy="0" r="3.5"/>
-      </g>
-    </svg>
-    <div class="brand-name">SureDesk</div>
-    <div class="brand-tagline">Personal IT Support + AI Training · Miami, FL</div>
-    <div class="brain-zone">
-      <svg width="74pt" height="68pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="50" cy="52" rx="46" ry="42" fill="rgba(168,85,247,0.18)"/>
-        <path d="M50,76 C41,76 31,71 25,63 C17,55 16,44 21,35 C17,28 16,19 22,13 C28,7 38,6 46,10 C48,6 52,4 56,4 C60,4 64,6 66,10 C74,6 84,7 90,13 C96,19 95,28 91,35 C96,44 95,55 87,63 C81,71 71,76 62,76 Z"
-              fill="rgba(168,85,247,0.30)" stroke="#C084FC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M46,10 C42,20 43,33 49,44" stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M56,4 C53,16 55,29 61,40" stroke="rgba(216,180,254,0.65)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M21,35 C29,37 37,34 45,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <path d="M91,35 C83,37 75,34 67,39" stroke="rgba(216,180,254,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <circle cx="33" cy="38" r="4.5" fill="#C084FC"/>
-        <circle cx="50" cy="29" r="4.5" fill="#C084FC"/>
-        <circle cx="67" cy="38" r="4.5" fill="#C084FC"/>
-        <circle cx="43" cy="54" r="4.5" fill="#C084FC"/>
-        <circle cx="61" cy="54" r="4.5" fill="#C084FC"/>
-        <line x1="33" y1="38" x2="50" y2="29" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
-        <line x1="50" y1="29" x2="67" y2="38" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
-        <line x1="33" y1="38" x2="43" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
-        <line x1="67" y1="38" x2="61" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
-        <line x1="43" y1="54" x2="61" y2="54" stroke="rgba(192,132,252,0.65)" stroke-width="1.8"/>
-      </svg>
-    </div>
-    <div class="learn-title">Learn AI</div>
-    <div class="learn-sub">Personal AI Training</div>
-    <div class="learn-lang">One-on-one training in English or Spanish</div>
+  <div class="topbar">
+    <div class="topbar-brand">SureDesk</div>
+    <div class="topbar-loc">AI Training · Miami, FL</div>
   </div>
 
-  <!-- WHITE BODY -->
-  <div class="body-wrap">
-    <div class="section-lbl">What You Can Do With AI</div>
-    <div class="grid">
-      <div class="gcell">
-        <div class="gcell-top"><div class="gicon g-gr"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="gtxt">Write Emails &amp; Messages</div></div>
-        <div class="gdesc">Draft professional emails in seconds — just describe what you need</div>
+  <div class="hero">
+    <div class="hero-top">
+      <div class="brain-wrap">
+        <svg width="72pt" height="66pt" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="50" cy="52" rx="46" ry="42" fill="rgba(124,58,237,0.10)"/>
+          <path d="M50,76 C41,76 31,71 25,63 C17,55 16,44 21,35 C17,28 16,19 22,13 C28,7 38,6 46,10 C48,6 52,4 56,4 C60,4 64,6 66,10 C74,6 84,7 90,13 C96,19 95,28 91,35 C96,44 95,55 87,63 C81,71 71,76 62,76 Z"
+                fill="rgba(124,58,237,0.18)" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M46,10 C42,20 43,33 49,44" stroke="rgba(124,58,237,0.55)" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M56,4 C53,16 55,29 61,40" stroke="rgba(124,58,237,0.55)" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M21,35 C29,37 37,34 45,39" stroke="rgba(124,58,237,0.45)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M91,35 C83,37 75,34 67,39" stroke="rgba(124,58,237,0.45)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <circle cx="33" cy="38" r="4.5" fill="#7C3AED"/>
+          <circle cx="50" cy="29" r="4.5" fill="#7C3AED"/>
+          <circle cx="67" cy="38" r="4.5" fill="#7C3AED"/>
+          <circle cx="43" cy="54" r="4.5" fill="#7C3AED"/>
+          <circle cx="61" cy="54" r="4.5" fill="#7C3AED"/>
+          <line x1="33" y1="38" x2="50" y2="29" stroke="rgba(124,58,237,0.55)" stroke-width="1.8"/>
+          <line x1="50" y1="29" x2="67" y2="38" stroke="rgba(124,58,237,0.55)" stroke-width="1.8"/>
+          <line x1="33" y1="38" x2="43" y2="54" stroke="rgba(124,58,237,0.55)" stroke-width="1.8"/>
+          <line x1="67" y1="38" x2="61" y2="54" stroke="rgba(124,58,237,0.55)" stroke-width="1.8"/>
+          <line x1="43" y1="54" x2="61" y2="54" stroke="rgba(124,58,237,0.55)" stroke-width="1.8"/>
+        </svg>
       </div>
-      <div class="gcell">
-        <div class="gcell-top"><div class="gicon g-pu"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="gtxt">Summarize Long Documents</div></div>
-        <div class="gdesc">Turn pages of text into a short, clear summary instantly</div>
-      </div>
-      <div class="gcell">
-        <div class="gcell-top"><div class="gicon g-or"><svg viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div><div class="gtxt">Brainstorm &amp; Plan Ideas</div></div>
-        <div class="gdesc">Get suggestions, outlines, and ideas for any project or goal</div>
-      </div>
-      <div class="gcell">
-        <div class="gcell-top"><div class="gicon g-bl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="gtxt">Research Any Topic Fast</div></div>
-        <div class="gdesc">Ask questions in plain language and get clear, useful answers</div>
+      <div class="hero-copy">
+        <div class="hero-eyebrow">Personal AI Training</div>
+        <div class="hero-headline">Learn<br><span>AI</span><br>Today</div>
       </div>
     </div>
+    <div class="hero-sub">One-on-one lessons in English or Spanish.<br>No experience needed — we start from scratch.</div>
+  </div>
 
-    <div class="tools">
-      <div class="tools-lbl">Tools We Cover</div>
-      <div class="tools-list">ChatGPT · Claude · Gemini · DALL-E · Copilot</div>
-    </div>
+  <div class="accent-bar"></div>
 
-    <div class="trust">
-      <div class="tpill">🕐 After Hours &amp; Weekends</div>
-      <div class="tpill">🌐 Bilingual EN/ES</div>
+  <div class="learn-section">
+    <div class="learn-label">What You Will Learn</div>
+    <div class="learn-list">
+      <div class="learn-item">
+        <div class="learn-num">1</div>
+        <div class="learn-text">
+          <div class="learn-title">Write Emails &amp; Messages</div>
+          <div class="learn-desc">Draft professional emails, texts, and replies in seconds — just describe what you need.</div>
+        </div>
+      </div>
+      <div class="learn-item">
+        <div class="learn-num or">2</div>
+        <div class="learn-text">
+          <div class="learn-title">Summarize Long Documents</div>
+          <div class="learn-desc">Turn pages of reading into a clear, short summary without missing anything important.</div>
+        </div>
+      </div>
+      <div class="learn-item">
+        <div class="learn-num bl">3</div>
+        <div class="learn-text">
+          <div class="learn-title">Brainstorm &amp; Plan Ideas</div>
+          <div class="learn-desc">Get suggestions, outlines, and step-by-step plans for any goal or project.</div>
+        </div>
+      </div>
+      <div class="learn-item">
+        <div class="learn-num gr">4</div>
+        <div class="learn-text">
+          <div class="learn-title">Research Any Topic Fast</div>
+          <div class="learn-desc">Ask questions in plain language and get clear, useful answers instantly.</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- CONTACT BAR -->
+  <div class="tools-row">
+    <div class="tools-label">Tools We Cover</div>
+    <div class="tools-chips">
+      <div class="tool-chip">ChatGPT</div>
+      <div class="tool-chip">Claude</div>
+      <div class="tool-chip">Gemini</div>
+      <div class="tool-chip">DALL-E</div>
+      <div class="tool-chip">Copilot</div>
+      <div class="tool-chip">Siri / Alexa</div>
+    </div>
+  </div>
+
+  <div class="trust-row">
+    <div class="tbadge">🕐 After Hours &amp; Weekends</div>
+    <div class="tbadge">🌐 Bilingual EN/ES</div>
+    <div class="tbadge">📋 No Contracts</div>
+  </div>
+
   <div class="cbar">
     <div>
       <div class="phone">(561) 481-7911</div>
-      <div class="cmeta">🌐 suredesk.net · 📍 Miami, FL</div>
+      <div class="cmeta">suredesk.net · Miami, FL</div>
     </div>
     <div class="qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&data=https://suredesk.net" alt="QR"/></div>
   </div>
+
 </div>
 </body>
 </html>
